@@ -3,22 +3,22 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-responses = db.Table(
-    "responses",
-    db.Model.metadata,
-    db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
-    db.Column("post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True),
-    db.Column("response", db.String(255), nullable=False),
-    db.Column("created_at", db.DateTime, default=datetime.now())
-)
+# responses = db.Table(
+#     "responses",
+#     db.Model.metadata,
+#     db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
+#     db.Column("post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True),
+#     db.Column("response", db.String(255), nullable=False),
+#     db.Column("created_at", db.DateTime, default=datetime.now())
+# )
 
-claps = db.Table(
-    "claps",
-    db.Model.metadata,
-    db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
-    db.Column("post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True),
-    db.Column("amount", db.Integer, nullable=False)
-)
+# claps = db.Table(
+#     "claps",
+#     db.Model.metadata,
+#     db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
+#     db.Column("post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True),
+#     db.Column("amount", db.Integer, nullable=False)
+# )
 
 post_tags = db.Table(
     "post_tags",
@@ -45,15 +45,15 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False)
     about = db.Column(db.String(200))
 
-    posts = db.relationship("Post", back_populates="writer")
-    user_responses = db.relationship("Post", secondary=responses, back_populates="post_responses")
-    clapped_posts = db.relationship("Post", secondary=claps, back_populates="clapped_users")
+    posts = db.relationship("Post", back_populates="writer", cascade="all, delete-orphan")
+    responses = db.relationship("Response", back_populates="user")
+    claps = db.relationship("Clap", back_populates="user")
     following = db.relationship(
         "User",
         secondary=follows,
         primaryjoin=id == follows.c.follower_id,
         secondaryjoin=id == follows.c.followee_id,
-        backref="followers",
+        backref="followers"
     )
 
     @property
@@ -79,6 +79,30 @@ class User(db.Model, UserMixin):
             'followers': self.followers
         }
 
+class Response(db.Model):
+    __tablename__ = 'responses'
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), primary_key=True)
+    response = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+
+    post = db.relationship("Post", back_populates="responses")
+    user = db.relationship("User", back_populates="responses")
+
+
+
+class Clap(db.Model):
+    __tablename__ = 'claps'
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), primary_key=True)
+    amount = db.Column(db.Integer, nullable=False)
+
+    post = db.relationship("Post", back_populates="claps")
+    user = db.relationship("User", back_populates="claps")
+
+
 class Post(db.Model):
     __tablename__ = 'posts'
 
@@ -92,8 +116,8 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     writer = db.relationship("User", back_populates="posts")
-    post_responses = db.relationship("User", secondary=responses, back_populates="user_responses")
-    clapped_users = db.relationship("User", secondary=claps, back_populates="clapped_posts")
+    responses = db.relationship("Response", back_populates="post")
+    claps = db.relationship("Clap", back_populates="post")
     tags = db.relationship("Tag", secondary=post_tags, back_populates="posts")
 
 class Tag(db.Model):
