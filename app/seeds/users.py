@@ -103,16 +103,11 @@ def seed_users():
                    password='password',
                    ))
 
-    users[0].followers.append(users[1])
-
     for user in users:
         db.session.add(user)
 
 
     db.session.commit()
-
-    print(users[0].to_dict())
-    print(users[1].to_dict())
 
 
 # Uses a raw SQL query to TRUNCATE the users table.
