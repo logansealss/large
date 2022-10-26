@@ -6,6 +6,7 @@ from app.models import db, Post, Response, Clap
 from app.forms.post_form import CreatePostForm, UpdatePostForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.utils.reading_speed import read_time_from_string
+from app.utils.error_messages import couldnt_be_found, forbidden, deleted
 
 post_routes = Blueprint("post", __name__)
 
@@ -32,10 +33,7 @@ def get_post_by_id(post_id):
     post_by_id = Post.query.get(post_id)
 
     if post_by_id is None:
-        return {
-            "message": "Post couldn't be found",
-            "statusCode": 404
-        }, 404
+        return couldnt_be_found("Post")
 
     num_claps = Post.query.join(Clap)           \
         .filter(Post.id == post_id)             \
@@ -84,16 +82,10 @@ def update_post_by_id(post_id):
     post_by_id = Post.query.get(post_id)
 
     if post_by_id is None:
-        return {
-            "message": "Post couldn't be found",
-            "statusCode": 404
-        }, 404
+        return couldnt_be_found("Post")
 
     if post_by_id.writer_id != current_user.id:
-        return {
-            "message": "Forbidden",
-            "statusCode": 403
-        }, 403
+        return forbidden()
 
     form = UpdatePostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -135,21 +127,12 @@ def delete_post_by_id(post_id):
     post_by_id = Post.query.get(post_id)
 
     if post_by_id is None:
-        return {
-            "message": "Post couldn't be found",
-            "statusCode": 404
-        }, 404
+        return couldnt_be_found("Post")
 
     if post_by_id.writer_id != current_user.id:
-        return {
-            "message": "Forbidden",
-            "statusCode": 403
-        }, 403
+        return forbidden()
 
     db.session.delete(post_by_id)
     db.session.commit()
 
-    return {
-        "message": "Successfully deleted",
-        "statusCode": 200
-    }
+    return deleted()
