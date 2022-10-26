@@ -88,6 +88,14 @@ class Response(db.Model):
     post = db.relationship("Post", back_populates="responses")
     user = db.relationship("User", back_populates="responses")
 
+    def to_dict(self):
+        return {
+            "response": self.response,
+            "createdAt": self.created_at,
+            "user_id": self.user_id,
+            "post_id": self.post_id
+        }
+
 class Clap(db.Model):
     __tablename__ = 'claps'
 

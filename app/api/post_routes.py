@@ -1,4 +1,3 @@
-from turtle import pos
 from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
