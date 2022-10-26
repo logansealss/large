@@ -88,8 +88,6 @@ class Response(db.Model):
     post = db.relationship("Post", back_populates="responses")
     user = db.relationship("User", back_populates="responses")
 
-
-
 class Clap(db.Model):
     __tablename__ = 'claps'
 
@@ -99,6 +97,14 @@ class Clap(db.Model):
 
     post = db.relationship("Post", back_populates="claps")
     user = db.relationship("User", back_populates="claps")
+
+    def to_dict(self):
+        return {
+            "userId": self.user_id,
+            "postId": self.post_id,
+            "amount": self.amount,
+            "user": self.user.to_dict()
+        }
 
 
 class Post(db.Model):
@@ -119,6 +125,18 @@ class Post(db.Model):
     tags = db.relationship("Tag", secondary=post_tags, back_populates="posts")
 
     def to_dict(self):
+        return {
+            "id": self.id,
+            "writer": self.writer.to_dict(),
+            "title": self.title,
+            "subtitle": self.subtitle,
+            "post": self.post,
+            "readTime": self.read_time,
+            "imageURL": self.image_url,
+            "createdAt": self.created_at
+        }
+
+    def preview_to_dict(self):
         return {
             "id": self.id,
             "writer": self.writer.to_dict(),
