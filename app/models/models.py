@@ -80,8 +80,9 @@ class User(db.Model, UserMixin):
 class Response(db.Model):
     __tablename__ = 'responses'
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
-    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
     response = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
@@ -90,6 +91,7 @@ class Response(db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "response": self.response,
             "createdAt": self.created_at,
             "user_id": self.user_id,
