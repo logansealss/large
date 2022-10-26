@@ -5,6 +5,7 @@ from flask_login import current_user, login_required
 from app.models import db, Post, Response
 from app.utils.error_messages import couldnt_be_found, forbidden, deleted
 from app.api.auth_routes import validation_errors_to_error_messages
+from app.forms.response_form import ResponseForm
 
 response_routes = Blueprint("response", __name__)
 
@@ -28,3 +29,27 @@ def get_response_by_id(response_id):
         return couldnt_be_found("Response")
 
     return response_by_id.to_dict()
+
+# -------------- UPDATE A RESPONSE -------------- #
+
+@response_routes.route('/<int:response_id>', methods=["PUT"])
+@login_required
+def update_response_by_id(response_id):
+    response_by_id = Response.query.get(response_id)
+
+    if response_by_id is None:
+        return couldnt_be_found("Response")
+
+    if response_by_id.user_id != current_user.id:
+        return forbidden()
+
+    form = ResponseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        form_data = form.data
+        response_by_id.response = form_data["response"]
+        db.session.commit()
+        return response_by_id.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
