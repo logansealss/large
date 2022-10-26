@@ -116,7 +116,7 @@ class Post(db.Model):
     subtitle = db.Column(db.String(100))
     read_time = db.Column(db.Integer, nullable=False)
     image_url = db.Column(db.String(255))
-    post = db.Column(db.String())
+    post = db.Column(db.String(), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     writer = db.relationship("User", back_populates="posts")
@@ -129,10 +129,10 @@ class Post(db.Model):
             "id": self.id,
             "writer": self.writer.to_dict(),
             "title": self.title,
-            "subtitle": self.subtitle,
+            "subtitle": self.subtitle or None,
             "post": self.post,
             "readTime": self.read_time,
-            "imageURL": self.image_url,
+            "imageURL": self.image_url or None,
             "createdAt": self.created_at
         }
 
@@ -143,7 +143,7 @@ class Post(db.Model):
             "title": self.title,
             "preview": self.subtitle or self.post[0:100],
             "readTime": self.read_time,
-            "imageURL": self.image_url,
+            "imageURL": self.image_url or None,
             "createdAt": self.created_at
         }
 
@@ -154,7 +154,7 @@ class Post(db.Model):
             "title": self.title,
             "preview": self.subtitle or self.post[0:100],
             "readTime": self.read_time,
-            "imageURL": self.image_url,
+            "imageURL": self.image_url or None,
             "createdAt": self.created_at
         }
 

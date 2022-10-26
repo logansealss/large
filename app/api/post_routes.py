@@ -1,7 +1,12 @@
 from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
+
 from app.models import db, Post, Response, Clap
+from app.forms.post_form import PostForm
+from app.api.auth_routes import validation_errors_to_error_messages
+
+AVG_READING_SPEED = 250
 
 post_routes = Blueprint("post", __name__)
 
@@ -50,23 +55,22 @@ def get_post_by_id(post_id):
 
 @post_routes.route('', methods=["POST"])
 def create_post():
-    form = TaskForm()
+    form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         form_data = form.data
-        new_task = Task(user_id=current_user.id,
-                        name=form_data["name"],
-                        priority=form_data["priority"],
-                        start_date=form_data["start_date"],
-                        due_date=form_data["due_date"],
-                        duration=form_data["duration"],
-                        list_id=form_data["list_id"],
-                        note=form_data["note"],
-                        completed=form_data["completed"])
+        read_time = len(form_data["post"].split(' ')) // AVG_READING_SPEED
+        new_post = Post(writer_id=current_user.id,
+                        read_time=read_time,
+                        title=form_data["title"],
+                        subtitle=form_data["subtitle"],
+                        image_url=form_data["image_url"],
+                        post=form_data["post"])
 
-        db.session.add(new_task)
+        db.session.add(new_post)
         db.session.commit()
 
-        return new_task.to_dict()
+        return new_post.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
