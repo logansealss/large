@@ -8,6 +8,8 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, firstName, lastName, password));
       if (data) {
         setErrors(data)
       }
@@ -37,6 +39,14 @@ const SignUpForm = () => {
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value)
+  }
+
+  const updatelastName = (e) => {
+    setLastName(e.target.value)
+  }
 
   if (user) {
     return <Redirect to='/' />;
@@ -65,6 +75,24 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
+        ></input>
+      </div>
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='lastName'
+          onChange={updatelastName}
+          value={lastName}
         ></input>
       </div>
       <div>
