@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 
 from app.models import db, Post, Response, Clap
 from app.forms.post_form import CreatePostForm, UpdatePostForm
+from app.forms.response_form import ResponseForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.utils.reading_speed import read_time_from_string
 from app.utils.error_messages import couldnt_be_found, forbidden, deleted
@@ -49,6 +50,14 @@ def get_post_by_id(post_id):
 
     return post_dict
 
+# -------------- GET ALL RESPONSES TO A POST -------------- #
+
+@post_routes.route('/<int:post_id>/responses')
+def get_post_responses(post_id):
+    post_responses = Response.query.filter(Response.post_id == post_id)     \
+        .options(joinedload(Response.user)).all()
+    return {response.id: response.writer_to_dict() for response in post_responses}
+
 # -------------- CREATE A POST -------------- #
 
 @post_routes.route('', methods=["POST"])
@@ -71,6 +80,28 @@ def create_post():
         db.session.commit()
 
         return new_post.writer_to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# -------------- CREATE A RESPONSE -------------- #
+
+@post_routes.route('<int:post_id>/responses', methods=["POST"])
+@login_required
+def create_response(post_id):
+    form = ResponseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        form_data = form.data
+
+        new_response = Response(user_id=current_user.id,
+                                post_id=post_id,
+                                response=form_data["response"])
+
+        db.session.add(new_response)
+        db.session.commit()
+
+        return new_response.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

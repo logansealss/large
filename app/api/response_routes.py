@@ -15,7 +15,8 @@ response_routes = Blueprint("response", __name__)
 @login_required
 def get_user_response():
     user_id = current_user.id
-    user_responses = Response.query.filter(Response.user_id == user_id).all()
+    user_responses = Response.query                     \
+        .filter(Response.user_id == user_id).all()
     return {response.id: response.to_dict() for response in user_responses}
 
 # -------------- GET A RESPONSE BY ID -------------- #

@@ -98,11 +98,21 @@ class Response(db.Model):
             "post_id": self.post_id
         }
 
+    def writer_to_dict(self):
+        return {
+            "id": self.id,
+            "response": self.response,
+            "createdAt": self.created_at,
+            "user": self.user.to_dict(),
+            "post_id": self.post_id
+        }
+
 class Clap(db.Model):
     __tablename__ = 'claps'
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
-    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
 
     post = db.relationship("Post", back_populates="claps")
