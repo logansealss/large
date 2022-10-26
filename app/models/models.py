@@ -74,9 +74,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'about': self.about,
-            'following': self.following,
-            'followers': self.followers
+            'about': self.about
         }
 
 class Response(db.Model):
@@ -119,6 +117,28 @@ class Post(db.Model):
     responses = db.relationship("Response", back_populates="post")
     claps = db.relationship("Clap", back_populates="post")
     tags = db.relationship("Tag", secondary=post_tags, back_populates="posts")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "writer": self.writer.to_dict(),
+            "title": self.title,
+            "preview": self.subtitle or self.post[0:100],
+            "readTime": self.read_time,
+            "imageURL": self.image_url,
+            "createdAt": self.created_at
+        }
+
+    def writer_to_dict(self):
+        return {
+            "id": self.id,
+            "writerId": self.writer_id,
+            "title": self.title,
+            "preview": self.subtitle or self.post[0:100],
+            "readTime": self.read_time,
+            "imageURL": self.image_url,
+            "createdAt": self.created_at
+        }
 
 class Tag(db.Model):
     __tablename__ = 'tags'

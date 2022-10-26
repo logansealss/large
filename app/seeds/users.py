@@ -102,6 +102,18 @@ def seed_users():
                    username='kermitfrog',
                    password='password',
                    ))
+    users.append(User(username="alexdam",
+                  email="alexdam@user.io",
+                  password="password",
+                  first_name="Alex",
+                  last_name="Dam",
+                ))
+    users.append(User(username="garysong",
+                  email="garysong@user.io",
+                  password="password",
+                  first_name="Gary",
+                  last_name="Song",
+                ))
 
     for user in users:
         db.session.add(user)
