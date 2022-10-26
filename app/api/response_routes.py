@@ -53,3 +53,21 @@ def update_response_by_id(response_id):
         return response_by_id.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# -------------- DELETE A RESPONSE -------------- #
+
+@response_routes.route('/<int:response_id>', methods=["DELETE"])
+@login_required
+def delete_response_by_id(response_id):
+    response_by_id = Response.query.get(response_id)
+
+    if response_by_id is None:
+        return couldnt_be_found("Response")
+
+    if response_by_id.user_id != current_user.id:
+        return forbidden()
+
+    db.session.delete(response_by_id)
+    db.session.commit()
+
+    return deleted()
