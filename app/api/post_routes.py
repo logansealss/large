@@ -1,19 +1,13 @@
-from turtle import pos
 from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
 
 from app.models import db, Post, Response, Clap
 from app.forms.post_form import CreatePostForm, UpdatePostForm
+from app.forms.response_form import ResponseForm
 from app.api.auth_routes import validation_errors_to_error_messages
-
-AVG_READING_SPEED = 250
-
-def calculate_read_time(number_of_words):
-    return round(number_of_words / AVG_READING_SPEED)
-
-def get_word_count(string):
-    return len(string.split(' '))
+from app.utils.reading_speed import read_time_from_string
+from app.utils.error_messages import couldnt_be_found, forbidden, deleted
 
 post_routes = Blueprint("post", __name__)
 
@@ -40,10 +34,7 @@ def get_post_by_id(post_id):
     post_by_id = Post.query.get(post_id)
 
     if post_by_id is None:
-        return {
-            "message": "Post couldn't be found",
-            "statusCode": 404
-        }, 404
+        return couldnt_be_found("Post")
 
     num_claps = Post.query.join(Clap)           \
         .filter(Post.id == post_id)             \
@@ -59,6 +50,14 @@ def get_post_by_id(post_id):
 
     return post_dict
 
+# -------------- GET ALL RESPONSES TO A POST -------------- #
+
+@post_routes.route('/<int:post_id>/responses')
+def get_post_responses(post_id):
+    post_responses = Response.query.filter(Response.post_id == post_id)     \
+        .options(joinedload(Response.user)).all()
+    return {response.id: response.writer_to_dict() for response in post_responses}
+
 # -------------- CREATE A POST -------------- #
 
 @post_routes.route('', methods=["POST"])
@@ -69,8 +68,7 @@ def create_post():
 
     if form.validate_on_submit():
         form_data = form.data
-        word_count = get_word_count(form_data["post"])
-        read_time = calculate_read_time(word_count)
+        read_time = read_time_from_string(form_data["post"])
         new_post = Post(writer_id=current_user.id,
                         read_time=read_time,
                         title=form_data["title"],
@@ -85,6 +83,28 @@ def create_post():
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+# -------------- CREATE A RESPONSE -------------- #
+
+@post_routes.route('<int:post_id>/responses', methods=["POST"])
+@login_required
+def create_response(post_id):
+    form = ResponseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        form_data = form.data
+
+        new_response = Response(user_id=current_user.id,
+                                post_id=post_id,
+                                response=form_data["response"])
+
+        db.session.add(new_response)
+        db.session.commit()
+
+        return new_response.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 # -------------- UPDATE A POST -------------- #
 
 @post_routes.route('/<int:post_id>', methods=["PUT"])
@@ -93,16 +113,10 @@ def update_post_by_id(post_id):
     post_by_id = Post.query.get(post_id)
 
     if post_by_id is None:
-        return {
-            "message": "Post couldn't be found",
-            "statusCode": 404
-        }, 404
+        return couldnt_be_found("Post")
 
     if post_by_id.writer_id != current_user.id:
-        return {
-            "message": "Forbidden",
-            "statusCode": 403
-        }, 403
+        return forbidden()
 
     form = UpdatePostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -114,16 +128,21 @@ def update_post_by_id(post_id):
             post_by_id.title = form_data["title"]
 
         if form_data["subtitle"] is not None:
-            post_by_id.subtitle = form_data["subtitle"]
+            if form_data["subtitle"] == "":
+                post_by_id.subtitle = None
+            else:
+                post_by_id.subtitle = form_data["subtitle"]
 
         if form_data["post"]:
             post_by_id.post = form_data["post"]
-            word_count = get_word_count(form_data["post"])
-            read_time = calculate_read_time(word_count)
+            read_time = read_time_from_string(form_data["post"])
             post_by_id.read_time = read_time
 
         if form_data["image_url"] is not None:
-            post_by_id.image_url = form_data["image_url"]
+            if form_data["image_url"] == "":
+                post_by_id.image_url = None
+            else:
+                post_by_id.image_url = form_data["image_url"]
 
         db.session.commit()
 
@@ -139,21 +158,12 @@ def delete_post_by_id(post_id):
     post_by_id = Post.query.get(post_id)
 
     if post_by_id is None:
-        return {
-            "message": "Post couldn't be found",
-            "statusCode": 404
-        }, 404
+        return couldnt_be_found("Post")
 
     if post_by_id.writer_id != current_user.id:
-        return {
-            "message": "Forbidden",
-            "statusCode": 403
-        }, 403
+        return forbidden()
 
     db.session.delete(post_by_id)
     db.session.commit()
 
-    return {
-        "message": "Successfully deleted",
-        "statusCode": 200
-    }
+    return deleted()

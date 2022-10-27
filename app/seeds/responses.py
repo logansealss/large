@@ -11,7 +11,7 @@ def seed_responses():
     response1 = Response(response="this is my response")
     response2 = Response(response="this is another response")
 
-    response1.user = users[8]
+    response1.user = users[0]
     response1.post = posts[1]
 
     response2.user = users[7]
