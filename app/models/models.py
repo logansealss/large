@@ -94,17 +94,17 @@ class Response(db.Model):
             "id": self.id,
             "response": self.response,
             "createdAt": self.created_at,
-            "user_id": self.user_id,
-            "post_id": self.post_id
+            "userId": self.user_id,
+            "postId": self.post_id
         }
 
-    def writer_to_dict(self):
+    def to_dict_with_user(self):
         return {
             "id": self.id,
             "response": self.response,
             "createdAt": self.created_at,
             "user": self.user.to_dict(),
-            "post_id": self.post_id
+            "postId": self.post_id
         }
 
 class Clap(db.Model):
