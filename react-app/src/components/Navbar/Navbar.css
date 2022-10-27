@@ -3,7 +3,7 @@
     position: fixed;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    transition: background-color 300ms linear linear;
+    transition: background-color 300ms linear;
 }
 
 .color{
