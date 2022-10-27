@@ -1,9 +1,17 @@
 #navbar{
-    background-color: #FFC017;
     width: 100%;
     position: fixed;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+    transition: background-color 0.7s;
+}
+
+.color{
+    background-color: #FFC017;
+}
+
+.no-color{
+    background-color: #FFF;
 }
 
 .bottom-border{

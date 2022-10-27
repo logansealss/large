@@ -28,8 +28,14 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/'>
+        <Route exact path='/'>
           <LandingPage></LandingPage>
+        </Route>
+        <Route exact path='/signup'>
+          <SignUpForm></SignUpForm>
+        </Route>
+        <Route exact path='/login'>
+          <LoginForm></LoginForm>
         </Route>
       </Switch>
 

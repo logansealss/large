@@ -51,13 +51,14 @@
 #header-heading{
     font-family: 'PT Serif', serif;
     font-weight: 400;
-    font-size: 106px;
+    font-size: 90px;
     margin-bottom: 35px;
     line-height: 95px;
 }
 
 #header-body{
     font-size: 24px;
+    line-height: 24px;
     font-weight: 400;
     width: 440px;
     margin-bottom: 50px;

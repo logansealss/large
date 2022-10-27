@@ -1,7 +1,10 @@
+import { useHistory } from "react-router-dom"
 
 import "./Header.css"
 
 export default function Header() {
+
+    const history = useHistory()
 
     return (
         <div
@@ -15,10 +18,7 @@ export default function Header() {
                             <div
                                 id="header-heading"
                             >
-                                <span>
-
-                                    Stay curious.
-                                </span>
+                                Stay curious.
                             </div>
                             <div
                                 id="header-body"
@@ -28,6 +28,7 @@ export default function Header() {
                             <button
                                 id="header-button"
                                 className="navbar-header-button"
+                                onClick={() =>history.push('/signup')}
                             >
                                 Start Reading
                             </button>
