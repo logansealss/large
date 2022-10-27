@@ -46,8 +46,8 @@ class User(db.Model, UserMixin):
     about = db.Column(db.String(200))
 
     posts = db.relationship("Post", back_populates="writer", cascade="all, delete-orphan")
-    responses = db.relationship("Response", back_populates="user")
-    claps = db.relationship("Clap", back_populates="user")
+    responses = db.relationship("Response", back_populates="user", cascade="all, delete-orphan")
+    claps = db.relationship("Clap", back_populates="user", cascade="all, delete-orphan")
     following = db.relationship(
         "User",
         secondary=follows,
@@ -94,17 +94,17 @@ class Response(db.Model):
             "id": self.id,
             "response": self.response,
             "createdAt": self.created_at,
-            "user_id": self.user_id,
-            "post_id": self.post_id
+            "userId": self.user_id,
+            "postId": self.post_id
         }
 
-    def writer_to_dict(self):
+    def to_dict_with_user(self):
         return {
             "id": self.id,
             "response": self.response,
             "createdAt": self.created_at,
             "user": self.user.to_dict(),
-            "post_id": self.post_id
+            "postId": self.post_id
         }
 
 class Clap(db.Model):
@@ -140,8 +140,8 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     writer = db.relationship("User", back_populates="posts")
-    responses = db.relationship("Response", back_populates="post")
-    claps = db.relationship("Clap", back_populates="post")
+    responses = db.relationship("Response", back_populates="post", cascade="all, delete-orphan")
+    claps = db.relationship("Clap", back_populates="post", cascade="all, delete-orphan")
     tags = db.relationship("Tag", secondary=post_tags, back_populates="posts")
 
     def to_dict(self):

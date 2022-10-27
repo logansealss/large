@@ -16,8 +16,10 @@ response_routes = Blueprint("response", __name__)
 def get_user_response():
     user_id = current_user.id
     user_responses = Response.query                     \
-        .filter(Response.user_id == user_id).all()
-    return {response.id: response.to_dict() for response in user_responses}
+        .filter(Response.user_id == user_id)            \
+        .options(joinedload(Response.user)).all()
+    
+    return {response.id: response.to_dict_with_user() for response in user_responses}
 
 # -------------- GET A RESPONSE BY ID -------------- #
 
@@ -51,7 +53,12 @@ def update_response_by_id(response_id):
         form_data = form.data
         response_by_id.response = form_data["response"]
         db.session.commit()
-        return response_by_id.to_dict()
+
+        response_by_id_dict = response_by_id.to_dict()
+        response_by_id_dict["user"] = current_user.to_dict()
+        del response_by_id_dict["userId"]
+
+        return response_by_id_dict
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

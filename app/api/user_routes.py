@@ -1,19 +1,20 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask import Blueprint
+from sqlalchemy.orm import joinedload
+
+from app.models import User, Post
+from app.utils.error_messages import couldnt_be_found
+
 
 user_routes = Blueprint('users', __name__)
 
-
-@user_routes.route('')
-@login_required
-def users():
-    users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
-
-
-@user_routes.route('/<int:id>')
-@login_required
+@user_routes.route('/<int:id>/posts')
 def user(id):
+
     user = User.query.get(id)
-    return user.to_dict()
+
+    if user is None:
+        return couldnt_be_found("User")
+
+    user_posts = Post.query.filter(Post.writer_id == id)                \
+        .options(joinedload(Post.writer)).all()
+    return { post.id: post.preview_to_dict() for post in user_posts }
