@@ -46,8 +46,8 @@ class User(db.Model, UserMixin):
     about = db.Column(db.String(200))
 
     posts = db.relationship("Post", back_populates="writer", cascade="all, delete-orphan")
-    responses = db.relationship("Response", back_populates="user")
-    claps = db.relationship("Clap", back_populates="user")
+    responses = db.relationship("Response", back_populates="user", cascade="all, delete-orphan")
+    claps = db.relationship("Clap", back_populates="user", cascade="all, delete-orphan")
     following = db.relationship(
         "User",
         secondary=follows,
@@ -140,8 +140,8 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     writer = db.relationship("User", back_populates="posts")
-    responses = db.relationship("Response", back_populates="post")
-    claps = db.relationship("Clap", back_populates="post")
+    responses = db.relationship("Response", back_populates="post", cascade="all, delete-orphan")
+    claps = db.relationship("Clap", back_populates="post", cascade="all, delete-orphan")
     tags = db.relationship("Tag", secondary=post_tags, back_populates="posts")
 
     def to_dict(self):
