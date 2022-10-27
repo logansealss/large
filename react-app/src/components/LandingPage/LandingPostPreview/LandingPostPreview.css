@@ -11,7 +11,6 @@
 .post-content-details{
     display: flex;
     flex-direction: row;
-    padding-top: 8px;
     color: rgba(117, 117, 117, 1);
     font-size: 13px;
     line-height: 20px;
@@ -22,7 +21,6 @@
     line-height: 16px;
     overflow: hidden;
     font-weight: 600;
-    padding-bottom: 8px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -38,7 +36,6 @@
 }
 
 .post-content-preview{
-    padding-top: 4px;
     color: rgba(117, 117, 117, 1);
     font-size: 16px;
     line-height: 20px;
@@ -56,6 +53,11 @@
     margin-right: 20px;
     width: 100%;
     display: grid;
+}
+
+.post-content > div{
+    display: flex;
+    align-items: center;
 }
 
 .post-image-container img{
