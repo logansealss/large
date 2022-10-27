@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import Navbar from "../Navbar/Navbar"
 import Header from "../Header/Header"
+import LandingPostPreview from "./LandingPostPreview/LandingPostPreview"
 import { isEmptyObj } from "../../utils/Objects"
 import { readAllPostsThunk } from "../../store/posts"
 
@@ -29,11 +30,20 @@ export default function LandingPage() {
             {isEmptyObj(user) && (
                 <Header></Header>
             )}
-            {postArr.map(post => (
-                <div key={post.id}>
-                    {post.id}
+            <div id="content-body-container">
+                <div id="content-body-flex">
+                    <div id="content-body">
+                        <div id="content-posts-container">
+                            {postArr.map(post => (
+                                <LandingPostPreview key={post.id} post={post} />
+                            ))}
+                        </div>
+                        <div id="content-sidebar-container">
+
+                        </div>
+                    </div>
                 </div>
-            ))}
+            </div>
         </>
     )
 }

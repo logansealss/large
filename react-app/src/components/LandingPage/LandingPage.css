@@ -1,0 +1,24 @@
+#content-body-container{
+    width: 100%;
+    padding-top: 56px;
+}
+
+#content-body-flex{
+    display: flex;
+    justify-content: center;
+}
+
+#content-body{
+    width:  1192px;
+    margin: 0 64px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#content-posts-container{
+    width: 62.5%;
+}
+
+#content-sidebar-container{
+    width: auto;
+}
