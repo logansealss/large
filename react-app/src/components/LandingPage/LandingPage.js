@@ -35,7 +35,7 @@ export default function LandingPage() {
                     <div id="content-body">
                         <div id="content-posts-container">
                             {postArr.map(post => (
-                                <LandingPostPreview post={post} />
+                                <LandingPostPreview key={post.id} post={post} />
                             ))}
                         </div>
                         <div id="content-sidebar-container">
