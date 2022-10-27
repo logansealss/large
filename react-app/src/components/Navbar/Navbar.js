@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../../store/session';
@@ -11,6 +11,7 @@ export default function Navbar() {
 
     const dispatch = useDispatch()
     const history = useHistory()
+    const location = useLocation()
     const user = useSelector(state => state.session.user)
     const [isTop, setIsTop] = useState(true)
 
@@ -43,6 +44,7 @@ export default function Navbar() {
     const buttonClick = loggedIn ? signout : signup
     const writeLink = loggedIn ? "/new-post" : "/login"
     const navbarClass = (isTop && !loggedIn) ? "bottom-border color" : "bottom-border no-color"
+    const navbarButtonClass = (location.pathname === '/' && isTop && !loggedIn) ? "color-one" : "color-two"
 
 
     return (
@@ -84,7 +86,7 @@ export default function Navbar() {
                                 }
                                 <button
                                     id="navbar-button"
-                                    className="navbar-header-button"
+                                    className={navbarButtonClass}
                                     onClick={buttonClick}
                                 >
                                     {buttonText}

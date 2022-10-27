@@ -4,15 +4,9 @@
     width: 213px;
     border-radius: 99em;
     padding: 7px 20px 9px;
-}
-
-.navbar-header-button{
     border: 1px solid rgba(25, 25, 25, 1);
     background-color: rgba(25, 25, 25, 1);
     color: rgba(255, 255, 255, 1);
-}
-
-.navbar-header-button:hover{
     cursor: pointer;
 }
 
@@ -51,7 +45,7 @@
 #header-heading{
     font-family: 'PT Serif', serif;
     font-weight: 400;
-    font-size: 90px;
+    font-size: 106px;
     margin-bottom: 35px;
     line-height: 95px;
 }
