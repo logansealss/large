@@ -55,6 +55,7 @@
 .post-content{
     margin-right: 20px;
     width: 100%;
+    display: grid;
 }
 
 .post-image-container img{
