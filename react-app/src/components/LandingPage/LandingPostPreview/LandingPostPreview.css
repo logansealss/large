@@ -17,8 +17,6 @@
     padding-top: 8px;
 }
 
-
-
 .post-content-name{
     font-size: 13px;
     line-height: 16px;
@@ -60,6 +58,8 @@
 
 .post-content{
     margin-right: 20px;
+    display: flex;
+    align-items: center;
 }
 
 @media screen and (min-width: 1024px){
@@ -96,11 +96,6 @@
     width: 200px;
     height: 133px;
     object-fit: cover;
-    display: flex;
-    align-items: center;
-}
-
-.post-content-container{
     display: flex;
     align-items: center;
 }

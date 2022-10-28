@@ -14,24 +14,27 @@ export default function LandingPostPreview({ post }) {
             <div className="post-container-padding">
                 <div className="post-content-flex">
                     <div className="post-content">
-                        <div className="post-content-name">
-                            {`${post.writer.firstName} ${post.writer.lastName}`}
-                        </div>
-                        <div className="post-content-title">
-                            {`${post.title}`}
-                        </div>
-                        <div className="post-content-preview">
-                            {`${post.preview}`}
-                        </div>
-                        <div className="post-content-details">
-                            <div>
-                                {`${postMonth} ${postDay}`}
+                        <div className="post-content-container">
+
+                            <div className="post-content-name">
+                                {`${post.writer.firstName} ${post.writer.lastName}`}
                             </div>
-                            <div className="post-content-spreader">
-                                ·
+                            <div className="post-content-title">
+                                {`${post.title}`}
                             </div>
-                            <div>
-                                {`${post.readTime} min read`}
+                            <div className="post-content-preview">
+                                {`${post.preview}`}
+                            </div>
+                            <div className="post-content-details">
+                                <div>
+                                    {`${postMonth} ${postDay}`}
+                                </div>
+                                <div className="post-content-spreader">
+                                    ·
+                                </div>
+                                <div>
+                                    {`${post.readTime} min read`}
+                                </div>
                             </div>
                         </div>
                     </div>
