@@ -44,7 +44,7 @@ const PostForm = ({ postToUpdate }) => {
         if (title.length === 0) {
             setTitleError('Title is required')
         } else if (title.length > 100) {
-            setTitleError('Title must be 100 characters or less')
+            setTitleError('Must be 100 characters or less')
         } else {
             setTitleError()
         }
@@ -53,7 +53,7 @@ const PostForm = ({ postToUpdate }) => {
 
     useEffect(() => {
         if (subtitle.length > 100) {
-            setSubtitleError('Subtitle must be 100 characters or less')
+            setSubtitleError('Must be 100 characters or less')
         } else {
             setSubtitleError()
         }
@@ -69,15 +69,19 @@ const PostForm = ({ postToUpdate }) => {
 
     useEffect(() => {
         if (imageUrl.length > 255) {
-            setImageUrlError('Image URL must be 255 characters or less')
+            setImageUrlError('Must be 255 characters or less')
         }
-        else if (imageUrl.length && !(/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(imageUrl)) {
-            setImageUrlError('Image URL must end with a valid image extension')
+        else if (imageUrl.length && !(/.\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(imageUrl)) {
+            setImageUrlError('Invalid image extension')
         }
         else {
             setImageUrlError()
         }
     }, [imageUrl])
+
+    function postIsUpdated() {
+
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -131,60 +135,104 @@ const PostForm = ({ postToUpdate }) => {
     };
 
     return (
-        <div
-            id="form-container"
-        >
-            <form 
-                id='post-form'
-                onSubmit={onSubmit}
-            >
-                <div>
-                    <input
-                        id="post-form-title"
-                        type='text'
-                        name='title'
-                        onChange={updateTitle}
-                        value={title}
-                        placeholder='Title'
-                        autocomplete="off"
-                    ></input>
+        <div id="form-body">
+            <div id="form-body-flex">
+                <div id="form-body-center">
+                    <div
+                        id="form-container"
+                    >
+                        <form
+                            id='post-form'
+                            onSubmit={onSubmit}
+                        >
+                            <div id="post-button-container">
+                                <button
+                                    id="post-form-button"
+                                    className='color-two'
+                                    type='submit'
+                                >
+                                    {postToUpdate ? 'Save and publish' : 'Publish'}
+                                </button>
+                            </div>
+                            <div
+                                id="title-input-container"
+                                className='input-container'
+                            >
+                                <div className={submitted && titleError ? 'input-error active' : 'input-error inactive'}>
+                                    <div>
+                                        {submitted ? titleError : ''}
+                                    </div>
+                                </div>
+                                <input
+                                    id="post-form-title"
+                                    type='text'
+                                    name='title'
+                                    onChange={updateTitle}
+                                    value={title}
+                                    placeholder='Title'
+                                    autocomplete="off"
+                                ></input>
+                            </div>
+                            <div
+                                id="subtitle-input-container"
+                                className='input-container'
+                            >
+                                <div className={submitted && subtitleError ? 'input-error active' : 'input-error inactive'}>
+                                    <div>
+                                        {submitted ? subtitleError : ''}
+                                    </div>
+                                </div>
+                                <input
+                                    id="post-form-subtitle"
+                                    type='text'
+                                    name='subtitle'
+                                    onChange={updateSubtitle}
+                                    value={subtitle}
+                                    placeholder='Subtitle'
+                                    autocomplete="off"
+                                ></input>
+                            </div>
+                            <div
+                                id="imageurl-input-container"
+                                className='input-container'
+                            >
+                                <div className={submitted && imageUrlError ? 'input-error active' : 'input-error inactive'}>
+                                    <div>
+                                        {submitted ? imageUrlError : ''}
+                                    </div>
+                                </div>
+                                <input
+                                    type='text'
+                                    name='imageUrl'
+                                    onChange={updateImageUrl}
+                                    value={imageUrl}
+                                    placeholder="Image URL"
+                                    autocomplete="off"
+                                ></input>
+                            </div>
+                            <div
+                                id="post-input-container"
+                                className='input-container'
+                            >
+                                <div className={submitted && postError ? 'input-error active' : 'input-error inactive'}>
+                                    <div>
+                                        {submitted ? postError : ''}
+                                    </div>
+                                </div>
+                                <textarea
+                                    id="post-form-post"
+                                    // type='textarea'
+                                    name='post'
+                                    onChange={updatePost}
+                                    value={post}
+                                    placeholder="Write your post..."
+                                    autocomplete="off"
+                                ></textarea>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <input
-                        id="post-form-subtitle"
-                        type='text'
-                        name='subtitle'
-                        onChange={updateSubtitle}
-                        value={subtitle}
-                        placeholder='Subtitle'
-                        autocomplete="off"
-                    ></input>
-                </div>
-                <div>
-                    <input
-                        id="post-form-post"
-                        type='text'
-                        name='post'
-                        onChange={updatePost}
-                        value={post}
-                        placeholder="Write your post..."
-                        autocomplete="off"
-                    ></input>
-                </div>
-                <div>
-                    <input
-                        type='text'
-                        name='imageUrl'
-                        onChange={updateImageUrl}
-                        value={imageUrl}
-                        placeholder="Image URL"
-                        autocomplete="off"
-                    ></input>
-                </div>
-                <button
-                    type='submit'
-                >{postToUpdate ? 'Save and publish' : 'Publish'}</button>
-            </form>
+            </div>
         </div>
     );
 };
