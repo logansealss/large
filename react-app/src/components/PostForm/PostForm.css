@@ -32,10 +32,12 @@
     padding-left: 10px;
     border-style: hidden;
     outline: none;
-    height: 100%;
+    height: 400px;
     font-family: 'Roboto Slab', serif;
     resize: none;
 }
+
+
 
 #post-form-title {
     height: 50px;
