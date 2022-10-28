@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
-import { createPostThunk, updatePostThunk } from '../../store/posts';
+import { createPostThunk, deletePostThunk, updatePostThunk } from '../../store/posts';
 
 import "./PostForm.css"
 
@@ -79,10 +79,6 @@ const PostForm = ({ postToUpdate }) => {
         }
     }, [imageUrl])
 
-    function postIsUpdated() {
-
-    }
-
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -110,13 +106,21 @@ const PostForm = ({ postToUpdate }) => {
         }
 
         if (result.id) {
+            history.push('/')
             // history.push(`/posts/${result.id}}`)
-            console.log("the result", result)
         } else {
             setServerError('Something went wrong. Please try again.')
         }
     };
 
+    async function deletePost(e){
+        e.preventDefault()
+        const result = await dispatch(deletePostThunk(postToUpdate.id))
+
+        if(!result){
+            history.push('/')
+        }
+    }
 
     const updateTitle = (e) => {
         setTitle(e.target.value);
@@ -146,6 +150,15 @@ const PostForm = ({ postToUpdate }) => {
                             onSubmit={onSubmit}
                         >
                             <div id="post-button-container">
+                                {postToUpdate && 
+                                    <button
+                                        id='post-form-button'
+                                        className='delete-button'
+                                        onClick={deletePost}
+                                    >
+                                        Delete post
+                                    </button>
+                                }
                                 <button
                                     id="post-form-button"
                                     className='color-two'
@@ -170,7 +183,7 @@ const PostForm = ({ postToUpdate }) => {
                                     onChange={updateTitle}
                                     value={title}
                                     placeholder='Title'
-                                    autocomplete="off"
+                                    autoComplete="off"
                                 ></input>
                             </div>
                             <div
@@ -189,7 +202,7 @@ const PostForm = ({ postToUpdate }) => {
                                     onChange={updateSubtitle}
                                     value={subtitle}
                                     placeholder='Subtitle'
-                                    autocomplete="off"
+                                    autoComplete="off"
                                 ></input>
                             </div>
                             <div
@@ -207,7 +220,7 @@ const PostForm = ({ postToUpdate }) => {
                                     onChange={updateImageUrl}
                                     value={imageUrl}
                                     placeholder="Image URL"
-                                    autocomplete="off"
+                                    autoComplete="off"
                                 ></input>
                             </div>
                             <div
@@ -226,7 +239,7 @@ const PostForm = ({ postToUpdate }) => {
                                     onChange={updatePost}
                                     value={post}
                                     placeholder="Write your post..."
-                                    autocomplete="off"
+                                    autoComplete="off"
                                 ></textarea>
                             </div>
                         </form>

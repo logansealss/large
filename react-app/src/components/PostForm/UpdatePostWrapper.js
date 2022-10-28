@@ -31,19 +31,9 @@ export default function UpdatePostWrapper() {
         return <Redirect to="/"></Redirect>
     }
 
-    const postIsEmpty = isEmptyObj(post)
-
-    if (postIsEmpty ||  post.id !== +postId) {
-        return (
-            <div>
-                loading
-            </div>
-        )
-    } else{
-        if(post.writer.id !== user.id){
-            return <Redirect to='/'></Redirect>
-        }
+    if (!isEmptyObj(post) && post.writer.id !== user.id){
+        return <Redirect to='/'></Redirect>
     }
 
-    return <PostForm postToUpdate={post}></PostForm>
+    return !isEmptyObj(post) && <PostForm postToUpdate={post}></PostForm>
 }
