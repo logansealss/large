@@ -1,10 +1,12 @@
 
+
+import { Link } from "react-router-dom";
+import { getMonthDay } from "../../../utils/Dates";
 import "./LandingPostPreview.css"
 
 export default function LandingPostPreview({ post }) {
 
-    const postMonth = post.createdAt.slice(8, 11);
-    const postDay = post.createdAt.slice(5, 7);
+    const monthDayStr = getMonthDay(post.createdAt)
 
     console.log("image url", post.imageURL)
 
@@ -19,29 +21,33 @@ export default function LandingPostPreview({ post }) {
                             <div className="post-content-name">
                                 {`${post.writer.firstName} ${post.writer.lastName}`}
                             </div>
-                            <div className="post-content-title">
-                                {`${post.title}`}
-                            </div>
-                            <div className="post-content-preview">
-                                {`${post.preview}`}
-                            </div>
-                            <div className="post-content-details">
-                                <div>
-                                    {`${postMonth} ${postDay}`}
+                            <Link to={`/posts/${post.id}`}>
+                                <div className="post-content-title">
+                                    {`${post.title}`}
                                 </div>
-                                <div className="post-content-spreader">
-                                    ·
+                                <div className="post-content-preview">
+                                    {`${post.preview}`}
                                 </div>
-                                <div>
-                                    {`${post.readTime} min read`}
+                                <div className="post-content-details">
+                                    <div>
+                                        {monthDayStr}
+                                    </div>
+                                    <div className="post-content-spreader">
+                                        ·
+                                    </div>
+                                    <div>
+                                        {`${post.readTime} min read`}
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
-                    <div className="post-image-container">
-                        {/* <img src={post.imageURL} /> */}
-                        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png' />
-                    </div>
+                    <Link to={`/posts/${post.id}`}>
+                        <div className="post-image-container">
+                            {/* <img src={post.imageURL} /> */}
+                            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png' />
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>
