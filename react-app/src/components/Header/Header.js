@@ -1,5 +1,7 @@
 import { useHistory } from "react-router-dom"
 
+import ReusableModal from '../../context/ReusableModal'
+import SignupForm from '../auth/SignUpForm'
 import "./Header.css"
 
 export default function Header() {
@@ -25,13 +27,20 @@ export default function Header() {
                             >
                                 Discover stories, thinking, and expertise from writers on any topic.
                             </div>
-                            <button
-                                id="header-button"
-                                className="navbar-header-button"
-                                onClick={() =>history.push('/signup')}
+                            <ReusableModal
+                                displayText='Get started'
+                                container={
+                                    (<button
+                                        id="header-button"
+                                        className="navbar-header-button"
+                                    >
+                                        Start Reading
+                                    </button>
+                                    )
+                                }
                             >
-                                Start Reading
-                            </button>
+                                <SignupForm></SignupForm>
+                            </ReusableModal>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
-const SignUpForm = () => {
+const SignUpForm = ({onClose}) => {
+  const mountedRef = useRef(true)
+
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -14,14 +16,19 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const history = useHistory()
 
+  useEffect(() => {
+    mountedRef.current = false
+  }, [])
+
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, firstName, lastName, password));
+      console.log("data after signup thunk", data)
       if (data) {
         setErrors(data)
-      }else{
-        history.push('/')
+      }else if (mountedRef.current) {
+        onClose()
       }
     }
   };
