@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 
-const LoginForm = ({onClose}) => {
+const LoginForm = ({ onClose }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +27,10 @@ const LoginForm = ({onClose}) => {
   };
 
   return (
-    <form onSubmit={onLogin}>
+    <form
+      onSubmit={onLogin}
+      id='auth-form'
+    >
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -35,6 +38,7 @@ const LoginForm = ({onClose}) => {
       </div>
       <div>
         <label htmlFor='email'>Email</label>
+        <br></br>
         <input
           name='email'
           type='text'
@@ -45,6 +49,7 @@ const LoginForm = ({onClose}) => {
       </div>
       <div>
         <label htmlFor='password'>Password</label>
+        <br></br>
         <input
           name='password'
           type='password'
@@ -52,8 +57,8 @@ const LoginForm = ({onClose}) => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
       </div>
+      <button type='submit'>Login</button>
     </form>
   );
 };

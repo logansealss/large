@@ -58,7 +58,10 @@ const SignUpForm = ({onClose}) => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form 
+      onSubmit={onSignUp}
+      id='auth-form'
+    >
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -66,6 +69,7 @@ const SignUpForm = ({onClose}) => {
       </div>
       <div>
         <label>User Name</label>
+        <br></br>
         <input
           type='text'
           name='username'
@@ -75,6 +79,7 @@ const SignUpForm = ({onClose}) => {
       </div>
       <div>
         <label>Email</label>
+        <br></br>
         <input
           type='text'
           name='email'
@@ -84,6 +89,7 @@ const SignUpForm = ({onClose}) => {
       </div>
       <div>
         <label>First Name</label>
+        <br></br>
         <input
           type='text'
           name='firstName'
@@ -93,6 +99,7 @@ const SignUpForm = ({onClose}) => {
       </div>
       <div>
         <label>Last Name</label>
+        <br></br>
         <input
           type='text'
           name='lastName'
@@ -102,6 +109,7 @@ const SignUpForm = ({onClose}) => {
       </div>
       <div>
         <label>Password</label>
+        <br></br>
         <input
           type='password'
           name='password'
@@ -111,6 +119,7 @@ const SignUpForm = ({onClose}) => {
       </div>
       <div>
         <label>Repeat Password</label>
+        <br></br>
         <input
           type='password'
           name='repeat_password'

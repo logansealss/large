@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom"
 
 import ReusableModal from '../../context/ReusableModal'
-import SignupForm from '../auth/SignUpForm'
+import AuthModalForm from "../auth/AuthModalForm"
 import "./Header.css"
 
 export default function Header() {
@@ -38,8 +38,9 @@ export default function Header() {
                                     </button>
                                     )
                                 }
+                                bgClass="auth-modal"
                             >
-                                <SignupForm></SignupForm>
+                                <AuthModalForm formToDisplay={false}></AuthModalForm>
                             </ReusableModal>
                         </div>
                     </div>

@@ -5,8 +5,10 @@ import { logout } from '../../store/session';
 
 import LoginForm from '../auth/LoginForm'
 import SignupForm from '../auth/SignUpForm'
+import AuthModalForm from "../auth/AuthModalForm";
 import { isEmptyObj } from "../../utils/Objects";
 import "./Navbar.css"
+import "./AuthModal.css"
 import mainLogo from "../../images/main-logo.png"
 import ReusableModal from "../../context/ReusableModal";
 
@@ -98,8 +100,9 @@ export default function Navbar() {
                                                 (<div className="navbar-links">
                                                     Sign In
                                                 </div>)}
+                                            bgClass='auth-modal'
                                         >
-                                            <LoginForm></LoginForm>
+                                            <AuthModalForm formToDisplay={true}></AuthModalForm>
                                         </ReusableModal>
                                         <ReusableModal
                                             displayText='Get started'
@@ -112,8 +115,9 @@ export default function Navbar() {
                                                 </button>
                                                 )
                                             }
+                                            bgClass='auth-modal'
                                         >
-                                            <SignupForm></SignupForm>
+                                            <AuthModalForm formToDisplay={false}></AuthModalForm>
                                         </ReusableModal>
                                     </>
                                 }
