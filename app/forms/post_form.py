@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, FileField
-from wtforms.validators import DataRequired, Length, regexp
-
-# regexp("(?i)([^\\s]+(\\.(jpe?g|png|gif|bmp))$)")
+from wtforms.validators import DataRequired, Length
 
 class CreatePostForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(), Length(1, 100)])

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
-import { createPostThunk } from '../../../store/posts';
+import { createPostThunk, updatePostThunk } from '../../store/posts';
 
-
+import "./PostForm.css"
 
 const PostForm = ({ postToUpdate }) => {
 
@@ -71,9 +71,9 @@ const PostForm = ({ postToUpdate }) => {
         if (imageUrl.length > 255) {
             setImageUrlError('Image URL must be 255 characters or less')
         }
-        // else if () {
-        //     setImageUrlError('Image URL must be 255 characters or less')
-        // }
+        else if (imageUrl.length && !(/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(imageUrl)) {
+            setImageUrlError('Image URL must end with a valid image extension')
+        }
         else {
             setImageUrlError()
         }
@@ -86,7 +86,7 @@ const PostForm = ({ postToUpdate }) => {
             setSubmitted(true)
         }
 
-        if(titleError || subtitleError || postError || imageUrlError){
+        if (titleError || subtitleError || postError || imageUrlError) {
             return;
         }
 
@@ -97,11 +97,17 @@ const PostForm = ({ postToUpdate }) => {
             image_url: imageUrl
         }
 
-        const result = await dispatch(createPostThunk(postToSubmit))
+        let result;
+
+        if (postToUpdate) {
+            result = await dispatch(updatePostThunk(postToUpdate.id, postToSubmit))
+        } else {
+            result = await dispatch(createPostThunk(postToSubmit))
+        }
 
         if (result.id) {
             // history.push(`/posts/${result.id}}`)
-            console.log("the new post: ", result)
+            console.log("the result", result)
         } else {
             setServerError('Something went wrong. Please try again.')
         }
@@ -125,71 +131,61 @@ const PostForm = ({ postToUpdate }) => {
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            {submitted && titleError && (
+        <div
+            id="form-container"
+        >
+            <form 
+                id='post-form'
+                onSubmit={onSubmit}
+            >
                 <div>
-                    {titleError}
+                    <input
+                        id="post-form-title"
+                        type='text'
+                        name='title'
+                        onChange={updateTitle}
+                        value={title}
+                        placeholder='Title'
+                        autocomplete="off"
+                    ></input>
                 </div>
-            )}
-            <div>
-                <label>Title</label>
-                <input
-                    type='text'
-                    name='title'
-                    onChange={updateTitle}
-                    value={title}
-                    placeholder='Title'
-                ></input>
-            </div>
-            {submitted && subtitleError && (
                 <div>
-                    {subtitleError}
+                    <input
+                        id="post-form-subtitle"
+                        type='text'
+                        name='subtitle'
+                        onChange={updateSubtitle}
+                        value={subtitle}
+                        placeholder='Subtitle'
+                        autocomplete="off"
+                    ></input>
                 </div>
-            )}
-            <div>
-                <label>Subtitle</label>
-                <input
-                    type='text'
-                    name='subtitle'
-                    onChange={updateSubtitle}
-                    value={subtitle}
-                    placeholder="Subtitle"
-                ></input>
-            </div>
-            {submitted && postError && (
                 <div>
-                    {postError}
+                    <input
+                        id="post-form-post"
+                        type='text'
+                        name='post'
+                        onChange={updatePost}
+                        value={post}
+                        placeholder="Write your post..."
+                        autocomplete="off"
+                    ></input>
                 </div>
-            )}
-            <div>
-                <label>Post</label>
-                <input
-                    type='text'
-                    name='post'
-                    onChange={updatePost}
-                    value={post}
-                    placeholder="Write your post..."
-                ></input>
-            </div>
-            {submitted && imageUrlError && (
                 <div>
-                    {imageUrlError}
+                    <input
+                        type='text'
+                        name='imageUrl'
+                        onChange={updateImageUrl}
+                        value={imageUrl}
+                        placeholder="Image URL"
+                        autocomplete="off"
+                    ></input>
                 </div>
-            )}
-            <div>
-                <label>Post Image</label>
-                <input
-                    type='text'
-                    name='imageUrl'
-                    onChange={updateImageUrl}
-                    value={imageUrl}
-                    placeholder="Image URL"
-                ></input>
-            </div>
-            <button
-                type='submit'
-            >Publish</button>
-        </form>
+                <button
+                    type='submit'
+                >{postToUpdate ? 'Save and publish' : 'Publish'}</button>
+            </form>
+        </div>
     );
 };
 

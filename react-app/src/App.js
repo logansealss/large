@@ -6,8 +6,9 @@ import Navbar from './components/Navbar/Navbar'
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import LandingPage from './components/LandingPage/LandingPage';
-import PostForm from './components/PostFormPage/PostForm/PostForm';
+import PostForm from './components/PostForm/PostForm';
 import { authenticate } from './store/session';
+import UpdatePostWrapper from './components/PostForm/UpdatePostWrapper';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route exact path='/new-post'>
           <PostForm></PostForm>
+        </Route>
+        <Route exact path='/posts/:postId/edit'>
+          <UpdatePostWrapper></UpdatePostWrapper>
         </Route>
         <Route exact path='/signup'>
           <SignUpForm></SignUpForm>

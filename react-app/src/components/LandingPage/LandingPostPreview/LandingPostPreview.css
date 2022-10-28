@@ -5,7 +5,7 @@
 
 .post-content-flex{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .post-content-details{
@@ -14,7 +14,10 @@
     color: rgba(117, 117, 117, 1);
     font-size: 13px;
     line-height: 20px;
+    padding-top: 12px;
 }
+
+
 
 .post-content-name{
     font-size: 13px;
@@ -24,6 +27,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-bottom: 10px;
 }
 
 .post-content-title{
@@ -43,6 +47,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-top: 8px;
 }
 
 .post-content-spreader{
@@ -51,17 +56,44 @@
 
 .post-content{
     margin-right: 20px;
-    width: 100%;
-    display: grid;
 }
 
-.post-content > div{
+@media screen and (min-width: 1024px){
+
+    .post-content{
+        margin-right: 20px;
+        width: 475px;
+    }
+    
+    .post-content > div{
+        width: 475px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+
+    .post-content{
+        margin-right: 20px;
+        width: 356px;
+    }
+    
+    .post-content > div{
+        width: 356px;
+    }
+}
+
+
+
+
+.post-image-container img{
+    width: 200px;
+    height: 133px;
+    object-fit: cover;
     display: flex;
     align-items: center;
 }
 
-.post-image-container img{
-    width: 200px;
-    height: 100%;
-    object-fit: cover;
+.post-content-container{
+    display: flex;
+    align-items: center;
 }

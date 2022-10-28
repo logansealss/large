@@ -1,0 +1,52 @@
+/* 
+make div containing picture flex align items center
+update padding around text elements
+
+css for overflow line stuff{
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+} */
+
+
+#post-form{
+
+}
+
+#post-form input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+}
+
+#post-form input {
+    outline: none;
+}
+
+#post-form-title {
+    width: 100%;
+    height: 50px;
+    font-size: 35px;
+}
+
+#post-form-post {
+    width: 100%;
+    height: 25px;
+    font-size: 17.5px;
+}
+
+#post-form-subtitle {
+    width: 100%;
+    height: 33.3px;
+    font-size: 23.31px;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#form-container input{
+    font-family: 'Roboto Slab', serif;
+}
