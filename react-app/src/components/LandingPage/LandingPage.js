@@ -26,7 +26,6 @@ export default function LandingPage() {
 
     return (
         <>
-            <Navbar></Navbar>
             {isEmptyObj(user) && (
                 <Header></Header>
             )}

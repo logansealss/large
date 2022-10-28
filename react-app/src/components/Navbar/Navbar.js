@@ -43,9 +43,37 @@ export default function Navbar() {
     const buttonText = loggedIn ? "Sign out" : "Get started"
     const buttonClick = loggedIn ? signout : signup
     const writeLink = loggedIn ? "/new-post" : "/login"
-    const navbarClass = (isTop && !loggedIn) ? "bottom-border color" : "bottom-border no-color"
-    const navbarButtonClass = (location.pathname === '/' && isTop && !loggedIn) ? "color-one" : "color-two"
+    // const navbarClass = (isTop && !loggedIn) ? "bottom-border color" : "bottom-border no-color"
 
+    let navbarClass = "bottom-border color"
+    let navbarButtonClass = "color-one"
+
+    if (location.pathname === '/') {
+        if (loggedIn) {
+            navbarButtonClass = "color-one"
+            navbarClass = "bottom-border no-color"
+        } else {
+            if (!isTop) {
+                navbarButtonClass = "color-two"
+                navbarClass = "bottom-border no-color"
+            }
+        }
+    } else {
+        if (loggedIn) {
+            navbarButtonClass = "color-one"
+            navbarClass = "bottom-border no-color"
+        } else {
+            navbarClass = "bottom-border no-color"
+            navbarButtonClass = "color-two"
+        }
+    }
+
+    // if(!loggedIn){
+    //     navbarButtonClass = "color-two"
+    //     navbarClass = "bottom-border no-color"
+    // } else if(location.pathname === '/') {
+    //     navbarButtonClass = isTop ? "color-one" : "color-two"
+    // }
 
     return (
         <>
