@@ -7,6 +7,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import LandingPage from './components/LandingPage/LandingPage';
 import PostForm from './components/PostForm/PostForm';
+import PostPage from './components/PostPage/PostPage';
 import { authenticate } from './store/session';
 import UpdatePostWrapper from './components/PostForm/UpdatePostWrapper';
 
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route exact path='/new-post'>
           <PostForm></PostForm>
+        </Route>
+        <Route exact path='/posts/:postId'>
+          <PostPage></PostPage>
         </Route>
         <Route exact path='/posts/:postId/edit'>
           <UpdatePostWrapper></UpdatePostWrapper>

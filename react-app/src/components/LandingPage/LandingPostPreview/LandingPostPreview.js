@@ -1,10 +1,11 @@
 
+
+import { getMonthDay } from "../../../utils/Dates";
 import "./LandingPostPreview.css"
 
 export default function LandingPostPreview({ post }) {
 
-    const postMonth = post.createdAt.slice(8, 11);
-    const postDay = post.createdAt.slice(5, 7);
+    const monthDayStr = getMonthDay(post.createdAt)
 
     console.log("image url", post.imageURL)
 
@@ -27,7 +28,7 @@ export default function LandingPostPreview({ post }) {
                             </div>
                             <div className="post-content-details">
                                 <div>
-                                    {`${postMonth} ${postDay}`}
+                                    {monthDayStr}
                                 </div>
                                 <div className="post-content-spreader">
                                     ·
