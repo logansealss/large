@@ -13,14 +13,15 @@ const PostForm = ({ postToUpdate }) => {
     let prevPost
 
     if (postToUpdate) {
+        console.log("post to update", postToUpdate)
         prevTitle = postToUpdate.title
         prevPost = postToUpdate.post
 
-        if (postToUpdate.prevSubtitle) {
-            prevSubtitle = postToUpdate.prevSubtitle
+        if (postToUpdate.subtitle) {
+            prevSubtitle = postToUpdate.subtitle
         }
-        if (postToUpdate.prevImageUrl) {
-            prevImageUrl = postToUpdate.prevImageUrl
+        if (postToUpdate.imageURL) {
+            prevImageUrl = postToUpdate.imageURL
         }
     }
 
