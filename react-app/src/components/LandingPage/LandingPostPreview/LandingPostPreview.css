@@ -5,7 +5,7 @@
 
 .post-content-flex{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .post-content-details{
@@ -14,6 +14,7 @@
     color: rgba(117, 117, 117, 1);
     font-size: 13px;
     line-height: 20px;
+    padding-top: 8px;
 }
 
 .post-content-name{
@@ -24,6 +25,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-bottom: 8px;
 }
 
 .post-content-title{
@@ -32,7 +34,10 @@
     line-height: 28px;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
 }
 
 .post-content-preview{
@@ -42,7 +47,11 @@
     font-weight: 500;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    padding-top: 4px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
 }
 
 .post-content-spreader{
@@ -51,17 +60,44 @@
 
 .post-content{
     margin-right: 20px;
-    width: 100%;
-    display: grid;
+    display: flex;
+    align-items: center;
 }
 
-.post-content > div{
+@media screen and (min-width: 1024px){
+
+    .post-content{
+        margin-right: 20px;
+        width: 475px;
+    }
+    
+    .post-content > div{
+        width: 475px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+
+    .post-content{
+        margin-right: 20px;
+        width: 356px;
+    }
+    
+    .post-content > div{
+        width: 356px;
+    }
+}
+
+
+.post-image-container{
     display: flex;
     align-items: center;
 }
 
 .post-image-container img{
     width: 200px;
-    height: 100%;
+    height: 133px;
     object-fit: cover;
+    display: flex;
+    align-items: center;
 }

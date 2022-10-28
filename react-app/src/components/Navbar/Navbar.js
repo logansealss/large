@@ -43,9 +43,29 @@ export default function Navbar() {
     const buttonText = loggedIn ? "Sign out" : "Get started"
     const buttonClick = loggedIn ? signout : signup
     const writeLink = loggedIn ? "/new-post" : "/login"
-    const navbarClass = (isTop && !loggedIn) ? "bottom-border color" : "bottom-border no-color"
-    const navbarButtonClass = (location.pathname === '/' && isTop && !loggedIn) ? "color-one" : "color-two"
 
+    let navbarClass = "bottom-border color"
+    let navbarButtonClass = "color-one"
+
+    if (location.pathname === '/') {
+        if (loggedIn) {
+            navbarButtonClass = "color-one"
+            navbarClass = "bottom-border no-color"
+        } else {
+            if (!isTop) {
+                navbarButtonClass = "color-two"
+                navbarClass = "bottom-border no-color"
+            }
+        }
+    } else {
+        if (loggedIn) {
+            navbarButtonClass = "color-one"
+            navbarClass = "bottom-border no-color"
+        } else {
+            navbarClass = "bottom-border no-color"
+            navbarButtonClass = "color-two"
+        }
+    }
 
     return (
         <>
@@ -72,11 +92,14 @@ export default function Navbar() {
                                         LinkedIn
                                     </a>
                                 </div>
+                                {location.pathname === '/' && 
+
                                 <div className="navbar-links">
                                     <Link to={writeLink}>
                                         Write
                                     </Link>
                                 </div>
+                                }
                                 {!loggedIn &&
                                     <div className="navbar-links">
                                         <Link to='/login'>
