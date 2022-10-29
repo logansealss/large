@@ -121,12 +121,19 @@ export default function Navbar() {
                                         </ReusableModal>
                                     </>
                                 }
-                                {loggedIn && 
-                                    <div id='profile-image-container'>
-                                        <img 
-                                            onClick={signout}
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"/>
-                                    </div>
+                                {loggedIn &&
+                                    <>
+                                        <div className="navbar-links">
+                                            <Link to='/new-post'>
+                                                Write
+                                            </Link>
+                                        </div>
+                                        <div id='profile-image-container'>
+                                            <img
+                                                onClick={signout}
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" />
+                                        </div>
+                                    </>
                                 }
 
                             </div>

@@ -138,6 +138,8 @@ const SignUpForm = ({ onClose }) => {
       const data = await dispatch(signUp(username, email, firstName, lastName, password));
       if (data) {
         // setErrors(data)
+        console.log(data)
+        alert("Server error")
       } else if (mountedRef.current) {
         onClose()
       }
