@@ -5,6 +5,9 @@ import { useHistory, useParams } from "react-router-dom";
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
+import clap from "../../images/clap.svg"
+import chat from "../../images/chat.svg"
+import dots from "../../images/dots.svg"
 import "./PostPage.css"
 
 export default function PostPage() {
@@ -14,6 +17,10 @@ export default function PostPage() {
     const history = useHistory()
     const post = useSelector(state => state.posts.singlePost)
     const user = useSelector(state => state.session.user)
+
+    function managePost() {
+        history.push(`/posts/${postId}/edit`)
+    }
 
     useEffect(() => {
 
@@ -41,12 +48,14 @@ export default function PostPage() {
                                 <div>
                                     {`${post.writer.firstName} ${post.writer.lastName}`}
                                 </div>
-                                {user && user.id === post.writer.id && 
+                                {user && user.id === post.writer.id &&
                                     <div>
-                                    <button>
-                                        Manage post
-                                    </button>
-                                </div>}
+                                        <button
+                                            onClick={managePost}
+                                        >
+                                            Manage post
+                                        </button>
+                                    </div>}
                             </div>
                             <div>
                                 <div id="writer-post-details">
@@ -75,6 +84,39 @@ export default function PostPage() {
                 </div>
                 <div id="post-content">
                     {post.post}
+                </div>
+                <div id="post-footer-details">
+                    <div id="post-footer-details-flex">
+                        <div id="post-footer-interactions">
+                            <div id="post-footer-interactions-flex">
+                                <div id="post-footer-claps">
+                                    <div id="post-footer-claps-flex">
+                                        <div>
+                                            <img src={clap} />
+                                        </div>
+                                        <div>
+                                            {post.numClaps}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="post-footer-responses">
+                                    <div id="post-footer-responses-flex">
+                                        <div>
+                                            <img src={chat} />
+                                        </div>
+                                        <div>
+                                            {post.numResponses}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <img src={dots}></img>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

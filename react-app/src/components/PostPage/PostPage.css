@@ -38,7 +38,7 @@ a {
 
 #writer-name-flex{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     margin-bottom: 4px;
 }
 
@@ -82,4 +82,34 @@ a {
     margin-top: 2em;
     color: rgba(41, 41, 41, 1);
     word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+#post-footer-details-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+#post-footer-claps-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+#post-footer-responses-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+#post-footer-details img{
+    height: 24px;
+    width: 24px;
+    filter: invert(45%) sepia(33%) saturate(2%) hue-rotate(314deg) brightness(94%) contrast(96%);
+}
+
+#post-footer-interactions-flex{
+    display: flex;
+    line-height: 20px;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    color:rgba(117, 117, 117, 1);
 }
