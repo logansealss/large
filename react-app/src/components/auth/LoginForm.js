@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
+
+import { testInputStr, minStrLengthFunc } from '../../utils/InputValidation';
 import { login } from '../../store/session';
 
 const LoginForm = ({ onClose }) => {
-  const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [emailErr, setEmailErr] = useState()
   const [passwordErr, setPasswordErr] = useState()
@@ -13,30 +14,21 @@ const LoginForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const history = useHistory()
 
-  function nonZeroLength(submitted, testStr, setErr, errStr) {
-    
-    if (submitted && testStr.length === 0) {
-      setErr(errStr)
-      return false
-    } else {
-      setErr()
-      return true
-    }
-  }
-
-  async function demoUserLogin(e){
+  async function demoUserLogin(e) {
     e.preventDefault()
     const data = await dispatch(login('davidrogers@user.io', 'password'));
   }
+
+  const isNoLength = minStrLengthFunc(0)
 
   const onLogin = async (e) => {
     e.preventDefault();
 
     setSubmitted(true)
 
-    const validEmail = nonZeroLength(true, email, setEmailErr, 'Email is required')
-    const validPassword = nonZeroLength(true, password, setPasswordErr, 'Password is required')
-    
+    const validEmail = testInputStr(email, setEmailErr, [isNoLength], ['Email is required'])
+    const validPassword = testInputStr(password, setPasswordErr, [isNoLength], ['Password is required'])
+
     if (!validEmail || !validPassword) {
       return
     }
@@ -57,12 +49,17 @@ const LoginForm = ({ onClose }) => {
   };
 
   useEffect(() => {
-    nonZeroLength(submitted, password, setPasswordErr, 'Password is required')
+    if (submitted) {
+      testInputStr(password, setPasswordErr, [isNoLength], ['Password is required'])
+    }
   }, [password])
-  
-  
+
+
   useEffect(() => {
-    nonZeroLength(submitted, email, setEmailErr, 'Email is required')
+    if (submitted) {
+
+      testInputStr(email, setEmailErr, [isNoLength], ['Email is required'])
+    }
   }, [email])
 
   const updateEmail = (e) => {
@@ -79,12 +76,7 @@ const LoginForm = ({ onClose }) => {
       id='auth-form'
     >
       <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-      <label 
+        <label
           htmlFor='email'
           className={submitted && emailErr && 'validation-error'}
         >
@@ -93,14 +85,14 @@ const LoginForm = ({ onClose }) => {
         <br></br>
         <input
           name='email'
-          type='text'
+          type='email'
           placeholder='Email'
           value={email}
           onChange={updateEmail}
         />
       </div>
       <div>
-        <label 
+        <label
           htmlFor='password'
           className={submitted && passwordErr && 'validation-error'}
         >
