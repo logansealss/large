@@ -6,6 +6,17 @@
     transition: background-color 300ms linear;
 }
 
+#profile-image-container img{
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#profile-image-container img:hover{
+    cursor: pointer;
+}
+
 .color{
     background-color: #FFC017;
 }
@@ -80,6 +91,7 @@
 
 .navbar-links{
     margin-right: 25px;
+    cursor: pointer;
 }
 
 .navbar-links a{

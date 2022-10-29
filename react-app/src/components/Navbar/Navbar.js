@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../../store/session';
 
+import LoginForm from '../auth/LoginForm'
+import SignupForm from '../auth/SignUpForm'
+import AuthModalForm from "../auth/AuthModalForm";
 import { isEmptyObj } from "../../utils/Objects";
 import "./Navbar.css"
+import "./AuthModal.css"
 import mainLogo from "../../images/main-logo.png"
+import ReusableModal from "../../context/ReusableModal";
 
 export default function Navbar() {
 
@@ -36,12 +41,7 @@ export default function Navbar() {
         await dispatch(logout());
     };
 
-    const signup = () => {
-        history.push('/signup')
-    }
-
     const buttonText = loggedIn ? "Sign out" : "Get started"
-    const buttonClick = loggedIn ? signout : signup
     const writeLink = loggedIn ? "/new-post" : "/login"
 
     let navbarClass = "bottom-border color"
@@ -92,28 +92,50 @@ export default function Navbar() {
                                         LinkedIn
                                     </a>
                                 </div>
-                                {location.pathname === '/' && 
-
-                                <div className="navbar-links">
-                                    <Link to={writeLink}>
-                                        Write
-                                    </Link>
-                                </div>
-                                }
                                 {!loggedIn &&
-                                    <div className="navbar-links">
-                                        <Link to='/login'>
-                                            Sign In
-                                        </Link>
-                                    </div>
+                                    <>
+                                        <ReusableModal
+                                            displayText='Login'
+                                            container={
+                                                (<div className="navbar-links">
+                                                    Sign In
+                                                </div>)}
+                                            bgClass='auth-modal'
+                                        >
+                                            <AuthModalForm formToDisplay={true}></AuthModalForm>
+                                        </ReusableModal>
+                                        <ReusableModal
+                                            displayText='Get started'
+                                            container={
+                                                (<button
+                                                    id="navbar-button"
+                                                    className={navbarButtonClass}
+                                                >
+                                                    {buttonText}
+                                                </button>
+                                                )
+                                            }
+                                            bgClass='auth-modal'
+                                        >
+                                            <AuthModalForm formToDisplay={false}></AuthModalForm>
+                                        </ReusableModal>
+                                    </>
                                 }
-                                <button
-                                    id="navbar-button"
-                                    className={navbarButtonClass}
-                                    onClick={buttonClick}
-                                >
-                                    {buttonText}
-                                </button>
+                                {loggedIn &&
+                                    <>
+                                        <div className="navbar-links">
+                                            <Link to='/new-post'>
+                                                Write
+                                            </Link>
+                                        </div>
+                                        <div id='profile-image-container'>
+                                            <img
+                                                onClick={signout}
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" />
+                                        </div>
+                                    </>
+                                }
+
                             </div>
                         </div>
                     </div>
