@@ -25,3 +25,22 @@
     align-items: center;
     box-shadow: 0 5px 10px #9d9d9d;
   }
+
+  #auth-form input{
+    width: 300px;
+    border-color: rgb(168, 168, 168);
+    padding: 3px 5px;
+    border-radius: 5px;
+  }
+
+  #auth-form button{
+    margin-top: 20px;
+  }
+
+  #navbar-button.auth-form-button{
+    width: 310px;
+  }
+
+  .validation-error{
+    color: #D63613;
+  }

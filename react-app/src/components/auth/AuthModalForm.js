@@ -25,22 +25,37 @@ export default function AuthModalForm({ formToDisplay }) {
                         {isLoginForm ? 'Welcome back.' : 'Join Large.'}
                     </div>
                     {isLoginForm ? (
-                        <LoginForm></LoginForm>
+                        <>
+                            <LoginForm></LoginForm>
+                            <div
+                                className='auth-form-toggle-container'
+                            >
+                                No account?
+                                <span
+                                    onClick={toggleForm}
+                                    id='auth-form-toggle'
+                                >
+                                    {' Create one'}
+                                </span>
+                            </div>
+                        </>
                     ) : (
-                        <SignUpForm></SignUpForm>
+                        <>
+                            <SignUpForm></SignUpForm>
+                            <div
+                                className='auth-form-toggle-container'
+                            >
+                                Already have an account?
+                                <span
+                                    onClick={toggleForm}
+                                    id='auth-form-toggle'
+                                >
+                                    {' Sign in'}
+                                </span>
+                            </div>
+                        </>
                     )
                     }
-                    <div
-                        className='auth-form-toggle-container'
-                    >
-                        Already have an account?
-                        <span 
-                            onClick={toggleForm}
-                            id='auth-form-toggle'
-                        >
-                            {' Sign in'}
-                        </span>
-                    </div>
                 </div>
             </div>
         </div>

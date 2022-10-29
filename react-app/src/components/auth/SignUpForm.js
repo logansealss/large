@@ -13,6 +13,7 @@ const SignUpForm = ({onClose}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [submitted, setSubmitted] = useState(false)
   const dispatch = useDispatch();
   const history = useHistory()
 
@@ -68,7 +69,7 @@ const SignUpForm = ({onClose}) => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
+        <label>{'User Name'}</label>
         <br></br>
         <input
           type='text'
@@ -128,7 +129,11 @@ const SignUpForm = ({onClose}) => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button 
+        type='submit'
+        id="navbar-button"
+        class="color-two auth-form-button"
+      >Sign Up</button>
     </form>
   );
 };
