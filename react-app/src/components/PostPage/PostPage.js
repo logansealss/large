@@ -86,7 +86,30 @@ export default function PostPage() {
                     {post.post}
                 </div>
                 <div id="post-scroll-container">
-
+                    <div id="post-scroll-background">
+                        <div id="post-footer-interactions-flex">
+                            <div id="post-footer-claps">
+                                <div id="post-footer-claps-flex">
+                                    <div className="svg-container">
+                                        <img src={clap} />
+                                    </div>
+                                    <div>
+                                        {post.numClaps}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="post-footer-responses">
+                                <div id="post-footer-responses-flex">
+                                    <div className="svg-container">
+                                        <img src={chat} />
+                                    </div>
+                                    <div>
+                                        {post.numResponses}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="post-footer-details">
                     <div id="post-footer-details-flex">
