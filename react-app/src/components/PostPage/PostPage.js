@@ -49,13 +49,13 @@ export default function PostPage() {
                                     {`${post.writer.firstName} ${post.writer.lastName}`}
                                 </div>
                                 {user && user.id === post.writer.id &&
-                                    <div>
-                                        <button
+                                    <div className="svg-container">
+                                        <img
                                             onClick={managePost}
-                                        >
-                                            Manage post
-                                        </button>
-                                    </div>}
+                                            src={dots}
+                                        ></img>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <div id="writer-post-details">
@@ -85,13 +85,16 @@ export default function PostPage() {
                 <div id="post-content">
                     {post.post}
                 </div>
+                <div id="post-scroll-container">
+
+                </div>
                 <div id="post-footer-details">
                     <div id="post-footer-details-flex">
                         <div id="post-footer-interactions">
                             <div id="post-footer-interactions-flex">
                                 <div id="post-footer-claps">
                                     <div id="post-footer-claps-flex">
-                                        <div>
+                                        <div className="svg-container">
                                             <img src={clap} />
                                         </div>
                                         <div>
@@ -101,7 +104,7 @@ export default function PostPage() {
                                 </div>
                                 <div id="post-footer-responses">
                                     <div id="post-footer-responses-flex">
-                                        <div>
+                                        <div className="svg-container">
                                             <img src={chat} />
                                         </div>
                                         <div>
@@ -112,7 +115,7 @@ export default function PostPage() {
                             </div>
                         </div>
                         <div>
-                            <div>
+                            <div className="svg-container">
                                 <img src={dots}></img>
                             </div>
                         </div>

@@ -12,12 +12,18 @@ a {
 #post-page-container{
     font-family: 'Roboto', sans-serif;
     width: 691px;
+    margin-bottom: 40px;
+}
+
+#post-footer-interactions-flex img{
+    margin-right: 5px;
 }
 
 #writer-details-container{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
 }
 
 #writer-card-flex{
@@ -95,15 +101,24 @@ a {
     justify-content: space-between;
 }
 
+#post-footer-responses{
+    margin-left: 24px;
+}
+
 #post-footer-responses-flex{
     display: flex;
     justify-content: space-between;
 }
 
-#post-footer-details img{
+.svg-container img{
     height: 24px;
     width: 24px;
     filter: invert(45%) sepia(33%) saturate(2%) hue-rotate(314deg) brightness(94%) contrast(96%);
+}
+
+.svg-container img:hover{
+    filter: invert(0%) sepia(2%) saturate(21%) hue-rotate(351deg) brightness(98%) contrast(80%);
+    cursor: pointer;
 }
 
 #post-footer-interactions-flex{
@@ -112,4 +127,8 @@ a {
     font-size: 13px;
     font-family: 'Roboto', sans-serif;
     color:rgba(117, 117, 117, 1);
+}
+
+#post-scroll-container{
+    height: 40px;
 }
