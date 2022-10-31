@@ -19,7 +19,7 @@ export default function PostPage() {
     const postFooterDetails = useRef()
     const post = useSelector(state => state.posts.singlePost)
     const user = useSelector(state => state.session.user)
-    const responses = useSElector(state => state.session.responses)
+    const responses = useSelector(state => state.session.responses)
     const [scrollVisible, setScrollVisible] = useState(true)
 
     function managePost() {
