@@ -7,7 +7,7 @@ import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
 import { createPostResponseThunk, readPostResponsesThunk } from "../../store/responses";
 import PostFooterClaps from "./PostFooterClaps";
-import chat from "../../images/chat.svg"
+import PostFooterResponses from "./PostFooterResponses";
 import dots from "../../images/dots.svg"
 import "./PostPage.css"
 
@@ -126,16 +126,7 @@ export default function PostPage() {
                                 <div className="post-scroll-divider">
                                 </div>
                             </div>
-                            <div id="post-footer-responses">
-                                <div id="post-footer-responses-flex">
-                                    <div className="svg-container">
-                                        <img src={chat} />
-                                    </div>
-                                    <div>
-                                        {post.numResponses}
-                                    </div>
-                                </div>
-                            </div>
+                            <PostFooterResponses></PostFooterResponses>
                             <div className="post-scroll-divider-container">
                                 <div className="post-scroll-divider">
                                 </div>
@@ -155,16 +146,7 @@ export default function PostPage() {
                         <div id="post-footer-interactions">
                             <div id="post-footer-interactions-flex">
                                 <PostFooterClaps post={post}></PostFooterClaps>
-                                <div id="post-footer-responses">
-                                    <div id="post-footer-responses-flex">
-                                        <div className="svg-container">
-                                            <img src={chat} />
-                                        </div>
-                                        <div>
-                                            {post.numResponses}
-                                        </div>
-                                    </div>
-                                </div>
+                                <PostFooterResponses></PostFooterResponses>
                             </div>
                         </div>
                         <div>
