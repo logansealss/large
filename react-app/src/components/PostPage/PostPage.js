@@ -47,7 +47,7 @@ export default function PostPage() {
             window.addEventListener("scroll", updateScrollVisible)
         }
         return () => window.removeEventListener("scroll", updateScrollVisible)
-    }, [user])
+    }, [])
 
     useEffect(() => {
 

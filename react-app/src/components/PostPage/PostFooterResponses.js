@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 
 import ReusableModal from "../../context/ReusableModal"
-import Responses from "./Responses"
-import "./Responses.css"
+import Responses from "./Responses/Responses.js"
+import "./Responses/Responses.css"
 import chat from "../../images/chat.svg"
 
 export default function PostFooterResponses() {
@@ -15,7 +15,9 @@ export default function PostFooterResponses() {
                 <div id="post-footer-responses">
                     <div id="post-footer-responses-flex">
                         <div className="svg-container">
-                            <img src={chat} />
+                            <img 
+                                className="svg-color"
+                            src={chat} />
                         </div>
                         <div>
                             {Object.values(responses).length}
