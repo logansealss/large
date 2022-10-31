@@ -60,7 +60,6 @@ export default function PostPage() {
                 console.log(`post ${postId} not found`)
                 history.push('/')
             }
-            await dispatch(createPostResponseThunk(postId, {response: "this is a reponse"}))
             dispatch(readPostResponsesThunk(postId))
         })()
     }, [postId])

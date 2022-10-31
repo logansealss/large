@@ -133,6 +133,12 @@ a {
     cursor: pointer;
 }
 
+#post-footer-responses:hover{
+    filter: invert(0%) sepia(2%) saturate(21%) hue-rotate(351deg) brightness(98%) contrast(80%);
+    cursor: pointer;
+    color: rgba(41, 41, 41, 1);
+}
+
 #post-footer-interactions-flex{
     display: flex;
     line-height: 20px;
