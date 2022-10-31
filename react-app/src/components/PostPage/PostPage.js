@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
-import { readPostResponsesThunk } from "../../store/responses";
+import { createPostResponseThunk, readPostResponsesThunk } from "../../store/responses";
 import clap from "../../images/clap.svg"
 import chat from "../../images/chat.svg"
 import dots from "../../images/dots.svg"
@@ -19,6 +19,7 @@ export default function PostPage() {
     const postFooterDetails = useRef()
     const post = useSelector(state => state.posts.singlePost)
     const user = useSelector(state => state.session.user)
+    const responses = useSElector(state => state.session.responses)
     const [scrollVisible, setScrollVisible] = useState(true)
 
     function managePost() {
@@ -59,6 +60,7 @@ export default function PostPage() {
                 console.log(`post ${postId} not found`)
                 history.push('/')
             }
+            await dispatch(createPostResponseThunk(postId, {response: "this is a reponse"}))
             dispatch(readPostResponsesThunk(postId))
         })()
     }, [postId])
