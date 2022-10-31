@@ -4,6 +4,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     transition: background-color 300ms linear;
+    z-index: 10;
 }
 
 #profile-image-container img{
