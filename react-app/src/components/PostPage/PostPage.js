@@ -6,7 +6,7 @@ import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
 import { createPostResponseThunk, readPostResponsesThunk } from "../../store/responses";
-import clap from "../../images/clap.svg"
+import PostFooterClaps from "./PostFooterClaps";
 import chat from "../../images/chat.svg"
 import dots from "../../images/dots.svg"
 import "./PostPage.css"
@@ -121,16 +121,7 @@ export default function PostPage() {
                 >
                     <div id="post-scroll-background">
                         <div id="post-footer-interactions-flex">
-                            <div id="post-footer-claps">
-                                <div id="post-footer-claps-flex">
-                                    <div className="svg-container">
-                                        <img src={clap} />
-                                    </div>
-                                    <div>
-                                        {post.numClaps}
-                                    </div>
-                                </div>
-                            </div>
+                            <PostFooterClaps post={post}></PostFooterClaps>
                             <div className="post-scroll-divider-container">
                                 <div className="post-scroll-divider">
                                 </div>
@@ -163,16 +154,7 @@ export default function PostPage() {
                     <div id="post-footer-details-flex">
                         <div id="post-footer-interactions">
                             <div id="post-footer-interactions-flex">
-                                <div id="post-footer-claps">
-                                    <div id="post-footer-claps-flex">
-                                        <div className="svg-container">
-                                            <img src={clap} />
-                                        </div>
-                                        <div>
-                                            {post.numClaps}
-                                        </div>
-                                    </div>
-                                </div>
+                                <PostFooterClaps post={post}></PostFooterClaps>
                                 <div id="post-footer-responses">
                                     <div id="post-footer-responses-flex">
                                         <div className="svg-container">
