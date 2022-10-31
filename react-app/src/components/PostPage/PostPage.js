@@ -42,9 +42,7 @@ export default function PostPage() {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            if (!loggedIn) {
-                window.addEventListener("scroll", updateScrollVisible)
-            }
+            window.addEventListener("scroll", updateScrollVisible)
         }
         return () => window.removeEventListener("scroll", updateScrollVisible)
     }, [user])
