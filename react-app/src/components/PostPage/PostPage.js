@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
+import { readPostResponsesThunk } from "../../store/responses";
 import clap from "../../images/clap.svg"
 import chat from "../../images/chat.svg"
 import dots from "../../images/dots.svg"
@@ -51,12 +52,14 @@ export default function PostPage() {
 
         (async () => {
 
-            const result = dispatch(readSinglePostThunk(postId))
+            const result = await dispatch(readSinglePostThunk(postId))
 
-            if (!result) {
+            console.log("result of singlepostthunk", result)
+            if (result) {
                 console.log(`post ${postId} not found`)
                 history.push('/')
             }
+            dispatch(readPostResponsesThunk(postId))
         })()
     }, [postId])
 
