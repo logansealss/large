@@ -1,0 +1,127 @@
+.responses-modal-background{
+    height: 100%;
+    right: 0;
+    background-color: #FFF;
+}
+
+#response-modal-content{
+    font-family: 'Roboto', sans-serif;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+#response-modal-header{
+    padding: 24px;
+    line-height: 24px;
+    font-size: 20px;
+    font-weight: 500;
+    width: 365px;
+}
+
+.response-container{
+    margin: 0 24px;
+    padding: 16px 0 16px 0;
+    width: 366px;
+    border-top: 1px solid rgba(230, 230, 230, 1);
+}
+
+.response-container-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.response-author-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.response-author-details{
+    line-height: 20px;
+    font-size: 14px;;
+}
+
+.response-response{
+    margin-top: 5px;
+    padding: 5px 0;
+    line-height: 24px;
+    font-size: 14px;
+    color: rgba(41, 41, 41, 1);
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.response-form-container{
+    margin: 0 24px;
+    color:rgba(41, 41, 41, 1);
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.response-form-shadow-container{
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px;
+    padding: 14px;
+}
+
+.response-form-textarea{
+    border-style: hidden;
+    outline: none;
+    font-family: 'Roboto Slab', serif;
+    resize: none;
+    width: 100%;
+    /* height: 100px; */
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.tall{
+    height: 100px;
+}
+
+.short{
+    height: 20px;
+}
+
+.response-form-textarea::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.response-form-name{
+    margin-bottom: 14px;
+}
+
+.response-submit-flex{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.response-form-footer-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.response-submit-cancel{
+    cursor: pointer;
+}
+
+.response-form-error{
+    line-height: 20px;
+    font-size: 14px;
+    color: #D63613;
+    width: 100%;
+}
+
+.opaque{
+    opacity: .6;
+}
+
+#post-form-button.opaque:hover{
+    cursor:default;
+}

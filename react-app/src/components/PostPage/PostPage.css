@@ -1,4 +1,4 @@
-#post-page-flex{
+#post-page-flex {
     display: flex;
     justify-content: center;
     margin-top: 32px;
@@ -9,58 +9,58 @@ a {
     text-decoration: none;
 }
 
-#post-page-container{
+#post-page-container {
     font-family: 'Roboto', sans-serif;
     width: 691px;
     margin-bottom: 40px;
 }
 
-#post-footer-interactions-flex img{
+#post-footer-interactions-flex img {
     margin-right: 5px;
 }
 
-#writer-details-container{
+#writer-details-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
 }
 
-#writer-card-flex{
+#writer-card-flex {
     display: flex;
     justify-content: flex-start;
 }
 
-#writer-card-image-div{
+#writer-card-image-div {
     margin-right: 16px;
 }
 
-#writer-card-image-div img{
+#writer-card-image-div img {
     border-radius: 50%;
     width: 48px;
     height: 48px;
     object-fit: cover;
 }
 
-#post-footer-claps{
+#post-footer-claps {
     display: flex;
     align-items: center;
 }
 
-#writer-name-flex{
+#writer-name-flex {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
 }
 
-#writer-post-details{
+#writer-post-details {
     line-height: 20px;
     font-size: 14px;
     display: flex;
     color: rgba(117, 117, 117, 1);
 }
 
-#post-title{
+#post-title {
     margin-top: 0.6em;
     line-height: 40px;
     font-size: 32px;
@@ -68,7 +68,7 @@ a {
     margin-bottom: -0.27em;
 }
 
-#post-subtitle{
+#post-subtitle {
     margin-top: 0.79em;
     line-height: 28px;
     font-size: 22px;
@@ -76,17 +76,17 @@ a {
     margin-bottom: -0.42em;
 }
 
-#post-image-container{
+#post-image-container {
     margin-top: 56px;
 }
 
-#post-image-container img{
+#post-image-container img {
     height: 460px;
     width: 691px;
     object-fit: cover;
 }
 
-#post-content{
+#post-content {
     line-height: 32px;
     font-size: 20px;
     margin-top: 2em;
@@ -95,53 +95,63 @@ a {
     white-space: pre-wrap;
 }
 
-#post-footer-details-flex{
+#post-footer-details-flex {
     display: flex;
     justify-content: space-between;
 }
 
-#post-footer-claps-flex{
+#post-footer-claps-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#post-footer-responses{
+#post-footer-responses {
     margin-left: 24px;
-}
-
-#post-footer-responses-flex{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.svg-container{
-    display: flex;
-    align-items: center;
-}
-
-.svg-container img{
-    height: 24px;
-    width: 24px;
     filter: invert(45%) sepia(33%) saturate(2%) hue-rotate(314deg) brightness(94%) contrast(96%);
 }
 
-.svg-container img:hover{
-    filter: invert(0%) sepia(2%) saturate(21%) hue-rotate(351deg) brightness(98%) contrast(80%);
+#post-footer-responses-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.svg-container {
+    display: flex;
+    align-items: center;
+}
+
+.svg-container img {
+    height: 24px;
+    width: 24px;
+}
+
+.svg-claps img{
+    filter: invert(45%) sepia(33%) saturate(2%) hue-rotate(314deg) brightness(94%) contrast(96%);
+}
+
+.svg-container img:hover {
+    filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(297deg) brightness(96%) contrast(104%);
     cursor: pointer;
 }
 
-#post-footer-interactions-flex{
+#post-footer-responses:hover {
+    filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(297deg) brightness(96%) contrast(104%);
+    cursor: pointer;
+    color: black;
+}
+
+#post-footer-interactions-flex {
     display: flex;
     line-height: 20px;
     font-size: 13px;
     font-family: 'Roboto', sans-serif;
-    color:rgba(117, 117, 117, 1);
+    color: rgba(117, 117, 117, 1);
 }
 
-#post-scroll-container{
+#post-scroll-container {
     height: 40px;
     display: flex;
     justify-content: center;
@@ -149,7 +159,7 @@ a {
     bottom: 16px;
 }
 
-#post-scroll-background{
+#post-scroll-background {
     background-color: #fff;
     border-radius: 20px;
     display: flex;
@@ -161,22 +171,22 @@ a {
     height: 40px;
 }
 
-.post-scroll-divider{
+.post-scroll-divider {
     height: 12px;
     margin: 0 16px;
     background-color: rgb(199, 198, 194);
     width: 1px;
 }
 
-.post-scroll-divider-container{
+.post-scroll-divider-container {
     display: flex;
     align-items: center;
 }
 
-#post-scroll-container #post-footer-responses{
+#post-scroll-container #post-footer-responses {
     margin-left: 0;
 }
 
-.hidden{
+.hidden {
     visibility: hidden;
 }

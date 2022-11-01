@@ -276,7 +276,7 @@ const SignUpForm = ({ onClose }) => {
       <button
         type='submit'
         id="navbar-button"
-        class="color-two auth-form-button"
+        className="color-two auth-form-button"
       >Sign Up</button>
     </form>
   );
