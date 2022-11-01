@@ -1,11 +1,17 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
+import { deletePostResponsesThunk } from "../../../store/responses"
 import { getMonthDay } from "../../../utils/Dates"
 import dots from "../../../images/dots.svg"
 
 export default function Response({response}) {
 
     const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
+
+    function deleteResponse(){
+        dispatch(deletePostResponsesThunk(response.id))
+    }
 
     return (
         <div
@@ -30,7 +36,7 @@ export default function Response({response}) {
                 </div>
                 {user && user.id === response.user.id && (
                     <div
-                        
+                        onClick={deleteResponse}
                     >
                         <img src={dots} />
                     </div>

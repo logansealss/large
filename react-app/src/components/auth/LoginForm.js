@@ -78,7 +78,7 @@ const LoginForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='email'
-          className={submitted && emailErr && 'validation-error'}
+          className={submitted && emailErr ? 'validation-error' : undefined}
         >
           {submitted && emailErr ? emailErr : 'Email'}
         </label>
@@ -94,7 +94,7 @@ const LoginForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='password'
-          className={submitted && passwordErr && 'validation-error'}
+          className={submitted && passwordErr ? 'validation-error' : undefined}
         >
           {submitted && passwordErr ? passwordErr : 'Password'}
         </label>

@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
 }
 
