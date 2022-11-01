@@ -18,20 +18,7 @@ export default function Responses() {
                 {`Responses (${Object.values(responses).length})`}
             </div>
             {user && (
-                <div
-                    className="response-form-container"
-                >
-                    <div
-                        className="response-form-shadow-container"
-                    >
-                        <div
-                            className="response-form-name"
-                        >
-                            {`${user.firstName} ${user.lastName}`}
-                        </div>
-                        <ResponseForm></ResponseForm>
-                    </div>
-                </div>
+                <ResponseForm></ResponseForm>
             )}
             {Object.values(responses).map(response => (
                 <Response response={response}></Response>
