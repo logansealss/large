@@ -9,7 +9,7 @@ import { createPostResponseThunk, readPostResponsesThunk } from "../../store/res
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
 import PostFooterResponses from "./PostFooterResponses";
-import dots from "../../images/dots.svg"
+import largePic from "../../images/Large.png"
 import "./PostPage.css"
 
 export default function PostPage() {
@@ -107,7 +107,11 @@ export default function PostPage() {
                     {post.subtitle && post.subtitle}
                 </div>
                 <div id="post-image-container">
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png' />
+                    <img
+                        src={post.imageURL || largePic}
+                        alt={largePic}
+                        onError={e => { e.currentTarget.src = largePic }}
+                    />
                 </div>
                 <div id="post-content">
                     {post.post}
@@ -153,7 +157,7 @@ export default function PostPage() {
                             </div>
                         </div>
                         <div
-                            
+
                         >
                             <PostFooterMenu></PostFooterMenu>
                         </div>

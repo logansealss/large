@@ -2,14 +2,12 @@
 
 import { Link } from "react-router-dom";
 import { getMonthDay } from "../../../utils/Dates";
+import largePic from "../../../images/Large.png"
 import "./LandingPostPreview.css"
 
 export default function LandingPostPreview({ post }) {
 
     const monthDayStr = getMonthDay(post.createdAt)
-
-    console.log("image url", post.imageURL)
-
 
     return (
         <div className="post-container">
@@ -44,8 +42,11 @@ export default function LandingPostPreview({ post }) {
                     </div>
                     <Link to={`/posts/${post.id}`}>
                         <div className="post-image-container">
-                            {/* <img src={post.imageURL} /> */}
-                            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png' />
+                            <img
+                                src={post.imageURL || largePic}
+                                alt={largePic}
+                                onError={e => { e.currentTarget.src = largePic }}
+                            />
                         </div>
                     </Link>
                 </div>

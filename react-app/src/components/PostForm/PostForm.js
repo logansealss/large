@@ -106,9 +106,8 @@ const PostForm = ({ postToUpdate }) => {
             result = await dispatch(createPostThunk(postToSubmit))
         }
 
-        if (result.id) {
-            history.push('/')
-            // history.push(`/posts/${result.id}}`)
+        if(result.id){
+            history.push(`/posts/${result.id}`)
         } else {
             setServerError('Something went wrong. Please try again.')
         }
