@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router-dom'
-import { createPostResponseThunk } from "../../../store/responses"
+import { createPostResponseThunk, updatePostResponseThunk } from "../../../store/responses"
 
-export default function ResponseForm({ responseToUpdate }) {
+export default function ResponseForm({ responseToUpdate, setDisplayForm }) {
 
     const { postId } = useParams()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-    const [focused, setFocused] = useState(false)
+    const [focused, setFocused] = useState(!!responseToUpdate)
 
     let responseVal
     if (responseToUpdate) {
@@ -18,9 +18,12 @@ export default function ResponseForm({ responseToUpdate }) {
     const [response, setResponse] = useState(responseVal || '')
     const [responseErr, setResponseErr] = useState()
 
-    function clearForm(){
+    function clearForm() {
         setResponse('')
         setFocused(false)
+        if (setDisplayForm) {
+            setDisplayForm(false)
+        }
     }
 
     async function onSubmit(e) {
@@ -33,6 +36,7 @@ export default function ResponseForm({ responseToUpdate }) {
 
         if (responseToUpdate) {
             console.log("updated response")
+            await dispatch(updatePostResponseThunk(responseToUpdate.id, { response }))
             clearForm()
         } else {
             console.log("created response")
@@ -53,7 +57,7 @@ export default function ResponseForm({ responseToUpdate }) {
     return (
 
         <div
-            className="response-form-container"
+            className={responseToUpdate ? "response-form-container" : "response-form-container new-response"}
         >
             <div
                 className="response-form-shadow-container"

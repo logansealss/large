@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect, useRef } from 'react'
 
+import ResponseForm from "./ResponseForm"
 import { deletePostResponsesThunk } from "../../../store/responses"
 import { getMonthDay } from "../../../utils/Dates"
 import dots from "../../../images/dots.svg"
@@ -12,12 +13,13 @@ export default function Response({ response }) {
     const ref = useRef()
     const user = useSelector(state => state.session.user)
     const [menuOpen, toggleMenuOpen] = useState(false);
+    const [displayForm, setDisplayForm] = useState(false)
 
     useEffect(() => {
         if (!menuOpen) return;
 
         const closeMenu = (e) => {
-            
+
             if (!ref.current.contains(e.target) && ref.current !== e.target) {
                 toggleMenuOpen(cur => !cur);
             }
@@ -39,63 +41,79 @@ export default function Response({ response }) {
         toggleMenuOpen(cur => !cur)
     }
 
+    function editResponse() {
+        setDisplayForm(true)
+        toggleMenuOpen(cur => !cur)
+    }
+
+    async function deleteResponse() {
+        await dispatch(deletePostResponsesThunk(response.id))
+        toggleMenuOpen(cur => !cur)
+    }
+
     return (
         <div
             className="response-container"
         >
-            <div
-                className="response-container-header"
-            >
-                <div
-                    className="response-author-details"
-                >
+            {displayForm && <ResponseForm responseToUpdate={response} setDisplayForm={setDisplayForm}></ResponseForm>}
+            {!displayForm && (
+                <>
                     <div
-                        className="response-author"
+                        className="response-container-header"
                     >
-                        {`${response.user.firstName} ${response.user.lastName}`}
-                    </div>
-                    <div
-                        className="response-date"
-                    >
-                        {`${getMonthDay(response.createdAt)}`}
-                    </div>
-                </div>
-                {user && user.id === response.user.id && (
-                    <div
-                        className="response-menu-relative"
-                    >
+
                         <div
-                            ref={ref}
-                            className="response-menu-container"
-                            onClick={menuOnClick}
+                            className="response-author-details"
                         >
-                            <img src={dots} />
                             <div
-                                className={popupMenuClass}
-                                onClick={(e) => e.stopPropagation()}
+                                className="response-author"
                             >
-                                <div
-                                    className="popup-menu-option"
-                                    onClick={() => console.log("clicked delete")}
-                                >
-                                    Update
-                                </div>
-                                <div
-                                    className="popup-menu-option"
-                                    onClick={() => console.log("clicked delete")}
-                                >
-                                    Delete
-                                </div>
+                                {`${response.user.firstName} ${response.user.lastName}`}
+                            </div>
+                            <div
+                                className="response-date"
+                            >
+                                {`${getMonthDay(response.createdAt)}`}
                             </div>
                         </div>
+                        {user && user.id === response.user.id && (
+                            <div
+                                className="response-menu-relative"
+                            >
+                                <div
+                                    ref={ref}
+                                    className="response-menu-container"
+                                    onClick={menuOnClick}
+                                >
+                                    <img src={dots} />
+                                    <div
+                                        className={popupMenuClass}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <div
+                                            className="popup-menu-option"
+                                            onClick={editResponse}
+                                        >
+                                            Edit this response
+                                        </div>
+                                        <div
+                                            className="popup-menu-option"
+                                            onClick={deleteResponse}
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-            <div
-                className="response-response"
-            >
-                {response.response}
-            </div>
+                    <div
+                        className="response-response"
+                    >
+                        {response.response}
+                    </div>
+                </>
+            )}
         </div>
     )
 }
