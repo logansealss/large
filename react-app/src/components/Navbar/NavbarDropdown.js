@@ -32,7 +32,7 @@ export default function NavbarDropdown() {
         toggleMenuOpen(false);
     }
 
-    const popupMenuClass = menuOpen ? "popup-menu popup-menu-visible" : "popup-menu popup-menu-hidden"
+    const popupMenuClass = menuOpen ? "popup-menu visible" : "popup-menu hidden"
 
     return (
         <>
@@ -57,73 +57,5 @@ export default function NavbarDropdown() {
                 </div>
             </div>
         </>
-
-
-        // <div
-        //     className="menu-button-container"
-        // >
-        //     <div>
-        //         <button
-        //             className='menu-button'
-        //             onClick={() => toggleMenuOpen(!menuOpen)}
-        //         >
-        //             <div className='icon-container'>
-        //                 <i className="fa-solid fa-bars fa-1x"></i>
-        //                 <i className="fa-solid fa-user fa-2x"></i>
-        //             </div>
-        //         </button>
-        //         <div
-        //             className={popupMenuClass}
-        //             id="popup"
-        //         >
-        //             {user ? (
-        //                 <>
-        //                     <div
-        //                         className="popup-menu-option-no-pointer"
-        //                     >
-        //                         {user.username}
-        //                     </div>
-        //                     <div
-        //                         id="bottom-border"
-        //                         className="popup-menu-option-no-pointer"
-        //                     >
-        //                         {user.email}
-        //                     </div>
-        //                     <div
-        //                         className="popup-menu-option"
-        //                         onClick={() => history.push("/myspots")}
-        //                     >
-        //                         My spots
-        //                     </div>
-        //                     <div
-        //                         className="popup-menu-option"
-        //                         onClick={() => history.push("/myreviews")}
-        //                     >
-        //                         My reviews
-        //                     </div>
-        //                     <div
-        //                         className="popup-menu-option"
-        //                         onClick={() => history.push("/createspot")}
-        //                     >
-        //                         Create spot
-        //                     </div>
-        //                     <div
-        //                         className="popup-menu-option"
-        //                         onClick={logout}
-        //                     >Log out
-        //                     </div>
-        //                 </>
-        //             )
-        //                 : (
-        //                     <>
-        //                         <LoginFormModal afterSubmission={removeMenu} className="popup-menu-option" />
-        //                         <SignupFormModal afterSubmission={removeMenu} className="popup-menu-option" />
-        //                     </>
-        //                 )
-        //             }
-        //         </div>
-        //     </div>
-        // </div >
     )
-
 }

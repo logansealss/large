@@ -1,9 +1,5 @@
-.popup-menu-visible{
+.visible{
     visibility: visible;
-}
-
-.popup-menu-hidden{
-    visibility: hidden;
 }
 
 .popup-menu{
