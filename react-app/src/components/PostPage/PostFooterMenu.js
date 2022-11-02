@@ -13,7 +13,7 @@ export default function PostFooterMenu({ isTop }) {
     const user = useSelector(state => state.session.user)
     const post = useSelector(state => state.posts.singlePost)
     const [menuOpen, toggleMenuOpen] = useState(false);
-    const [displayForm, setDisplayForm] = useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
 
     useEffect(() => {
         if (!menuOpen) return;
@@ -22,6 +22,7 @@ export default function PostFooterMenu({ isTop }) {
 
             if (ref.current && !ref.current.contains(e.target) && ref.current !== e.target) {
                 toggleMenuOpen(cur => !cur);
+                setConfirmDelete(false)
             }
         };
 
@@ -39,6 +40,10 @@ export default function PostFooterMenu({ isTop }) {
         history.push('/')
     }
 
+    function deleteConfirmation() {
+        setConfirmDelete(true)
+    }
+
     function editPost() {
         history.push(`/posts/${post.id}/edit`)
     }
@@ -46,8 +51,8 @@ export default function PostFooterMenu({ isTop }) {
     const visibleMenu = menuOpen ? "post-menu visible" : "post-menu hidden"
     const topMenu = isTop ? " top" : ''
     const popupMenuClass = visibleMenu + topMenu
-    
-    
+
+
 
 
     return (
@@ -72,19 +77,29 @@ export default function PostFooterMenu({ isTop }) {
                             >
                                 Edit this post
                             </div>
-                            <div
-                                className="popup-menu-option"
-                                onClick={deletePost}
-                            >
-                                Delete
-                            </div>
+                            {!confirmDelete && (
+                                <div
+                                    className="popup-menu-option"
+                                    onClick={deleteConfirmation}
+                                >
+                                    Delete
+                                </div>
+                            )}
+                            {confirmDelete && (
+                                <div
+                                    className="popup-menu-option confirm-delete"
+                                    onClick={deletePost}
+                                >
+                                    Confirm delete
+                                </div>
+                            )}
                         </>
                     )}
                     {user && user.id !== post.writer.id && (
                         <>
                             <div
                                 className="popup-menu-option"
-                                // onClick={editPost}
+                            // onClick={editPost}
                             >
                                 Undo applause for this post
                             </div>

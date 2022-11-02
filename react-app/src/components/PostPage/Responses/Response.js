@@ -14,6 +14,7 @@ export default function Response({ response }) {
     const user = useSelector(state => state.session.user)
     const [menuOpen, toggleMenuOpen] = useState(false);
     const [displayForm, setDisplayForm] = useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
 
     useEffect(() => {
         if (!menuOpen) return;
@@ -22,6 +23,7 @@ export default function Response({ response }) {
 
             if (ref.current && !ref.current.contains(e.target) && ref.current !== e.target) {
                 toggleMenuOpen(cur => !cur);
+                setConfirmDelete(false)
             }
         };
 
@@ -48,6 +50,10 @@ export default function Response({ response }) {
     async function deleteResponse() {
         await dispatch(deletePostResponsesThunk(response.id))
         toggleMenuOpen(cur => !cur)
+    }
+
+    function deleteConfirmation() {
+        setConfirmDelete(true)
     }
 
     return (
@@ -95,12 +101,22 @@ export default function Response({ response }) {
                                         >
                                             Edit this response
                                         </div>
-                                        <div
-                                            className="popup-menu-option"
-                                            onClick={deleteResponse}
-                                        >
-                                            Delete
-                                        </div>
+                                        {!confirmDelete && (
+                                            <div
+                                                className="popup-menu-option"
+                                                onClick={deleteConfirmation}
+                                            >
+                                                Delete
+                                            </div>
+                                        )}
+                                        {confirmDelete && (
+                                            <div
+                                                className="popup-menu-option confirm-delete"
+                                                onClick={deleteResponse}
+                                            >
+                                                Confirm delete
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>

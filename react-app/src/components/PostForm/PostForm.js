@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
-import { createPostThunk, deletePostThunk, updatePostThunk } from '../../store/posts';
+import { createPostThunk, updatePostThunk } from '../../store/posts';
 
 import "./PostForm.css"
 
@@ -113,15 +113,6 @@ const PostForm = ({ postToUpdate }) => {
         }
     };
 
-    async function deletePost(e){
-        e.preventDefault()
-        const result = await dispatch(deletePostThunk(postToUpdate.id))
-
-        if(!result){
-            history.push('/')
-        }
-    }
-
     const updateTitle = (e) => {
         setTitle(e.target.value);
     };
@@ -150,15 +141,6 @@ const PostForm = ({ postToUpdate }) => {
                             onSubmit={onSubmit}
                         >
                             <div id="post-button-container">
-                                {postToUpdate && 
-                                    <button
-                                        id='post-form-button'
-                                        className='delete-button'
-                                        onClick={deletePost}
-                                    >
-                                        Delete post
-                                    </button>
-                                }
                                 <button
                                     id="post-form-button"
                                     className='color-two'
