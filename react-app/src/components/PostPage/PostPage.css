@@ -214,3 +214,8 @@ a {
     align-items: center;
     justify-content: center;
 }
+
+.post-menu.top{
+    bottom: 200%;
+    top: unset;
+}

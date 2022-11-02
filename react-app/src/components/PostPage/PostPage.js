@@ -133,7 +133,9 @@ export default function PostPage() {
                                     <div
                                         id="post-scroll-menu-flex"
                                     >
-                                        <PostFooterMenu></PostFooterMenu>
+                                        <PostFooterMenu
+                                            isTop={true}
+                                        ></PostFooterMenu>
                                     </div>
                                 </>
                             )}

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import dots from "../../images/dots.svg"
 
 
-export default function PostFooterMenu() {
+export default function PostFooterMenu({ isTop }) {
     const dispatch = useDispatch()
     const ref = useRef()
     const history = useHistory()
@@ -43,8 +43,11 @@ export default function PostFooterMenu() {
         history.push(`/posts/${post.id}/edit`)
     }
 
-
-    const popupMenuClass = menuOpen ? "post-menu visible" : "post-menu hidden"
+    const visibleMenu = menuOpen ? "post-menu visible" : "post-menu hidden"
+    const topMenu = isTop ? " top" : ''
+    const popupMenuClass = visibleMenu + topMenu
+    
+    
 
 
     return (
