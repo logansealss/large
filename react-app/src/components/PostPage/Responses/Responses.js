@@ -24,11 +24,11 @@ export default function Responses() {
                     >
                         <ResponseForm></ResponseForm>
                     </div>
-                    <div
-                        className="response-form-bottom-border"
-                    ></div>
                 </>
             )}
+            <div
+                className="response-form-bottom-border"
+            ></div>
             {Object.values(responses).map(response => (
                 <Response
                     response={response}

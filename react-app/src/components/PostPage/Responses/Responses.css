@@ -7,7 +7,7 @@
 #response-modal-content{
     font-family: 'Roboto', sans-serif;
     overflow-y: auto;
-    height: 100vh;
+    height: 100%;
 }
 
 #response-modal-header{
