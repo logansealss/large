@@ -125,3 +125,21 @@
 #post-form-button.opaque:hover{
     cursor:default;
 }
+
+.response-menu{
+    position: absolute;
+    background-color: #FFF;
+    right: 0px;
+    top: 50px;
+    padding: 10px;
+    border: 1px solid red;
+}
+
+.response-menu-container{
+    position: relative;
+}
+
+.response-menu-relative{
+    position: relative;
+}
+

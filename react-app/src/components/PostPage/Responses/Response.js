@@ -8,24 +8,24 @@ import dots from "../../../images/dots.svg"
 
 export default function Response({ response }) {
 
-    const ref = useRef()
     const dispatch = useDispatch()
+    const ref = useRef()
     const user = useSelector(state => state.session.user)
     const [menuOpen, toggleMenuOpen] = useState(false);
 
     useEffect(() => {
         if (!menuOpen) return;
 
-        console.log("menu open in useeffect")
-
-        const closeMenu = () => {
-            console.log("in close menu")
-            toggleMenuOpen(false);
+        const closeMenu = (e) => {
+            
+            if (!ref.current.contains(e.target) && ref.current !== e.target) {
+                toggleMenuOpen(cur => !cur);
+            }
         };
 
-        document.addEventListener('mouseup', closeMenu);
+        document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("mouseup", closeMenu);
+        return () => document.removeEventListener("click", closeMenu);
     }, [menuOpen]);
 
     const popupMenuClass = menuOpen ? "response-menu visible" : "response-menu hidden"
@@ -33,6 +33,10 @@ export default function Response({ response }) {
 
     function deleteResponse() {
         dispatch(deletePostResponsesThunk(response.id))
+    }
+
+    function menuOnClick(e) {
+        toggleMenuOpen(cur => !cur)
     }
 
     return (
@@ -57,23 +61,22 @@ export default function Response({ response }) {
                     </div>
                 </div>
                 {user && user.id === response.user.id && (
-                    <>
+                    <div
+                        className="response-menu-relative"
+                    >
                         <div
-                            onClick={() => toggleMenuOpen(!menuOpen)}
                             ref={ref}
+                            className="response-menu-container"
+                            onClick={menuOnClick}
                         >
                             <img src={dots} />
-                        </div>
-                        <div
-                            className=""
-                        >
                             <div
                                 className={popupMenuClass}
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <div
                                     className="popup-menu-option"
-                                    onClick={() => console.log("clicked update")}
+                                    onClick={() => console.log("clicked delete")}
                                 >
                                     Update
                                 </div>
@@ -85,7 +88,7 @@ export default function Response({ response }) {
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
             <div
