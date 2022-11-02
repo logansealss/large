@@ -219,3 +219,13 @@ a {
     bottom: 200%;
     top: unset;
 }
+
+.confirm-delete{
+    color: #D63613;
+    /* color: black; */
+}
+
+.confirm-delete:hover{
+    color: white;
+    background-color: #D63613;
+}
