@@ -31,7 +31,6 @@ export default function Response({ response }) {
     }, [menuOpen]);
 
     const popupMenuClass = menuOpen ? "response-menu visible" : "response-menu hidden"
-    console.log("popupmenu class", popupMenuClass)
 
     function deleteResponse() {
         dispatch(deletePostResponsesThunk(response.id))
