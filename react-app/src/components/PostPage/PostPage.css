@@ -66,6 +66,13 @@ a {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: -0.27em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -moz-box-orient: vertical;
 }
 
 #post-subtitle {
@@ -74,6 +81,13 @@ a {
     font-size: 22px;
     color: rgba(117, 117, 117, 1);
     margin-bottom: -0.42em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -moz-box-orient: vertical;
 }
 
 #post-image-container {
@@ -222,7 +236,6 @@ a {
 
 .confirm-delete{
     color: #D63613;
-    /* color: black; */
 }
 
 .confirm-delete:hover{

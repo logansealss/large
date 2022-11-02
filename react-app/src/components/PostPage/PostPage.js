@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
-import { createPostResponseThunk, readPostResponsesThunk } from "../../store/responses";
+import { readPostResponsesThunk } from "../../store/responses";
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
 import PostFooterResponses from "./PostFooterResponses";
@@ -23,10 +23,6 @@ export default function PostPage() {
     const responses = useSelector(state => state.session.responses)
     const [scrollVisible, setScrollVisible] = useState(true)
 
-    function managePost() {
-        history.push(`/posts/${postId}/edit`)
-    }
-
     function isInViewport(rect) {
         return (
             rect.top >= 0 &&
@@ -42,8 +38,6 @@ export default function PostPage() {
             setScrollVisible(!isInViewport(rect) && rect.bottom > 75)
         }
     }
-
-    const loggedIn = !isEmptyObj(user)
 
     useEffect(() => {
         if (typeof window !== "undefined") {
