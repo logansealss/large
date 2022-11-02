@@ -1,0 +1,36 @@
+.visible{
+    visibility: visible;
+}
+
+.popup-menu{
+    position: absolute;
+    top: 60px;
+    min-width: 160px;
+    border-radius: 4px;
+    padding: 4px 0;
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 4px;
+}
+
+.popup-menu-option{
+    color: rgb(117, 117, 117);
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+.popup-menu-option:hover{
+    cursor: pointer;
+    color: black;
+}
+
+#profile-image-container img{
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#profile-image-container img:hover{
+    cursor: pointer;
+}

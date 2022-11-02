@@ -53,8 +53,8 @@ export const createPostResponseThunk = (postId, newResponse) => async (dispatch)
     }
 }
 
-export const updatePostResponseThunk = (postId, newResponse) => async (dispatch) => {
-    const response = await fetch(`/api/posts/${postId}/responses`, {
+export const updatePostResponseThunk = (responseId, newResponse) => async (dispatch) => {
+    const response = await fetch(`/api/responses/${responseId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

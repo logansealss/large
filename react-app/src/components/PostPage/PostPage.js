@@ -6,6 +6,7 @@ import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readSinglePostThunk } from "../../store/posts";
 import { createPostResponseThunk, readPostResponsesThunk } from "../../store/responses";
+import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
 import PostFooterResponses from "./PostFooterResponses";
 import dots from "../../images/dots.svg"
@@ -79,13 +80,8 @@ export default function PostPage() {
                                 <div>
                                     {`${post.writer.firstName} ${post.writer.lastName}`}
                                 </div>
-                                {user && user.id === post.writer.id &&
-                                    <div className="svg-container">
-                                        <img
-                                            onClick={managePost}
-                                            src={dots}
-                                        ></img>
-                                    </div>
+                                {user &&
+                                    <PostFooterMenu></PostFooterMenu>
                                 }
                             </div>
                             <div>
@@ -128,15 +124,21 @@ export default function PostPage() {
                                 </div>
                             </div>
                             <PostFooterResponses></PostFooterResponses>
-                            <div className="post-scroll-divider-container">
-                                <div className="post-scroll-divider">
-                                </div>
-                            </div>
-                            <div>
-                                <div className="svg-container">
-                                    <img src={dots}></img>
-                                </div>
-                            </div>
+                            {user && (
+                                <>
+                                    <div className="post-scroll-divider-container">
+                                        <div className="post-scroll-divider">
+                                        </div>
+                                    </div>
+                                    <div
+                                        id="post-scroll-menu-flex"
+                                    >
+                                        <PostFooterMenu
+                                            isTop={true}
+                                        ></PostFooterMenu>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -150,10 +152,10 @@ export default function PostPage() {
                                 <PostFooterResponses></PostFooterResponses>
                             </div>
                         </div>
-                        <div>
-                            <div className="svg-container">
-                                <img src={dots}></img>
-                            </div>
+                        <div
+                            
+                        >
+                            <PostFooterMenu></PostFooterMenu>
                         </div>
                     </div>
                 </div>

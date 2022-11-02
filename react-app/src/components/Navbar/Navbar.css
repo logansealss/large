@@ -7,17 +7,6 @@
     z-index: 10;
 }
 
-#profile-image-container img{
-    height: 32px;
-    width: 32px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-#profile-image-container img:hover{
-    cursor: pointer;
-}
-
 .color{
     background-color: #FFC017;
 }

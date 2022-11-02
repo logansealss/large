@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../../store/session';
 
-import LoginForm from '../auth/LoginForm'
-import SignupForm from '../auth/SignUpForm'
+import NavbarDropdown from "./NavbarDropdown";
 import AuthModalForm from "../auth/AuthModalForm";
 import { isEmptyObj } from "../../utils/Objects";
 import "./Navbar.css"
@@ -128,11 +127,14 @@ export default function Navbar() {
                                                 Write
                                             </Link>
                                         </div>
-                                        <div id='profile-image-container'>
+                                        <NavbarDropdown>
+
+                                        </NavbarDropdown>
+                                        {/* <div id='profile-image-container'>
                                             <img
                                                 onClick={signout}
                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" />
-                                        </div>
+                                        </div> */}
                                     </>
                                 }
 

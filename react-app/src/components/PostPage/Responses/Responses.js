@@ -18,10 +18,22 @@ export default function Responses() {
                 {`Responses (${Object.values(responses).length})`}
             </div>
             {user && (
-                <ResponseForm></ResponseForm>
+                <>
+                    <div
+                        className="response-form-bottom-margin"
+                    >
+                        <ResponseForm></ResponseForm>
+                    </div>
+                    <div
+                        className="response-form-bottom-border"
+                    ></div>
+                </>
             )}
             {Object.values(responses).map(response => (
-                <Response response={response}></Response>
+                <Response
+                    response={response}
+                    key={response.id}
+                ></Response>
             ))}
 
         </div>
