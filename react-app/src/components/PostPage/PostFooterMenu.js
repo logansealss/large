@@ -20,7 +20,7 @@ export default function PostFooterMenu() {
 
         const closeMenu = (e) => {
 
-            if (!ref.current.contains(e.target) && ref.current !== e.target) {
+            if (ref.current && !ref.current.contains(e.target) && ref.current !== e.target) {
                 toggleMenuOpen(cur => !cur);
             }
         };

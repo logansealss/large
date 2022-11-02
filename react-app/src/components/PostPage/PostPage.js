@@ -130,7 +130,9 @@ export default function PostPage() {
                                         <div className="post-scroll-divider">
                                         </div>
                                     </div>
-                                    <div>
+                                    <div
+                                        id="post-scroll-menu-flex"
+                                    >
                                         <PostFooterMenu></PostFooterMenu>
                                     </div>
                                 </>
@@ -148,7 +150,9 @@ export default function PostPage() {
                                 <PostFooterResponses></PostFooterResponses>
                             </div>
                         </div>
-                        <div>
+                        <div
+                            
+                        >
                             <PostFooterMenu></PostFooterMenu>
                         </div>
                     </div>

@@ -22,7 +22,7 @@
     margin: 0 24px;
     padding: 16px 0 16px 0;
     width: 366px;
-    border-top: 1px solid rgba(230, 230, 230, 1);
+    border-bottom: 1px solid rgba(230, 230, 230, 1);
 }
 
 .response-container-header{
@@ -129,14 +129,24 @@
     cursor:default;
 }
 
+.response-form-bottom-margin{
+    margin-bottom: 24px;
+}
+
+.response-form-bottom-border{
+    height: 1px;
+    background-color: rgba(230, 230, 230, 1);
+}
+
 .response-menu{
     position: absolute;
     background-color: #FFF;
     right: 0px;
-    top: 50px;
-    padding: 10px;
-    min-width: 150px;
-    border: 1px solid red;
+    border-radius: 4px;
+    padding: 8px 0;
+    min-width: 160px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 4px;
 }
 
 .response-menu-container{

@@ -16,10 +16,7 @@ export default function NavbarDropdown() {
     useEffect(() => {
         if (!menuOpen) return;
 
-        console.log("menu open in useeffect")
-
         const closeMenu = () => {
-            console.log("in close menu")
             toggleMenuOpen(false);
         };
 

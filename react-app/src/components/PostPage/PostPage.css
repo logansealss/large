@@ -190,3 +190,27 @@ a {
 .hidden {
     visibility: hidden;
 }
+
+.post-menu-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-menu{
+    position: absolute;
+    background-color: #FFF;
+    top: 100%;
+    border-radius: 4px;
+    padding: 8px 0;
+    min-width: 215px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 4px;
+}
+
+#post-scroll-menu-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
