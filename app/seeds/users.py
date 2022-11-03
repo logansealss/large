@@ -6,7 +6,38 @@ def seed_users():
 
     users = []
 
-    users.append(User(username="9ziggy9",
+
+    users.append(User(username="edgarallanpoe",
+                  email="edgarallanpoe@user.io",
+                  password="password",
+                  first_name="Edgar Allan",
+                  last_name="Poe",
+                ))
+    users.append(User(first_name='W W',
+                  last_name='Jacobs',
+                  email='wwjacobs@user.io',
+                  username='wwjacobs',
+                  password='password',
+                  ))
+    users.append(User(first_name='Frank',
+                  last_name='Stockton',
+                  email='frankstockton@user.io',
+                  username='frankstockton',
+                  password='password',
+                  ))
+    users.append(User(first_name='O',
+                  last_name='Henry',
+                  email='ohenry@user.io',
+                  username='ohenry',
+                  password='password',
+                  ))
+    users.append(User(first_name='Jack',
+                  last_name='London',
+                  email='jacklondon@user.io',
+                  username='jacklondon',
+                  password='password',
+                  ))
+    users.append(User(username="davidrogers",
                   email="davidrogers@user.io",
                   password="password",
                   first_name="David",
