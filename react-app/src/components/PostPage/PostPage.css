@@ -213,6 +213,10 @@ a {
     justify-content: center;
 }
 
+.post-menu-container img:hover{
+    cursor: pointer;
+}
+
 .post-menu{
     position: absolute;
     background-color: #FFF;
