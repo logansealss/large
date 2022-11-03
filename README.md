@@ -1,6 +1,6 @@
 # Large
 
-LairBnB is a website clone inspired by [Medium](https://medium.com/). It is an online publishing platform where can people can share and interact with posts.
+Large is a website clone inspired by [Medium](https://medium.com/). It is an online publishing platform where can people can share and interact with posts.
 
 **Live site: [Large](https://large-logan.herokuapp.com/)**
 
