@@ -188,7 +188,7 @@ In her tomb by the side of the sea.'''
     {
         'title': 'A Dream within a Dream',
         'image_url': "https://th-thumbnailer.cdn-si-edu.com/BgwxEbISvCGjFf8oZanaDGry_YU=/1000x750/filters:no_upscale():focal(1096x852:1097x853)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/c0/b4/c0b41ae2-b449-4157-a874-34f78c0279ee/poe-portrait.jpg",
-        'subtitle': 'The poem dramatizes the confusion felt by the narrator as he watches the important things in life slip away.',
+        'subtitle': 'The poem dramatizes the confusion felt by the narrator as the important things in life slip away.',
         'post': '''Take this kiss upon the brow!
 And, in parting from you now,
 Thus much let me avow—
@@ -218,7 +218,7 @@ But a dream within a dream?'''
     {
         'title': 'The Tell-Tale Heart',
         'image_url': "https://ichef.bbci.co.uk/images/ic/640x360/p01gd1xq.jpg",
-        'subtitle': "An unnamed narrator endeavors to convince the reader of the narrator's sanity while simultaneously describing a murder the narrator committed.",
+        'subtitle': "The narrator tries to convince the reader of their sanity while describing a murder they committed.",
         'post': '''True!—nervous—very, very dreadfully nervous I had been and am; but why will you say that I am mad? The disease had sharpened my senses—not destroyed—not dulled them. Above all was the sense of hearing acute. I heard all things in the heaven and in the earth. I heard many things in hell. How, then, am I mad? Hearken! and observe how healthily—how calmly I can tell you the whole story.
 
 It is impossible to say how first the idea entered my brain; but once conceived, it haunted me day and night. Object there was none. Passion there was none. I loved the old man. He had never wronged me. He had never given me insult. For his gold I had no desire. I think it was his eye! yes, it was this! He had the eye of a vulture—a pale blue eye, with a film over it. Whenever it fell upon me, my blood ran cold; and so by degrees—very gradually—I made up my mind to take the life of the old man, and thus rid myself of the eye forever.
@@ -257,7 +257,8 @@ No doubt I now grew very pale;—but I talked more fluently, and with a heighten
 
 
 
-    }]
+    }
+    ]
 
     users = User.query.all()
 
