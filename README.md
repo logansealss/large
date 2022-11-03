@@ -1,87 +1,81 @@
-# Flask React Project
+# Large
 
-This is the starter for the Flask React project.
+LairBnB is a website clone inspired by [Medium](https://medium.com/). It is an online publishing platform where can people can share and interact with posts.
 
-## Getting started
-1. Clone this repository (only this branch)
+**Live site: [Large](https://large-logan.herokuapp.com/)**
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+## Wiki Link
 
-2. Install dependencies
+ - [Features](https://github.com/logansealss/large/wiki/Features)
+ - [User Stories](https://github.com/logansealss/large/wiki/User-Stories)
+ - [Database Schema](https://github.com/logansealss/large/wiki/Database-Schema)
+ 
+## Technologies Used
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+## Features
 
-5. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+### Landing Page
 
-   ```bash
-   pipenv shell
-   ```
+Users are able to view previews of posts and click on a post to see more information. The navigation bar's background color and button color will change based on the scroll and if a user is logged in.
 
-   ```bash
-   flask db upgrade
-   ```
+![Screenshot 2022-11-03 111158](https://user-images.githubusercontent.com/106628994/199776999-f6e8eb73-9e90-44a3-aa79-982e73a74f29.png)
+![Screenshot 2022-11-03 111228](https://user-images.githubusercontent.com/106628994/199777041-d912db90-a382-4eb0-9b90-eb6f13861d1b.png)
 
-   ```bash
-   flask seed all
-   ```
+### Posts
 
-   ```bash
-   flask run
-   ```
+The individual post details page shows all of the information related to the post including the responses related to the post. The claps/responses sticky menu will change display based on the scroll of the page.
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+![Screenshot 2022-11-03 111312](https://user-images.githubusercontent.com/106628994/199777385-156874fc-6e34-4cad-9614-35008297def8.png)
+![Screenshot 2022-11-03 111351](https://user-images.githubusercontent.com/106628994/199777398-050ffba4-99d6-44e6-8d5a-352aee11d40b.png)
+
+A new post can be created when a logged in user clicks write at the top of the navigation bar.
+
+![Screenshot 2022-11-03 113357](https://user-images.githubusercontent.com/106628994/199779614-02532abb-5fd6-41d4-b5f6-78a117c38192.png)
+
+![Screenshot 2022-11-03 111449](https://user-images.githubusercontent.com/106628994/199779635-6c34737b-8c13-4b69-8031-45cdbc4cfb99.png)
+
+The owner of the post can manage the post from the individual post details page.
 
 
-<br>
+![Screenshot 2022-11-03 113500](https://user-images.githubusercontent.com/106628994/199779888-f0666233-64e2-420b-9d5d-352f018b9bde.png)
 
-## Deploy to Heroku
-This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations. 
 
-1. Write your Dockerfile. In order for the Github action to work effectively, it must have a configured Dockerfile. Follow the comments found in this [Dockerfile](./Dockerfile) to write your own!
+### Responses
 
-2. Create a new project on Heroku.
+The post details page allows a user to view the responses to a post by clicking on the chat bubbles in the claps/responses sticky menu or menu beneath the post.
 
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres".
+![Screenshot 2022-11-03 111528](https://user-images.githubusercontent.com/106628994/199778440-ad1fa1e7-1b49-4d07-9b44-4dc7ea3b4f02.png)
 
-4. Configure production environment variables. In your Heroku app settings -> config variables you should have two environment variables set:
+![Screenshot 2022-11-03 111545](https://user-images.githubusercontent.com/106628994/199778463-a1ef9556-e2b0-4d5d-a866-d6883a5d792f.png)
 
-   |    Key          |    Value    |
-   | -------------   | ----------- |
-   | `DATABASE_URL`  | Autogenerated when adding postgres to Heroku app |
-   | `SECRET_KEY`    | Random string full of entropy |
+You can add, edit or delete responses in the modal that appears.
 
-5. Generate a Heroku OAuth token for your Github Action. To do so, log in to Heroku via your command line with `heroku login`. Once you are logged in, run `heroku authorizations:create`. Copy the GUID value for the Token key.
+![Screenshot 2022-11-03 112156](https://user-images.githubusercontent.com/106628994/199778879-44bf1f05-74c4-4026-8a16-f4914b589517.png)
 
-6. In your Github Actions Secrets you should have two environment variables set. You can set these variables via your Github repository settings -> secrets -> actions. Click "New respository secret" to create
-each of the following variables:
 
-   |    Key            |    Value    |
-   | -------------     | ----------- |
-   | `HEROKU_API_KEY`  | Heroku Oauth Token (from step 6)|
-   | `HEROKU_APP_NAME` | Heroku app name    |
+## To-Do List
 
-7. Push to your `main` branch! This will trigger the Github Action to build your Docker image and deploy your application to the Heroku container registry. Please note that the Github Action will automatically upgrade your production database with `flask db upgrade`. However, it will *not* automatically seed your database. You must manually seed your production database if/when you so choose (see step 8).
+ - Allow users to add and remove applause to a post.
+ - Allow users to follow/unfollow other users and view their followers and those that they are following.
+ - Allow users to manage tags for posts as well as searching posts by tags.
+ - Add a user page that allows logged in users to view their posts, responses, followers.
+ - Add search functionality to find posts by keyword/phrase.
 
-8. *Attention!* Please run this command *only if you wish to seed your production database*: `heroku run -a HEROKU_APP_NAME flask seed all`
+## Contact Information
 
-## Helpful commands
-|    Command            |    Purpose    |
-| -------------         | ------------- |
-| `pipenv shell`        | Open your terminal in the virtual environment and be able to run flask commands without a prefix |
-| `pipenv run`          | Run a command from the context of the virtual environment without actually entering into it. You can use this as a prefix for flask commands  |
-| `flask db upgrade`    | Check in with the database and run any needed migrations  |
-| `flask db downgrade`  | Check in with the database and revert any needed migrations  |
-| `flask seed all`      | Just a helpful syntax to run queries against the db to seed data. See the **app/seeds** folder for reference and more details |
-| `heroku login -i`      | Authenticate your heroku-cli using the command line. Drop the -i to authenticate via the browser |
-| `heroku authorizations:create` | Once authenticated, use this to generate an Oauth token |
-| `heroku run -a <app name>` | Run a command from within the deployed container on Heroku |
+https://www.linkedin.com/in/logan-seals-b91454251/
+
+https://github.com/logansealss
+
 
 
