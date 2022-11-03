@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom"
+
 import { getMonthDay } from "../../utils/Dates"
 import largePic from "../../images/Large.png"
 import "./AltPostDisplay.css"
@@ -30,34 +32,38 @@ export default function AltPostDisplay({ post }) {
                             {getMonthDay(post.createdAt)}
                         </div>
                     </div>
-                    <div
-                        className="alt-post-content-flex"
+                    <Link
+                        to={`/posts/${post.id}`}
                     >
                         <div
-                            className="alt-post-content"
+                            className="alt-post-content-flex"
                         >
-                            <div>
-                                <div
-                                    className="alt-post-content-title"
-                                >
-                                    {post.title}
-                                </div>
-                                <div
-                                    className="alt-post-content-preview"
-                                >
-                                    {post.preview}
+                            <div
+                                className="alt-post-content"
+                            >
+                                <div>
+                                    <div
+                                        className="alt-post-content-title"
+                                    >
+                                        {post.title}
+                                    </div>
+                                    <div
+                                        className="alt-post-content-preview"
+                                    >
+                                        {post.preview}
+                                    </div>
                                 </div>
                             </div>
+                            <div
+                                className="alt-post-image-container"
+                            >
+                                <img
+                                    src={post.imageURL || largePic}
+                                    onError={(e) => e.currentTarget.src = largePic}
+                                />
+                            </div>
                         </div>
-                        <div
-                            className="alt-post-image-container"
-                        >
-                            <img
-                                src={post.imageURL || largePic}
-                                onError={(e) => e.currentTarget.src = largePic}
-                            />
-                        </div>
-                    </div>
+                    </Link>
                     <div
                         className="alt-post-image-container"
                     >
