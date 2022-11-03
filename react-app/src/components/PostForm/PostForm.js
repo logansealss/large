@@ -188,7 +188,7 @@ const PostForm = ({ postToUpdate }) => {
                                     name='subtitle'
                                     onChange={updateSubtitle}
                                     value={subtitle}
-                                    placeholder='Subtitle'
+                                    placeholder='Subtitle (optional)'
                                     autoComplete="off"
                                 ></input>
                             </div>
@@ -206,7 +206,7 @@ const PostForm = ({ postToUpdate }) => {
                                     name='imageUrl'
                                     onChange={updateImageUrl}
                                     value={imageUrl}
-                                    placeholder="Image URL"
+                                    placeholder="Image URL (optional)"
                                     autoComplete="off"
                                 ></input>
                             </div>
