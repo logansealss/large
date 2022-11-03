@@ -14,8 +14,6 @@ export default function UpdatePostWrapper() {
     const user = useSelector(state => state.session.user)
     const post = useSelector(state => state.posts.singlePost)
 
-    // TODO: ADD REDIRECTS TO 404 PAGE ON ERRORS
-
     useEffect(() => {
 
         (async () => {

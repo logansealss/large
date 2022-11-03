@@ -112,6 +112,7 @@ a {
 #post-footer-details-flex {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 #post-footer-claps-flex {
@@ -210,6 +211,10 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.post-menu-container img:hover{
+    cursor: pointer;
 }
 
 .post-menu{

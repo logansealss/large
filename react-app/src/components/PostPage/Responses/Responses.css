@@ -153,6 +153,10 @@
     position: relative;
 }
 
+.response-menu-container img:hover{
+    cursor: pointer;
+}
+
 .response-menu-relative{
     position: relative;
 }

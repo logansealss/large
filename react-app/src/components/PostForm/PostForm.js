@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import { createPostThunk, updatePostThunk } from '../../store/posts';
 
@@ -27,6 +27,7 @@ const PostForm = ({ postToUpdate }) => {
 
     const dispatch = useDispatch();
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
 
     const [serverError, setServerError] = useState();
     const [titleError, setTitleError] = useState();
@@ -79,6 +80,10 @@ const PostForm = ({ postToUpdate }) => {
             setImageUrlError()
         }
     }, [imageUrl])
+
+    if (!user) {
+        return <Redirect to="/"></Redirect>
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault();
