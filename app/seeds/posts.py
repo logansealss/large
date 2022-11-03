@@ -188,7 +188,7 @@ In her tomb by the side of the sea.'''
     {
         'title': 'A Dream within a Dream',
         'image_url': "https://th-thumbnailer.cdn-si-edu.com/BgwxEbISvCGjFf8oZanaDGry_YU=/1000x750/filters:no_upscale():focal(1096x852:1097x853)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/c0/b4/c0b41ae2-b449-4157-a874-34f78c0279ee/poe-portrait.jpg",
-        'subtitle': 'The poem dramatizes the confusion felt by the narrator as he watches the important things in life slip away.',
+        'subtitle': 'The poem dramatizes the confusion felt by the narrator as the important things in life slip away.',
         'post': '''Take this kiss upon the brow!
 And, in parting from you now,
 Thus much let me avow—
