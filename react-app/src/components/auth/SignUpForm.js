@@ -137,9 +137,15 @@ const SignUpForm = ({ onClose }) => {
     if (usernameTest && firstNameTest && lastNameTest && emailTest && passwordTest && repeatPasswordTest) {
       const data = await dispatch(signUp(username, email, firstName, lastName, password));
       if (data) {
-        // setErrors(data)
         console.log(data)
-        alert("Server error")
+        for(let err of data){
+          let [type, error] = err.split(' : ')
+          if(type === "username"){
+            setUsernameErr(error)
+          }else{
+            setEmailErr(error)
+          }
+        }
       } else if (mountedRef.current) {
         onClose()
       }
