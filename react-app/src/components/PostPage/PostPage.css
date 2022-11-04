@@ -247,3 +247,21 @@ a {
     color: white;
     background-color: #D63613;
 }
+
+.claps-container{
+    position: relative;
+}
+
+.floating-claps{
+    position: absolute;
+    bottom: 150%;
+    right: 3px;
+    height: 30px;
+    width: 30px;
+    background-color: black;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
