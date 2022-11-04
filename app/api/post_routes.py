@@ -144,6 +144,8 @@ def create_clap(post_id):
         .filter(Clap.post_id == post_id, Clap.user_id == current_user.id)       \
         .first()
 
+    print(clap_for_post_from_user)
+
     if clap_for_post_from_user:
         return {
             "message": "User already has a clap for this post",
