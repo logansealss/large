@@ -59,6 +59,14 @@ def get_post_responses(post_id):
         .options(joinedload(Response.user)).all()
     return {response.id: response.to_dict_with_user() for response in post_responses}
 
+# -------------- GET ALL CLAPS FOR A POST -------------- #
+
+@post_routes.route('/<int:post_id>/claps')
+def get_post_claps(post_id):
+    post_claps = Clap.query.filter(Clap.post_id == post_id)     \
+        .options(joinedload(Clap.user)).all()
+    return {clap.id: clap.to_dict() for clap in post_claps}
+
 # -------------- CREATE A POST -------------- #
 
 @post_routes.route('', methods=["POST"])
