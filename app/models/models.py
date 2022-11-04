@@ -120,9 +120,17 @@ class Clap(db.Model):
 
     def to_dict(self):
         return {
-            "userId": self.user_id,
-            "postId": self.post_id,
+            "id": self.id,
             "amount": self.amount,
+            "userId": self.user_id,
+            "postId": self.post_id
+        }
+
+    def to_dict_with_user(self):
+        return {
+            "id": self.id,
+            "amount": self.amount,
+            "postId": self.post_id,
             "user": self.user.to_dict()
         }
 
