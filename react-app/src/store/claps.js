@@ -1,0 +1,1 @@
+const READ_POST_CLAPS = 'posts/READ_POST_CLAPS'
