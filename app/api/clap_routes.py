@@ -10,6 +10,7 @@ from app.forms.clap_form import ClapForm
 clap_routes = Blueprint("clap", __name__)
 
 # -------------- UPDATE A CLAP -------------- #
+
 @clap_routes.route('/<int:clap_id>', methods=["PUT"])
 @login_required
 def update_clap_by_id(clap_id):
@@ -36,3 +37,21 @@ def update_clap_by_id(clap_id):
         return clap_by_id_dict
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# -------------- DELETE A CLAP -------------- #
+
+@clap_routes.route('/<int:clap_id>', methods=["DELETE"])
+@login_required
+def delete_clap_by_id(clap_id):
+    clap_by_id = Clap.query.get(clap_id)
+
+    if clap_by_id is None:
+        return couldnt_be_found("Clap")
+
+    if clap_by_id.user_id != current_user.id:
+        return forbidden()
+
+    db.session.delete(clap_by_id)
+    db.session.commit()
+
+    return deleted()
