@@ -6,6 +6,7 @@ import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readAllPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
+import { readPostClapsThunk } from "../../store/claps";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
@@ -59,6 +60,7 @@ export default function PostPage() {
                 history.push('/')
             }
             dispatch(readPostResponsesThunk(postId))
+            dispatch(readPostClapsThunk(postId))
             dispatch(readAllPostsThunk())
         })()
     }, [postId])
@@ -155,7 +157,7 @@ export default function PostPage() {
                         <div
 
                         >
-                            <PostFooterMenu></PostFooterMenu>
+                            {user && <PostFooterMenu></PostFooterMenu>}
                         </div>
                     </div>
                 </div>

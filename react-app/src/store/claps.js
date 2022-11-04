@@ -17,14 +17,13 @@ export const readPostClapsThunk = (postId) => async (dispatch) => {
     }
 }
 
-const initialState = {
-    allClaps: {},
-    singleClap: {}
-}
+const initialState = {}
 
 export default function reducer(state = initialState, action) {
     let newState
     switch (action.type) {
+        case READ_POST_CLAPS:
+            return { ...action.claps }
         default:
             return state;
     }
