@@ -18,7 +18,7 @@ export default function PostFooterClaps() {
 
     function bubbleDisappears(){
         setBubbleVisible(false)
-        
+
     }
 
     function clapsCounter() {
@@ -43,7 +43,7 @@ export default function PostFooterClaps() {
         }
         if(clapsAmount < 50){
             setClapsAmount(cur => cur + 1)
-            setIntObj(setInterval(clapsCounter, 500))
+            setIntObj(setInterval(clapsCounter, 350))
         }
         setBubbleVisible(true)
     }
