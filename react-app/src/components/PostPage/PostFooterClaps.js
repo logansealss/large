@@ -9,7 +9,7 @@ import Claps from "./Claps/Claps"
 export default function PostFooterClaps() {
 
     const user = useSelector(state => state.session.user)
-    const claps = useSelector(state => state.claps)
+    const claps = useSelector(state => state.claps.allClaps)
     const numClaps = Object.values(claps).reduce((sum, cur) => sum += cur.amount, 0)
     const [intObj, setIntObj] = useState()
     const [timeoutObj, setTimeoutObj] = useState()
@@ -18,7 +18,6 @@ export default function PostFooterClaps() {
 
     function bubbleDisappears(){
         setBubbleVisible(false)
-
     }
 
     function clapsCounter() {
