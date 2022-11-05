@@ -23,8 +23,14 @@ export default function PostPage() {
     const post = useSelector(state => state.posts.singlePost)
     const user = useSelector(state => state.session.user)
     const responses = useSelector(state => state.session.responses)
+    const claps = useSelector(state => state.claps)
     const posts = useSelector(state => state.posts.allPosts)
     const [scrollVisible, setScrollVisible] = useState(true)
+
+    let userClap
+    if(user){
+        userClap = Object.values(claps).find(clap => clap.user.id === user.id)
+    }
 
     function isInViewport(rect) {
         return (
@@ -78,8 +84,10 @@ export default function PostPage() {
                                 <div>
                                     {`${post.writer.firstName} ${post.writer.lastName}`}
                                 </div>
-                                {user &&
-                                    <PostFooterMenu></PostFooterMenu>
+                                {user && userClap &&
+                                    <PostFooterMenu
+                                        userClap={userClap}
+                                    ></PostFooterMenu>
                                 }
                             </div>
                             <div>
@@ -126,7 +134,7 @@ export default function PostPage() {
                                 </div>
                             </div>
                             <PostFooterResponses></PostFooterResponses>
-                            {user && (
+                            {user && userClap && (
                                 <>
                                     <div className="post-scroll-divider-container">
                                         <div className="post-scroll-divider">
@@ -136,6 +144,7 @@ export default function PostPage() {
                                         id="post-scroll-menu-flex"
                                     >
                                         <PostFooterMenu
+                                            userClap={userClap}
                                             isTop={true}
                                         ></PostFooterMenu>
                                     </div>
@@ -157,7 +166,12 @@ export default function PostPage() {
                         <div
 
                         >
-                            {user && <PostFooterMenu></PostFooterMenu>}
+                            {user && userClap && 
+                                <PostFooterMenu
+                                    userClap={userClap}
+                                >
+                                </PostFooterMenu>
+                            }
                         </div>
                     </div>
                 </div>

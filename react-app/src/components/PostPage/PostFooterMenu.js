@@ -1,17 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
+
+import { deletePostClapThunk } from "../../store/claps";
 import { deletePostThunk } from "../../store/posts";
 import { useHistory } from "react-router-dom";
 
 import dots from "../../images/dots.svg"
 
 
-export default function PostFooterMenu({ isTop }) {
+export default function PostFooterMenu({ isTop, userClap }) {
     const dispatch = useDispatch()
     const ref = useRef()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const post = useSelector(state => state.posts.singlePost)
+    const claps = useSelector(state => state.claps)
     const [menuOpen, toggleMenuOpen] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -48,6 +51,10 @@ export default function PostFooterMenu({ isTop }) {
         history.push(`/posts/${post.id}/edit`)
     }
 
+    async function deleteUserClap() {
+        await dispatch(deletePostClapThunk(userClap.id))
+    }
+
     const visibleMenu = menuOpen ? "post-menu visible" : "post-menu hidden"
     const topMenu = isTop ? " top" : ''
     const popupMenuClass = visibleMenu + topMenu
@@ -64,7 +71,10 @@ export default function PostFooterMenu({ isTop }) {
                 className="post-menu-container"
                 onClick={menuOnClick}
             >
-                <img src={dots} />
+                <img
+                    className="dots-img"
+                    src={dots}
+                />
                 <div
                     className={popupMenuClass}
                     onClick={(e) => e.stopPropagation()}
@@ -99,7 +109,7 @@ export default function PostFooterMenu({ isTop }) {
                         <>
                             <div
                                 className="popup-menu-option"
-                            // onClick={editPost}
+                                onClick={deleteUserClap}
                             >
                                 Undo applause for this post
                             </div>

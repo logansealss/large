@@ -38,19 +38,7 @@ def get_post_by_id(post_id):
     if post_by_id is None:
         return couldnt_be_found("Post")
 
-    num_claps = Post.query.join(Clap)           \
-        .filter(Post.id == post_id)             \
-        .count()
-
-    num_responses = Post.query.join(Response)   \
-        .filter(Post.id == post_id)             \
-        .count()
-
-    post_dict = post_by_id.to_dict()
-    post_dict["numClaps"] = num_claps
-    post_dict["numResponses"] = num_responses
-
-    return post_dict
+    return post_by_id.to_dict()
 
 # -------------- GET ALL RESPONSES TO A POST -------------- #
 

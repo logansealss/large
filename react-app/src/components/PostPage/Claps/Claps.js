@@ -2,8 +2,7 @@ import { useSelector } from "react-redux"
 
 export default function Claps(){
 
-    const claps = useSelector(state => state.claps.allClaps)
-
+    const claps = useSelector(state => state.claps)
     const numClaps = Object.values(claps).reduce((sum, cur) => sum += cur.amount, 0)
 
     return (

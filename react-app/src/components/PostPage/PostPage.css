@@ -147,9 +147,18 @@ a {
     filter: invert(45%) sepia(33%) saturate(2%) hue-rotate(314deg) brightness(94%) contrast(96%);
 }
 
-.svg-container img:hover {
+.total-claps-div:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.hover img:hover{
     filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(297deg) brightness(96%) contrast(104%);
     cursor: pointer;
+}
+
+.dots-img{
+    margin-right: 0;
 }
 
 #post-footer-responses:hover {
@@ -182,7 +191,7 @@ a {
     box-shadow: rgb(0 0 0 / 10%) 0px 2px 10px 0px;
     align-items: center;
     border: 1px solid rgb(199, 198, 194);
-    padding: 0 14px 0 20px;
+    padding: 0 20px 0 20px;
     height: 40px;
 }
 
@@ -264,4 +273,28 @@ a {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    transition-property: visibility;
+    transition-duration: .2s;
+}
+
+.floating-sparkles-right{
+    filter: invert(63%) sepia(44%) saturate(588%) hue-rotate(159deg) brightness(97%) contrast(86%);
+    position: absolute;
+    transform: rotate(97deg);
+    transition-property: visibility;
+    transition-duration: .25s;
+    transition-delay: .2s;
+    bottom: 117%;
+    left: 65%;
+}
+
+.floating-sparkles-left{
+    filter: invert(59%) sepia(70%) saturate(2545%) hue-rotate(314deg) brightness(98%) contrast(84%);
+    position: absolute;
+    transform: rotate(157deg);
+    transition-property: visibility;
+    transition-duration: .065s;
+    transition-delay: .265s;
+    bottom: 187%;
+    right: 102%;
 }

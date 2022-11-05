@@ -84,38 +84,29 @@ export const deletePostClapThunk = (clapId) => async (dispatch) => {
     }
 }
 
-const initialState = {
-    allClaps: {},
-    singleClap: {}
-}
+const initialState = {}
 
 export default function reducer(state = initialState, action) {
-    let allClaps
-    let singleClap
+    let newState
     switch (action.type) {
         case READ_POST_CLAPS:
             return {
-                ...state,
-                allClaps: { ...action.claps }
+                ...action.claps
             }
         case CREATE_POST_CLAP:
             return {
-                allClaps: { ...state.allClaps, [action.clap.id]: action.clap },
-                singleClap: { ...action.clap }
+                ...state, 
+                [action.clap.id]: action.clap
             }
         case UPDATE_POST_CLAP:
             return {
-                allClaps: { ...state.allClaps, [action.clap.id]: action.clap },
-                singleClap: { ...action.clap }
+                ...state, 
+                [action.clap.id]: action.clap 
             }
         case DELETE_POST_CLAP:
-            allClaps = { ...state.allClaps }
-            delete allClaps[action.id]
-            singleClap = { ...state.singleClap }
-            if(singleClap.id && singleClap.id === action.id){
-                singleClap = {}
-            }
-            return { allClaps, singleClap }
+            newState = { ...state }
+            delete newState[action.id]
+            return newState
         default:
             return state;
     }
