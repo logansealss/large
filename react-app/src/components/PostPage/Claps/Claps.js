@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import Clap from "./Clap"
 
 export default function Claps(){
 
@@ -12,12 +13,14 @@ export default function Claps(){
             <div
                 id="response-modal-header"
             >
-                {`${numClaps} claps from ${Object.values(claps).length} people`}
+                {`${numClaps} claps from ${Object.values(claps).length} ${Object.values(claps).length === 1 ? 'person' : 'people'}`}
             </div>
             {Object.values(claps).map(clap => (
-                <div>
-                    {`${clap.user.firstName} ${clap.user.lastName}`}
-                </div>
+                <Clap
+                    clap={clap}
+                    key={clap.id}
+                >
+                </Clap>
             ))}
         </div>
     )

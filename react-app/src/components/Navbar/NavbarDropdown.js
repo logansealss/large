@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../../store/session";
+import profilePic from "../../images/ProfilePic.png"
 import "./NavbarDropdown.css"
 
 export default function NavbarDropdown() {
@@ -38,7 +39,7 @@ export default function NavbarDropdown() {
                 id='profile-image-container'
             >
                 <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+                    src={profilePic}
                 />
             </div>
             <div

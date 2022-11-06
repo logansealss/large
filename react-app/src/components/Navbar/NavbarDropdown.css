@@ -29,6 +29,7 @@
     width: 32px;
     object-fit: cover;
     border-radius: 50%;
+    background-color: rgba(168, 168, 168, 1);
 }
 
 #profile-image-container img:hover{

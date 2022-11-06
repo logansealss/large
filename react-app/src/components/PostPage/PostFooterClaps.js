@@ -83,10 +83,10 @@ export default function PostFooterClaps() {
                     className="claps-container"
                 >
                     <div
-                        className={user ? "svg-container svg-claps hover" : "svg-container svg-claps"}
-                        onMouseDown={user ? clapsMouseDown : undefined}
-                        onMouseUp={user ? clapsStopClick : undefined}
-                        onDragEnd={user ? clapsStopClick : undefined}
+                        className={user && user.id !==post.writer.id ? "svg-container svg-claps hover" : "svg-container svg-claps"}
+                        onMouseDown={user && user.id !==post.writer.id ? clapsMouseDown : undefined}
+                        onMouseUp={user && user.id !==post.writer.id ? clapsStopClick : undefined}
+                        onDragEnd={user && user.id !==post.writer.id ? clapsStopClick : undefined}
                     >
                         <img src={clap} />
                     </div>

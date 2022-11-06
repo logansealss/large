@@ -12,6 +12,7 @@ import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
 import PostFooterResponses from "./PostFooterResponses";
 import largePic from "../../images/Large.png"
+import profilePic from "../../images/ProfilePic.png"
 import "./PostPage.css"
 
 export default function PostPage() {
@@ -77,7 +78,7 @@ export default function PostPage() {
                 <div id="writer-card-container">
                     <div id="writer-card-flex">
                         <div id="writer-card-image-div">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" />
+                            <img src={profilePic} />
                         </div>
                         <div id="writer-details-container">
                             <div id="writer-name-flex">
@@ -175,13 +176,13 @@ export default function PostPage() {
                         </div>
                     </div>
                 </div>
-                {Object.values(posts).map(post => (
+                {Object.values(posts).map(post => post.id !== +postId ? (
                     <AltPostDisplay
                         key={post.id}
                         post={post}
                     >
                     </AltPostDisplay>
-                ))}
+                ) : null)}
             </div>
         </div>
     )
