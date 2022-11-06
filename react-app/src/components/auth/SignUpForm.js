@@ -185,7 +185,7 @@ const SignUpForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='username'
-          className={submitted && usernameErr && 'validation-error'}
+          className={submitted && usernameErr ? 'validation-error' : undefined}
         >
           {submitted && usernameErr ? usernameErr : 'Username'}
         </label>
