@@ -45,7 +45,6 @@ export default function PostFooterClaps() {
         else {
             await dispatch(createPostClapThunk(post.id, { amount: clapsToSend }))
         }
-        console.log("clap created/updated")
         setBubbleVisible(false)
     }
 

@@ -137,7 +137,6 @@ const SignUpForm = ({ onClose }) => {
     if (usernameTest && firstNameTest && lastNameTest && emailTest && passwordTest && repeatPasswordTest) {
       const data = await dispatch(signUp(username, email, firstName, lastName, password));
       if (data) {
-        console.log(data)
         for(let err of data){
           let [type, error] = err.split(' : ')
           if(type === "username"){

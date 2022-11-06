@@ -13,7 +13,6 @@ const PostForm = ({ postToUpdate }) => {
     let prevPost
 
     if (postToUpdate) {
-        console.log("post to update", postToUpdate)
         prevTitle = postToUpdate.title
         prevPost = postToUpdate.post
 

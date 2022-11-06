@@ -36,11 +36,9 @@ export default function ResponseForm({ responseToUpdate, setDisplayForm }) {
         }
 
         if (responseToUpdate) {
-            console.log("updated response")
             await dispatch(updatePostResponseThunk(responseToUpdate.id, { response }))
             clearForm()
         } else {
-            console.log("created response")
             await dispatch(createPostResponseThunk(postId, { response }))
             clearForm()
         }

@@ -36,7 +36,6 @@ const LoginForm = ({ onClose }) => {
     const data = await dispatch(login(email, password));
     if (data) {
       const [head, tail] = data[0].split(' : ')
-      console.log('head and tail', head, tail)
       if (head === 'email') {
         setEmailErr(tail);
       } else {

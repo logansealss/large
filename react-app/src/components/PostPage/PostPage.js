@@ -63,7 +63,6 @@ export default function PostPage() {
             const result = await dispatch(readSinglePostThunk(postId))
 
             if (result) {
-                console.log(`post ${postId} not found`)
                 history.push('/')
             }
             dispatch(readPostResponsesThunk(postId))
