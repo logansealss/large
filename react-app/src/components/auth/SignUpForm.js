@@ -25,6 +25,7 @@ const SignUpForm = ({ onClose }) => {
   const history = useHistory()
 
   const isNoLength = minStrLengthFunc(0)
+  const isEightOrMore = minStrLengthFunc(7)
   const isFortyChars = maxStrLengthFunc(41)
   const isFiftyChars = maxStrLengthFunc(51)
   const isTwoFiftyFiveChars = maxStrLengthFunc(256)
@@ -34,14 +35,12 @@ const SignUpForm = ({ onClose }) => {
     mountedRef.current = false
   }, [])
 
-
-
   useEffect(() => {
     if (submitted) {
       testInputStr(username,
         setUsernameErr,
-        [isNoLength, isFortyChars],
-        ['Username is required', 'Username must be 40 characters or less'])
+        [isNoLength, isEightOrMore, isFortyChars],
+        ['Username is required', 'Username must be 8 characters or more', 'Username must be 40 characters or less'])
     }
   }, [username])
 
@@ -106,8 +105,8 @@ const SignUpForm = ({ onClose }) => {
 
     const usernameTest = testInputStr(username,
       setUsernameErr,
-      [isNoLength, isFortyChars],
-      ['Username is required', 'Username must be 40 characters or less'])
+      [isNoLength, isEightOrMore, isFortyChars],
+      ['Username is required', 'Username must be 8 characters or more', 'Username must be 40 characters or less'])
 
     const emailTest = testInputStr(email,
       setEmailErr,
