@@ -67,6 +67,16 @@
     cursor: pointer;
 }
 
+.navbar-button{
+    border-radius: 1386px;
+    font-size: 14px;
+    line-height: 20px;
+    height: 38px;
+    width: 104px;
+    transition: background-color 300ms linear, color 300ms linear, border 300ms linear;
+    cursor: pointer;
+}
+
 .color-one{
     color: rgba(255, 255, 255, 1);
     background-color: rgba(25, 25, 25, 1);

@@ -41,10 +41,7 @@ const LoginForm = ({ onClose }) => {
       } else {
         setPasswordErr(tail)
       }
-    } else {
-      setEmailErr()
-      setPasswordErr()
-    }
+    } 
   };
 
   useEffect(() => {
@@ -108,13 +105,11 @@ const LoginForm = ({ onClose }) => {
       </div>
       <button
         type='submit'
-        id="navbar-button"
-        className="color-two auth-form-button"
+        className="color-two auth-form-button navbar-button"
       >Login</button>
       <button
         type='submit'
-        id="navbar-button"
-        className="color-two auth-form-button"
+        className="color-two auth-form-button navbar-button"
         onClick={demoUserLogin}
       >Demo User Login</button>
     </form>

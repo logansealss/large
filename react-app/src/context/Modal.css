@@ -38,6 +38,10 @@
     margin-top: 20px;
   }
 
+  .navbar-button.auth-form-button{
+    width: 310px;
+  }
+
   #navbar-button.auth-form-button{
     width: 310px;
   }

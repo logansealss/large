@@ -29,7 +29,7 @@ export default function PostPage() {
     const [scrollVisible, setScrollVisible] = useState(true)
 
     let userClap
-    if(user){
+    if (user) {
         userClap = Object.values(claps).find(clap => clap.user.id === user.id)
     }
 
@@ -89,6 +89,10 @@ export default function PostPage() {
                                         userClap={userClap}
                                     ></PostFooterMenu>
                                 }
+                                {
+                                    user && user.id === post.writer.id &&
+                                    <PostFooterMenu></PostFooterMenu>
+                                }
                             </div>
                             <div>
                                 <div id="writer-post-details">
@@ -134,7 +138,7 @@ export default function PostPage() {
                                 </div>
                             </div>
                             <PostFooterResponses></PostFooterResponses>
-                            {user && userClap && (
+                            {user && (userClap || post.writer.id === user.id) && (
                                 <>
                                     <div className="post-scroll-divider-container">
                                         <div className="post-scroll-divider">
@@ -166,11 +170,14 @@ export default function PostPage() {
                         <div
 
                         >
-                            {user && userClap && 
+                            {user && userClap &&
                                 <PostFooterMenu
                                     userClap={userClap}
                                 >
                                 </PostFooterMenu>
+                            }
+                            {user && post.writer.id === user.id &&
+                                <PostFooterMenu></PostFooterMenu>
                             }
                         </div>
                     </div>

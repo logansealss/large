@@ -201,7 +201,7 @@ const SignUpForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='email'
-          className={submitted && emailErr && 'validation-error'}
+          className={submitted && emailErr ? 'validation-error' : undefined}
         >
           {submitted && emailErr ? emailErr : 'Email'}
         </label>
@@ -217,7 +217,7 @@ const SignUpForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='firstName'
-          className={submitted && firstNameErr && 'validation-error'}
+          className={submitted && firstNameErr ? 'validation-error' : undefined}
         >
           {submitted && firstNameErr ? firstNameErr : 'First name'}
         </label>
@@ -233,7 +233,7 @@ const SignUpForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='lastName'
-          className={submitted && lastNameErr && 'validation-error'}
+          className={submitted && lastNameErr ? 'validation-error' : undefined}
         >
           {submitted && lastNameErr ? lastNameErr : 'Last name'}
         </label>
@@ -249,7 +249,7 @@ const SignUpForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='password'
-          className={submitted && passwordErr && 'validation-error'}
+          className={submitted && passwordErr ? 'validation-error' : undefined}
         >
           {submitted && passwordErr ? passwordErr : 'Password'}
         </label>
@@ -265,7 +265,7 @@ const SignUpForm = ({ onClose }) => {
       <div>
         <label
           htmlFor='repeatPassword'
-          className={submitted && repeatPasswordErr && 'validation-error'}
+          className={submitted && repeatPasswordErr ? 'validation-error' : undefined}
         >
           {submitted && repeatPasswordErr ? repeatPasswordErr : 'Repeat password'}
         </label>
