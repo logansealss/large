@@ -6,6 +6,7 @@
     position: absolute;
     top: 60px;
     min-width: 160px;
+    max-width: 320px;
     border-radius: 4px;
     padding: 4px 0;
     background-color: #FFF;
@@ -29,8 +30,26 @@
     width: 32px;
     object-fit: cover;
     border-radius: 50%;
+    background-color: rgba(168, 168, 168, 1);
 }
 
 #profile-image-container img:hover{
+    cursor: pointer;
+}
+
+.navbar-dropdown{
+    color: rgba(41, 41, 41, 1);
+    padding: 8px 20px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.navbar-dropdown div{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.hover-dropdown:hover{
     cursor: pointer;
 }

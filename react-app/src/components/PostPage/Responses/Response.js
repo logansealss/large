@@ -5,6 +5,7 @@ import ResponseForm from "./ResponseForm"
 import { deletePostResponsesThunk } from "../../../store/responses"
 import { getMonthDay } from "../../../utils/Dates"
 import dots from "../../../images/dots.svg"
+import profilePic from "../../../images/ProfilePic.png"
 
 
 export default function Response({ response }) {
@@ -71,14 +72,27 @@ export default function Response({ response }) {
                             className="response-author-details"
                         >
                             <div
-                                className="response-author"
+                                className="response-author-profile-flex"
                             >
-                                {`${response.user.firstName} ${response.user.lastName}`}
-                            </div>
-                            <div
-                                className="response-date"
-                            >
-                                {`${getMonthDay(response.createdAt)}`}
+                                <div
+                                    className='profile-image-container'
+                                >
+                                    <img
+                                        src={profilePic}
+                                    />
+                                </div>
+                                <div>
+                                    <div
+                                        className="response-author"
+                                    >
+                                        {`${response.user.firstName} ${response.user.lastName}`}
+                                    </div>
+                                    <div
+                                        className="response-date"
+                                    >
+                                        {`${getMonthDay(response.createdAt)}`}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {user && user.id === response.user.id && (

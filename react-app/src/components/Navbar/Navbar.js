@@ -130,11 +130,6 @@ export default function Navbar() {
                                         <NavbarDropdown>
 
                                         </NavbarDropdown>
-                                        {/* <div id='profile-image-container'>
-                                            <img
-                                                onClick={signout}
-                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" />
-                                        </div> */}
                                     </>
                                 }
 

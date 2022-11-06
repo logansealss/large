@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router-dom'
 import { createPostResponseThunk, updatePostResponseThunk } from "../../../store/responses"
+import profilePic from "../../../images/ProfilePic.png"
 
 export default function ResponseForm({ responseToUpdate, setDisplayForm }) {
 
@@ -63,10 +64,28 @@ export default function ResponseForm({ responseToUpdate, setDisplayForm }) {
                 className="response-form-shadow-container"
             >
                 {focused &&
+                    // <div
+                    //     className="response-form-name"
+                    // >
+                    //     {`${user.firstName} ${user.lastName}`}
+                    // </div>
                     <div
-                        className="response-form-name"
+                        className="response-author-profile-flex"
                     >
-                        {`${user.firstName} ${user.lastName}`}
+                        <div
+                            className='profile-image-container'
+                        >
+                            <img
+                                src={profilePic}
+                            />
+                        </div>
+                        <div>
+                            <div
+                                className="response-author"
+                            >
+                                {`${user.firstName} ${user.lastName}`}
+                            </div>
+                        </div>
                     </div>
                 }
                 <form

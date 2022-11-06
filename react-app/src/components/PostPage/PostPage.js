@@ -6,11 +6,13 @@ import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readAllPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
+import { readPostClapsThunk } from "../../store/claps";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
 import PostFooterResponses from "./PostFooterResponses";
 import largePic from "../../images/Large.png"
+import profilePic from "../../images/ProfilePic.png"
 import "./PostPage.css"
 
 export default function PostPage() {
@@ -22,8 +24,14 @@ export default function PostPage() {
     const post = useSelector(state => state.posts.singlePost)
     const user = useSelector(state => state.session.user)
     const responses = useSelector(state => state.session.responses)
+    const claps = useSelector(state => state.claps)
     const posts = useSelector(state => state.posts.allPosts)
     const [scrollVisible, setScrollVisible] = useState(true)
+
+    let userClap
+    if(user){
+        userClap = Object.values(claps).find(clap => clap.user.id === user.id)
+    }
 
     function isInViewport(rect) {
         return (
@@ -59,6 +67,7 @@ export default function PostPage() {
                 history.push('/')
             }
             dispatch(readPostResponsesThunk(postId))
+            dispatch(readPostClapsThunk(postId))
             dispatch(readAllPostsThunk())
         })()
     }, [postId])
@@ -69,15 +78,17 @@ export default function PostPage() {
                 <div id="writer-card-container">
                     <div id="writer-card-flex">
                         <div id="writer-card-image-div">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" />
+                            <img src={profilePic} />
                         </div>
                         <div id="writer-details-container">
                             <div id="writer-name-flex">
                                 <div>
                                     {`${post.writer.firstName} ${post.writer.lastName}`}
                                 </div>
-                                {user &&
-                                    <PostFooterMenu></PostFooterMenu>
+                                {user && userClap &&
+                                    <PostFooterMenu
+                                        userClap={userClap}
+                                    ></PostFooterMenu>
                                 }
                             </div>
                             <div>
@@ -124,7 +135,7 @@ export default function PostPage() {
                                 </div>
                             </div>
                             <PostFooterResponses></PostFooterResponses>
-                            {user && (
+                            {user && userClap && (
                                 <>
                                     <div className="post-scroll-divider-container">
                                         <div className="post-scroll-divider">
@@ -134,6 +145,7 @@ export default function PostPage() {
                                         id="post-scroll-menu-flex"
                                     >
                                         <PostFooterMenu
+                                            userClap={userClap}
                                             isTop={true}
                                         ></PostFooterMenu>
                                     </div>
@@ -155,17 +167,22 @@ export default function PostPage() {
                         <div
 
                         >
-                            <PostFooterMenu></PostFooterMenu>
+                            {user && userClap && 
+                                <PostFooterMenu
+                                    userClap={userClap}
+                                >
+                                </PostFooterMenu>
+                            }
                         </div>
                     </div>
                 </div>
-                {Object.values(posts).map(post => (
+                {Object.values(posts).map(post => post.id !== +postId ? (
                     <AltPostDisplay
                         key={post.id}
                         post={post}
                     >
                     </AltPostDisplay>
-                ))}
+                ) : null)}
             </div>
         </div>
     )

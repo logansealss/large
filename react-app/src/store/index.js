@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import posts from './posts'
 import responses from './responses'
+import claps from './claps'
 
 const rootReducer = combineReducers({
   session,
   posts,
-  responses
+  responses,
+  claps
 });
 
 

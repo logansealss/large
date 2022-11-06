@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom";
 import { getMonthDay } from "../../../utils/Dates";
 import largePic from "../../../images/Large.png"
+import profilePic from "../../../images/ProfilePic.png"
 import "./LandingPostPreview.css"
 
 export default function LandingPostPreview({ post }) {
@@ -15,9 +16,19 @@ export default function LandingPostPreview({ post }) {
                 <div className="post-content-flex">
                     <div className="post-content">
                         <div className="post-content-container">
-
-                            <div className="post-content-name">
-                                {`${post.writer.firstName} ${post.writer.lastName}`}
+                            <div
+                                className="post-content-header-flex"
+                            >
+                                <div
+                                    className="profile-pic-small"
+                                >
+                                    <img
+                                        src={profilePic}
+                                    />
+                                </div>
+                                <div className="post-content-name">
+                                    {`${post.writer.firstName} ${post.writer.lastName}`}
+                                </div>
                             </div>
                             <Link to={`/posts/${post.id}`}>
                                 <div className="post-content-title">

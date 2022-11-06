@@ -62,6 +62,7 @@
     color:rgba(41, 41, 41, 1);
     line-height: 20px;
     font-size: 14px;
+    max-width: 366px;
 }
 
 .response-form-shadow-container{
@@ -159,5 +160,18 @@
 
 .response-menu-relative{
     position: relative;
+}
+
+.response-author-profile-flex{
+    display: flex;
+    align-items: center;
+}
+
+.response-author{
+    margin-left: 8px;
+}
+
+.response-date{
+    margin-left: 8px;
 }
 

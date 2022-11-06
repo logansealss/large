@@ -20,7 +20,7 @@ export default function PostFooterResponses() {
                             src={chat} />
                         </div>
                         <div>
-                            {Object.values(responses).length}
+                            {Object.values(responses).length || "--"}
                         </div>
                     </div>
                 </div>}

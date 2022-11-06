@@ -1,0 +1,27 @@
+.profile-image-container img{
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(168, 168, 168, 1);
+}
+
+.profile-image-container{
+    display: flex;
+    align-items: center;
+}
+
+.clap-container-flex{
+    display: flex;
+    align-items: center;
+}
+
+.clap-container{
+    margin: 0 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(230, 230, 230, 1);
+}
+
+.clap-name-container{
+    margin-left: 8px;
+}
