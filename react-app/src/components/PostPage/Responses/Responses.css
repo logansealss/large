@@ -161,3 +161,16 @@
     position: relative;
 }
 
+.response-author-profile-flex{
+    display: flex;
+    align-items: center;
+}
+
+.response-author{
+    margin-left: 8px;
+}
+
+.response-date{
+    margin-left: 8px;
+}
+

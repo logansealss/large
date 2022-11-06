@@ -15,6 +15,9 @@ export default function Claps(){
             >
                 {`${numClaps} claps from ${Object.values(claps).length} ${Object.values(claps).length === 1 ? 'person' : 'people'}`}
             </div>
+            <div
+                className="response-form-bottom-border"
+            ></div>
             {Object.values(claps).map(clap => (
                 <Clap
                     clap={clap}

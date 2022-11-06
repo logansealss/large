@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import { getMonthDay } from "../../utils/Dates"
 import largePic from "../../images/Large.png"
+import profilePic from "../../images/ProfilePic.png"
 import "./AltPostDisplay.css"
 
 export default function AltPostDisplay({ post }) {
@@ -20,6 +21,13 @@ export default function AltPostDisplay({ post }) {
                     <div
                         className="alt-post-header-flex"
                     >
+                        <div
+                            className="profile-pic-small"
+                        >
+                            <img
+                                src={profilePic}
+                            />
+                        </div>
                         <div>
                             {`${post.writer.firstName} ${post.writer.lastName}`}
                         </div>

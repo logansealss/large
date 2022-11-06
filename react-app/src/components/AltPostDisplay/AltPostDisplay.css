@@ -11,6 +11,7 @@
 .alt-post-content-flex{
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .alt-post-image-container{
@@ -58,6 +59,20 @@
 .alt-post-display{
     padding: 24px 0;
     border-top: 1px solid rgba(230, 230, 230, 1);
+}
+
+.profile-pic-small{
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.profile-pic-small img{
+    height: 24px;
+    width: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(168, 168, 168, 1);
 }
 
 
