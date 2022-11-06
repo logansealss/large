@@ -211,6 +211,7 @@ const SignUpForm = ({ onClose }) => {
           onChange={updateEmail}
           value={email}
           placeholder="Email"
+          pattern="[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z]+\.[a-zA-Z]{2,3}"
         ></input>
       </div>
       <div>
