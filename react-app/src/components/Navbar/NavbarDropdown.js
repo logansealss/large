@@ -48,7 +48,17 @@ export default function NavbarDropdown() {
                 onClick={(e) => e.stopPropagation()}
             >
                 <div
-                    className="popup-menu-option"
+                    className="navbar-dropdown"
+                >
+                    <div>
+                        {`${user.firstName} ${user.lastName}`}
+                    </div>
+                    <div>
+                        {`${user.email}`}
+                    </div>
+                </div>
+                <div
+                    className="navbar-dropdown hover-dropdown"
                     onClick={signout}
                 >
                     Sign out
