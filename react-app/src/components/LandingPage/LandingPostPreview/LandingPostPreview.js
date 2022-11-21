@@ -28,15 +28,15 @@ export default function LandingPostPreview({ post }) {
                                         src={profilePic}
                                     />
                                 </div>
-                                <div className="post-content-name">
+                                {/* <div className="post-content-name">
                                     {`${post.writer.firstName} ${post.writer.lastName}`}
-                                </div>
+                                </div> */}
 
                                 {/* TODO: complete hover effect for user cards */}
-                                {/* <UserCard 
+                                <UserCard 
                                     user={post.writer}
                                     className="post-content-name"
-                                ></UserCard> */}
+                                ></UserCard>
                             </div>
                             <Link to={`/posts/${post.id}`}>
                                 <div className="post-content-title">

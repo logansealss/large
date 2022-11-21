@@ -48,7 +48,7 @@ a {
     align-items: center;
 }
 
-#writer-name-flex {
+#writer-details {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
@@ -298,4 +298,23 @@ a {
     transition-delay: .265s;
     bottom: 187%;
     right: 102%;
+}
+
+.writer-details-left{
+    display: flex;
+    align-items: center;
+}
+
+.writer-details-name{
+    margin-right: 16px;
+}
+
+.user-follow-button{
+    height: 25px;
+    border-radius: 99em;
+    margin-left: 15px;
+}
+
+.user-follow-button:hover{
+    cursor: pointer;
 }

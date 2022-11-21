@@ -80,9 +80,23 @@ export default function PostPage() {
                             <img src={profilePic} />
                         </div>
                         <div id="writer-details-container">
-                            <div id="writer-name-flex">
-                                <div>
-                                    {`${post.writer.firstName} ${post.writer.lastName}`}
+                            <div id="writer-details">
+                                <div
+                                    className="writer-details-left"
+                                >
+                                    <div
+                                        className="writer-details-name"
+                                    >
+                                        {`${post.writer.firstName} ${post.writer.lastName}`}
+                                    </div>
+
+                                    {user &&
+                                        <button
+                                            className="color-two user-follow-button"
+                                        >
+                                            Follow
+                                        </button>
+                                    }
                                 </div>
                                 {user && userClap &&
                                     <PostFooterMenu

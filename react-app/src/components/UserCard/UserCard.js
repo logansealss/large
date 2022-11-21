@@ -1,10 +1,12 @@
 
-import { useState } from 'react'
+import { useSelector } from "react-redux"
 
 import profilePic from "../../images/ProfilePic.png"
 import './UserCard.css'
 
 export default function UserCard({ user, className }) {
+
+    const loggedInUser = useSelector(state => state.session.user)
 
     return (
         <div
@@ -39,7 +41,13 @@ export default function UserCard({ user, className }) {
                     <div>
                         {user.followerCount}
                     </div>
-                    <button>Follow</button>
+                    {loggedInUser &&
+                        <button
+                            className="color-two user-follow-button"
+                        >
+                            Follow
+                        </button>
+                    }
                 </div>
             </div>
         </div>
