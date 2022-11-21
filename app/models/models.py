@@ -77,6 +77,17 @@ class User(db.Model, UserMixin):
             'about': self.about
         }
 
+    def to_dict_with_followers(self):
+                return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'about': self.about,
+            'followers': self.followers
+        }
+
 class Response(db.Model):
     __tablename__ = 'responses'
 

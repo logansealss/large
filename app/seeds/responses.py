@@ -1,8 +1,6 @@
 from app.models import db, Post, User, Response
 
 def seed_responses():
-    pass
-
     users = User.query.all()
     posts = Post.query.all()
 
