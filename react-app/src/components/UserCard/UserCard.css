@@ -1,0 +1,38 @@
+.user-card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.user-card-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-card-container{
+    visibility: hidden;
+    position: absolute;
+    background-color: #fff;
+    /* right: 50%; */
+    width: 300px;
+    box-shadow: rgb(230 230 230) 0px 1px 4px;
+    border: 1px solid rgba(230, 230, 230, 1);
+}
+
+.right{
+    
+}
+
+.bottom{
+    left: 50%;
+	transform: translate(-50%);
+}
+
+.user-name-card-container{
+    position: relative;
+}
+
+.user-name-card-container:hover .user-card-container{
+    visibility: visible;
+}
