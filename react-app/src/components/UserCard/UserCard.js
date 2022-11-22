@@ -22,7 +22,7 @@ export default function UserCard({ user, className }) {
                 {`${user.firstName} ${user.lastName}`}
             </div>
             <div
-                className={'user-card-container'}
+                className={'right user-card-container'}
             >
                 <div className='user-card-header'>
                     <div
@@ -46,7 +46,7 @@ export default function UserCard({ user, className }) {
                         {user.followerCount}
                     </div>
                     {loggedInUser &&
-                        (following[user.id] ? 
+                        (following[user.id] ?
                             <button
                                 className="following user-follow-button"
                                 onClick={() => dispatch(unfollowUserThunk(user.id))}
@@ -55,7 +55,7 @@ export default function UserCard({ user, className }) {
                             </button>
                             :
                             <button
-                            className="color-two user-follow-button"
+                                className="color-two user-follow-button"
                                 onClick={() => dispatch(followUserThunk(user.id))}
                             >
                                 Follow
