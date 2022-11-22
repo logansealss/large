@@ -101,7 +101,7 @@ export default function reducer(state = initialState, action) {
         case FOLLOW_USER:
             return {
                 ...state,
-                following: { ...action.following, [action.userId]: action.userId }
+                following: { ...state.following, [action.userId]: action.userId }
             }
         case UNFOLLOW_USER:
             newFollowing = { ...state.following }

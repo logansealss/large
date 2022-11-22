@@ -1,12 +1,16 @@
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
+import { followUserThunk, unfollowUserThunk } from "../../store/follows"
 import profilePic from "../../images/ProfilePic.png"
 import './UserCard.css'
 
 export default function UserCard({ user, className }) {
 
+    const dispatch = useDispatch()
+
     const loggedInUser = useSelector(state => state.session.user)
+    const following = useSelector(state => state.follows.following)
 
     return (
         <div
@@ -42,11 +46,21 @@ export default function UserCard({ user, className }) {
                         {user.followerCount}
                     </div>
                     {loggedInUser &&
-                        <button
+                        (following[user.id] ? 
+                            <button
+                                className="following user-follow-button"
+                                onClick={() => dispatch(unfollowUserThunk(user.id))}
+                            >
+                                Following
+                            </button>
+                            :
+                            <button
                             className="color-two user-follow-button"
-                        >
-                            Follow
-                        </button>
+                                onClick={() => dispatch(followUserThunk(user.id))}
+                            >
+                                Follow
+                            </button>
+                        )
                     }
                 </div>
             </div>

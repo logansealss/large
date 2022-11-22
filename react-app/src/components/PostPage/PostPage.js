@@ -105,7 +105,8 @@ export default function PostPage() {
                                         >
                                             Follow
                                         </button>
-                                    )}
+                                        )
+                                    }
                                 </div>
                                 {user && userClap &&
                                     <PostFooterMenu
