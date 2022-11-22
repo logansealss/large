@@ -7,6 +7,7 @@ import { getMonthDay } from "../../utils/Dates";
 import { readAllPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
 import { readPostClapsThunk } from "../../store/claps";
+import { readCurrentUserFollowersThunk } from "../../store/follows";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
@@ -70,6 +71,12 @@ export default function PostPage() {
             dispatch(readAllPostsThunk())
         })()
     }, [postId])
+
+    useEffect(() => {
+        if(user){
+            dispatch(readCurrentUserFollowersThunk())
+        }
+    }, [user])
 
     return (!isEmptyObj(post) &&
         <div id="post-page-flex">
