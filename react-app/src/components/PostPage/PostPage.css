@@ -309,6 +309,10 @@ a {
     margin-right: 16px;
 }
 
+.writer-details-name:hover{
+    cursor: default;
+}
+
 .user-follow-button{
     height: 100%;
     border-radius: 99em;

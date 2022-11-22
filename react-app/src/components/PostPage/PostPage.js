@@ -8,6 +8,7 @@ import { readAllPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
 import { readPostClapsThunk } from "../../store/claps";
 import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
@@ -85,12 +86,12 @@ export default function PostPage() {
                                 <div
                                     className="writer-details-left"
                                 >
-                                    <div
+                                    <UserCard
+                                        user={post.writer}
                                         className="writer-details-name"
+                                        position="bottom"
                                     >
-                                        {`${post.writer.firstName} ${post.writer.lastName}`}
-                                    </div>
-
+                                    </UserCard>
                                     {user && (following[post.writer.id] ? 
                                         <button
                                             className="following user-follow-button"

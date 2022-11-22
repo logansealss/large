@@ -5,7 +5,7 @@ import { followUserThunk, unfollowUserThunk } from "../../store/follows"
 import profilePic from "../../images/ProfilePic.png"
 import './UserCard.css'
 
-export default function UserCard({ user, className }) {
+export default function UserCard({ user, className, position }) {
 
     const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ export default function UserCard({ user, className }) {
                 {`${user.firstName} ${user.lastName}`}
             </div>
             <div
-                className={'right user-card-container'}
+                className={`${position} user-card-container`}
             >
                 <div className='user-card-header'>
                     <div
@@ -32,18 +32,22 @@ export default function UserCard({ user, className }) {
                             src={profilePic}
                         />
                     </div>
-                    <div>
+                    <div
+                        className="user-card-name"
+                    >
                         {`${user.firstName} ${user.lastName}`}
                     </div>
                 </div>
                 {user.about &&
-                    <div>
+                    <div
+                        className="user-card-about"
+                    >
                         {user.about}
                     </div>
                 }
                 <div className='user-card-footer'>
                     <div>
-                        {user.followerCount}
+                        x Followers
                     </div>
                     {loggedInUser &&
                         (following[user.id] ?
