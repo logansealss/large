@@ -310,11 +310,17 @@ a {
 }
 
 .user-follow-button{
-    height: 25px;
+    height: 100%;
     border-radius: 99em;
     margin-left: 15px;
 }
 
 .user-follow-button:hover{
     cursor: pointer;
+}
+
+.following{
+    color: #1A8921;
+    border: 1px solid #1A8921;
+    background-color: #FFF;
 }

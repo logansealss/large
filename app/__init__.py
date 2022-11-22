@@ -11,7 +11,6 @@ from .api.auth_routes import auth_routes
 from .api.post_routes import post_routes
 from .api.response_routes import response_routes
 from .api.clap_routes import clap_routes
-from .api.follow_routes import follow_routes
 
 from .seeds import seed_commands
 

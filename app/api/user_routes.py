@@ -52,11 +52,15 @@ def followers_for_user_by_id(user_id):
 
 # ----------------- GET CURRENT USER'S FOLLOWING ----------------- #
 
-# @user_routes.route('/current/following')
-# @login_required
-# def following_for_user():
+@user_routes.route('/current/following')
+@login_required
+def following_for_user():
 
-#     user = User.query.get(current_user.id)
+    user = User.query.options(joinedload(User.following)).get(current_user.id)
+
+    return { following.id: following.id for following in user.following}
+
+
 
 # ----------------- FOLLOW ANOTHER USER ----------------- #
 

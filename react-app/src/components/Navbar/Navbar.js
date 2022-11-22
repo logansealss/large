@@ -1,4 +1,4 @@
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../../store/session';
@@ -6,6 +6,7 @@ import { logout } from '../../store/session';
 import NavbarDropdown from "./NavbarDropdown";
 import AuthModalForm from "../auth/AuthModalForm";
 import { isEmptyObj } from "../../utils/Objects";
+import { readCurrentUserFollowingThunk, clearFollows } from "../../store/follows";
 import "./Navbar.css"
 import "./AuthModal.css"
 import mainLogo from "../../images/main-logo.png"
@@ -14,7 +15,6 @@ import ReusableModal from "../../context/ReusableModal";
 export default function Navbar() {
 
     const dispatch = useDispatch()
-    const history = useHistory()
     const location = useLocation()
     const user = useSelector(state => state.session.user)
     const [isTop, setIsTop] = useState(true)
@@ -26,6 +26,12 @@ export default function Navbar() {
     const loggedIn = !isEmptyObj(user)
 
     useEffect(() => {
+        if(user){
+            dispatch(readCurrentUserFollowingThunk())
+        }else{
+            dispatch(clearFollows())
+        }
+
         if (typeof window !== "undefined") {
             if (!loggedIn) {
                 window.addEventListener("scroll", updateIsTop)
@@ -34,7 +40,6 @@ export default function Navbar() {
 
         return () => window.removeEventListener("scroll", updateIsTop)
     }, [user])
-
 
     const signout = async (e) => {
         await dispatch(logout());
