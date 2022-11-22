@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.post_routes import post_routes
 from .api.response_routes import response_routes
 from .api.clap_routes import clap_routes
+from .api.follow_routes import follow_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +38,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(response_routes, url_prefix='/api/responses')
 app.register_blueprint(clap_routes, url_prefix='/api/claps')
+app.register_blueprint(follow_routes, url_prefix='/api/follows')
 db.init_app(app)
 Migrate(app, db)
 
