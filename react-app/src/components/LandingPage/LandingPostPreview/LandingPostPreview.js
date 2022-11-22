@@ -1,6 +1,8 @@
 
 
 import { Link } from "react-router-dom";
+
+import UserCard from "../../UserCard/UserCard";
 import { getMonthDay } from "../../../utils/Dates";
 import largePic from "../../../images/Large.png"
 import profilePic from "../../../images/ProfilePic.png"
@@ -26,9 +28,12 @@ export default function LandingPostPreview({ post }) {
                                         src={profilePic}
                                     />
                                 </div>
-                                <div className="post-content-name">
-                                    {`${post.writer.firstName} ${post.writer.lastName}`}
-                                </div>
+
+                                <UserCard 
+                                    user={post.writer}
+                                    className="post-content-name"
+                                    position='right'
+                                ></UserCard>
                             </div>
                             <Link to={`/posts/${post.id}`}>
                                 <div className="post-content-title">

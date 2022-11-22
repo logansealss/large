@@ -48,7 +48,7 @@ a {
     align-items: center;
 }
 
-#writer-name-flex {
+#writer-details {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
@@ -298,4 +298,33 @@ a {
     transition-delay: .265s;
     bottom: 187%;
     right: 102%;
+}
+
+.writer-details-left{
+    display: flex;
+    align-items: center;
+}
+
+.writer-details-name{
+    margin-right: 16px;
+}
+
+.writer-details-name:hover{
+    cursor: default;
+}
+
+.user-follow-button{
+    height: 100%;
+    border-radius: 99em;
+    margin-left: 15px;
+}
+
+.user-follow-button:hover{
+    cursor: pointer;
+}
+
+.following{
+    color: #1A8921;
+    border: 1px solid #1A8921;
+    background-color: #FFF;
 }

@@ -4,12 +4,14 @@ import session from './session'
 import posts from './posts'
 import responses from './responses'
 import claps from './claps'
+import follows from './follows'
 
 const rootReducer = combineReducers({
   session,
   posts,
   responses,
-  claps
+  claps,
+  follows
 });
 
 

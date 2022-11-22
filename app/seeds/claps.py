@@ -1,7 +1,6 @@
 from app.models import db, Post, User, Clap
 
 def seed_claps():
-    pass
 
     users = User.query.all()
 

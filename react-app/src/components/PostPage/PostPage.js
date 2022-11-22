@@ -7,6 +7,8 @@ import { getMonthDay } from "../../utils/Dates";
 import { readAllPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
 import { readPostClapsThunk } from "../../store/claps";
+import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
 import PostFooterClaps from "./PostFooterClaps";
@@ -23,7 +25,7 @@ export default function PostPage() {
     const postFooterDetails = useRef()
     const post = useSelector(state => state.posts.singlePost)
     const user = useSelector(state => state.session.user)
-    const responses = useSelector(state => state.session.responses)
+    const following = useSelector(state => state.follows.following)
     const claps = useSelector(state => state.claps)
     const posts = useSelector(state => state.posts.allPosts)
     const [scrollVisible, setScrollVisible] = useState(true)
@@ -80,9 +82,32 @@ export default function PostPage() {
                             <img src={profilePic} />
                         </div>
                         <div id="writer-details-container">
-                            <div id="writer-name-flex">
-                                <div>
-                                    {`${post.writer.firstName} ${post.writer.lastName}`}
+                            <div id="writer-details">
+                                <div
+                                    className="writer-details-left"
+                                >
+                                    <UserCard
+                                        user={post.writer}
+                                        className="writer-details-name"
+                                        position="bottom"
+                                    >
+                                    </UserCard>
+                                    {user && (following[post.writer.id] ? 
+                                        <button
+                                            className="following user-follow-button"
+                                            onClick={() => dispatch(unfollowUserThunk(post.writer.id))}
+                                        >
+                                            Following
+                                        </button>
+                                        :
+                                        <button
+                                        className="color-two user-follow-button"
+                                            onClick={() => dispatch(followUserThunk(post.writer.id))}
+                                        >
+                                            Follow
+                                        </button>
+                                        )
+                                    }
                                 </div>
                                 {user && userClap &&
                                     <PostFooterMenu
