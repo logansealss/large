@@ -96,7 +96,7 @@ export default function PostPage() {
                                         position="bottom"
                                     >
                                     </UserCard>
-                                    {user && (following[post.writer.id] ?
+                                    {user && user.id !== post.writer.id && (following[post.writer.id] ?
                                         <button
                                             className="following user-follow-button"
                                             onClick={() => dispatch(unfollowUserThunk(post.writer.id))}

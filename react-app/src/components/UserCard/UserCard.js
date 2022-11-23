@@ -51,7 +51,7 @@ export default function UserCard({ user, className, position }) {
                     <div>
                         x Followers
                     </div>
-                    {loggedInUser &&
+                    {loggedInUser && loggedInUser.id !== user.id && 
                         (following[user.id] ?
                             <button
                                 className="following user-follow-button"
