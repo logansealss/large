@@ -43,7 +43,7 @@ function App() {
         <Route exact path='/posts/:postId/edit'>
           <UpdatePostWrapper></UpdatePostWrapper>
         </Route>
-        <Route exact path='/about'>
+        <Route path='/about'>
           <AboutUserPage></AboutUserPage>
         </Route>
       </Switch>
