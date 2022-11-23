@@ -78,7 +78,9 @@ export default function Response({ response }) {
                                     className='profile-image-container'
                                 >
                                     <img
-                                        src={profilePic}
+                                        src={response.user.imageURL || profilePic}
+                                        alt={profilePic}
+                                        onError={e => { e.currentTarget.src = profilePic }}
                                     />
                                 </div>
                                 <div>

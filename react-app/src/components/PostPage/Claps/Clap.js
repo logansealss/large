@@ -14,7 +14,9 @@ export default function Clap({ clap }) {
                     className='profile-image-container'
                 >
                     <img
-                        src={profilePic}
+                        src={clap.user.imageURL || profilePic}
+                        alt={profilePic}
+                        onError={e => { e.currentTarget.src = profilePic }}
                     />
                 </div>
                 <div

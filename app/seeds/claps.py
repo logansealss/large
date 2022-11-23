@@ -27,12 +27,12 @@ def seed_claps():
     db.session.add(clap4)
 
     clap5 = Clap(amount=29)
-    clap5.user = users[22]
+    clap5.user = users[20]
     clap5.post = posts[2]
     db.session.add(clap5)
 
     clap6 = Clap(amount=1)
-    clap6.user = users[21]
+    clap6.user = users[19]
     clap6.post = posts[2]
     db.session.add(clap6)
 

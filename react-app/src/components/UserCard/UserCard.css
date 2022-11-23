@@ -26,8 +26,8 @@
 
 .user-card-about{
     padding-top: 12px;
-    line-height: 24px;
-    font-size: 16px;
+    line-height: 20px;
+    font-size: 13px;
 }
 
 .user-card-container{
@@ -41,6 +41,7 @@
     transition-property: visibility;
     transition-timing-function: ease-in-out;
     transition-duration: 0.17s;
+    z-index: 11;
 }
 
 .right{
