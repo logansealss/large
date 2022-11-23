@@ -12,30 +12,40 @@ def seed_users():
                   password="password",
                   first_name="Edgar Allan",
                   last_name="Poe",
+                  about="American writer, poet, editor, and literary critic. Best known for my poetry and short stories, particularly my tales of mystery and the macabre.",
+                  image_url="https://static.scientificamerican.com/blogs/cache/file/B548B7E6-A083-4A94-B168567B82246A81_source.jpg"
                 ))
     users.append(User(first_name='W W',
                   last_name='Jacobs',
                   email='wwjacobs@user.io',
                   username='wwjacobs',
                   password='password',
+                  about="English author of short fiction and drama. Best remembered story is \"The Monkey's Paw\".",
+                  image_url="https://upload.wikimedia.org/wikipedia/commons/b/ba/Picture_of_W._W._Jacobs.jpg"
                   ))
     users.append(User(first_name='Frank',
                   last_name='Stockton',
                   email='frankstockton@user.io',
                   username='frankstockton',
                   password='password',
+                  about="American writer and humorist, best known today for a series of innovative children's fairy tales that were widely popular during the last decades of the 19th century.",
+                  image_url="https://upload.wikimedia.org/wikipedia/commons/f/f8/Frank_R._Stockton.jpg"
                   ))
     users.append(User(first_name='O',
                   last_name='Henry',
                   email='ohenry@user.io',
                   username='ohenry',
                   password='password',
+                  about="American short-story writer whose tales romanticized the commonplace-in particular the life of ordinary people in New York City.",
+                  image_url="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/William_Sydney_Porter_by_doubleday.jpg/220px-William_Sydney_Porter_by_doubleday.jpg"
                   ))
     users.append(User(first_name='Jack',
                   last_name='London',
                   email='jacklondon@user.io',
                   username='jacklondon',
                   password='password',
+                  about="American novelist and short-story writer whose best-known works depict elemental struggles for survival. One of the most extensively translated of American authors during the 20th century.",
+                  image_url="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Jack_London_young.jpg/1200px-Jack_London_young.jpg"
                   ))
     users.append(User(username="davidrogers",
                   email="davidrogers@user.io",
@@ -119,18 +129,6 @@ def seed_users():
                    last_name='Yang',
                    email='yashayang@user.io',
                    username='yashayang',
-                   password='password',
-                   ))
-    users.append(User(first_name='Yibo',
-                   last_name='Guo',
-                   email='yiboguo@user.io',
-                   username='yiboguo',
-                   password='password',
-                   ))
-    users.append(User(first_name='Kermit',
-                   last_name='Frog',
-                   email='kermitfrog@user.io',
-                   username='kermitfrog',
                    password='password',
                    ))
     users.append(User(username="alexdam",

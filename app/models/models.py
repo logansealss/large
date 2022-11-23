@@ -3,23 +3,6 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-# responses = db.Table(
-#     "responses",
-#     db.Model.metadata,
-#     db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
-#     db.Column("post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True),
-#     db.Column("response", db.String(255), nullable=False),
-#     db.Column("created_at", db.DateTime, default=datetime.now())
-# )
-
-# claps = db.Table(
-#     "claps",
-#     db.Model.metadata,
-#     db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
-#     db.Column("post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True),
-#     db.Column("amount", db.Integer, nullable=False)
-# )
-
 post_tags = db.Table(
     "post_tags",
     db.Model.metadata,
@@ -44,6 +27,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     about = db.Column(db.String(200))
+    image_url = db.Column(db.String(255))
 
     posts = db.relationship("Post", back_populates="writer", cascade="all, delete-orphan")
     responses = db.relationship("Response", back_populates="user", cascade="all, delete-orphan")
@@ -74,7 +58,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'about': self.about
+            'about': self.about,
+            'imageURL': self.image_url
         }
 
     def to_dict_with_followers(self):
@@ -85,6 +70,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'about': self.about,
+            'imageURL': self.image_url,
             'followers': self.followers
         }
 

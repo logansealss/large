@@ -53,7 +53,7 @@ def seed_responses():
     response9 = Response(response="The Tell-Tale Heart has been the only story (short or long) that has genuinelly scared me.")
     response10 = Response(response="So much suffering for one person to endure.")
 
-    response9.user = users[21]
+    response9.user = users[19]
     response9.post = posts[3]
 
     response10.user = users[17]
@@ -84,7 +84,7 @@ def seed_responses():
     response14 = Response(response="Be careful what you wish for")
     response15 = Response(response="Atmosphere, subtlety, thought provocation, quality prose and lingering horror…")
 
-    response14.user = users[22]
+    response14.user = users[20]
     response14.post = posts[6]
 
     response15.user = users[18]
