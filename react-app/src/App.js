@@ -10,6 +10,7 @@ import PostForm from './components/PostForm/PostForm';
 import PostPage from './components/PostPage/PostPage';
 import { authenticate } from './store/session';
 import UpdatePostWrapper from './components/PostForm/UpdatePostWrapper';
+import { AboutUserPage } from './components/AboutUserPage/AboutUserPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,11 +43,8 @@ function App() {
         <Route exact path='/posts/:postId/edit'>
           <UpdatePostWrapper></UpdatePostWrapper>
         </Route>
-        <Route exact path='/signup'>
-          <SignUpForm></SignUpForm>
-        </Route>
-        <Route exact path='/login'>
-          <LoginForm></LoginForm>
+        <Route exact path='/about'>
+          <AboutUserPage></AboutUserPage>
         </Route>
       </Switch>
     </BrowserRouter>
