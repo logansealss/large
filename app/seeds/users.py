@@ -52,96 +52,126 @@ def seed_users():
                   password="password",
                   first_name="David",
                   last_name="Rogers",
+                  about="🐐 The GOAT 🐐",
+                  image_url="https://avatars.githubusercontent.com/u/75019436?v=4"
                 ))
     users.append(User(first_name='Brandon',
                   last_name='Tasaki',
                   email='brandontasaki@user.io',
                   username='brandontasaki',
                   password='password',
+                  about="hero for fun",
+                  image_url="https://avatars.githubusercontent.com/u/102837663?v=4"
                   ))
     users.append(User(first_name='Jae',
                   last_name='Hwang',
                   email='jaehwang@user.io',
                   username='jaehwang',
                   password='password',
+                  about="Software Engineer",
+                  image_url="https://avatars.githubusercontent.com/u/103082046?s=100&v=4"
                   ))
     users.append(User(first_name='Jake',
                    last_name='Matillano',
                    email='jakematillano@user.io',
                    username='jakematillano',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/106983091?v=4"
                    ))
     users.append(User(first_name='Jessie',
                    last_name='Baron',
                    email='jessiebaron@user.io',
                    username='jessiebaron',
                    password='password',
+                   about="Software Engineer",
                    ))
     users.append(User(first_name='Joanna',
                    last_name='Gilbert',
                    email='joannagilbert@user.io',
                    username='joannagilbert',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/106204127?v=4"
                    ))
     users.append(User(first_name='John',
                    last_name='Carrera',
                    email='johncarrera@user.io',
                    username='johncarrera',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/105324675?v=4"
                    ))
     users.append(User(first_name='Logan',
                    last_name='Seals',
                    email='loganseals@user.io',
                    username='loganseals',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/106628994?v=4"
                    ))
     users.append(User(first_name='Kyle',
                    last_name='Kassen',
                    email='kylekassen@user.io',
                    username='kylekassen',
                    password='password',
+                   about="Software Engineer",
                    ))
     users.append(User(first_name='Michael',
                    last_name='Jung',
                    email='michaeljung@user.io',
                    username='michaeljung',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/6489585?v=4"
                    ))
     users.append(User(first_name='Na',
                    last_name='Chen',
                    email='nachen@user.io',
                    username='nachen',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/106648598?v=4"
                    ))
     users.append(User(first_name='Samuel',
                    last_name='Suh',
                    email='samuelsuh@user.io',
                    username='samuelsuh',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/106373753?v=4"
                    ))
     users.append(User(first_name='Amanda',
                    last_name='Vien',
                    email='amandavien@user.io',
                    username='amandavien',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/105696861?v=4"
                    ))
     users.append(User(first_name='Yasha',
                    last_name='Yang',
                    email='yashayang@user.io',
                    username='yashayang',
                    password='password',
+                   about="Software Engineer",
+                   image_url="https://avatars.githubusercontent.com/u/1794317?v=4"
                    ))
     users.append(User(username="alexdam",
                   email="alexdam@user.io",
                   password="password",
                   first_name="Alex",
                   last_name="Dam",
+                  about="Software Engineer",
+                  image_url="https://avatars.githubusercontent.com/u/106426283?v=4"
                 ))
     users.append(User(username="garysong",
                   email="garysong@user.io",
                   password="password",
                   first_name="Gary",
                   last_name="Song",
+                  about="Software Engineer",
+                  image_url="https://avatars.githubusercontent.com/u/106426283?v=4"
                 ))
 
     for user in users:

@@ -39,7 +39,9 @@ export default function NavbarDropdown() {
                 id='profile-image-container'
             >
                 <img
-                    src={profilePic}
+                    src={user.imageURL || profilePic}
+                    alt={profilePic}
+                    onError={e => { e.currentTarget.src = profilePic }}
                 />
             </div>
             <div

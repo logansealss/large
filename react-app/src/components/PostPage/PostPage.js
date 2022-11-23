@@ -79,7 +79,11 @@ export default function PostPage() {
                 <div id="writer-card-container">
                     <div id="writer-card-flex">
                         <div id="writer-card-image-div">
-                            <img src={profilePic} />
+                            <img
+                                src={post.writer.imageURL || profilePic}
+                                alt={profilePic}
+                                onError={e => { e.currentTarget.src = profilePic }}
+                            />
                         </div>
                         <div id="writer-details-container">
                             <div id="writer-details">
@@ -92,7 +96,7 @@ export default function PostPage() {
                                         position="bottom"
                                     >
                                     </UserCard>
-                                    {user && (following[post.writer.id] ? 
+                                    {user && (following[post.writer.id] ?
                                         <button
                                             className="following user-follow-button"
                                             onClick={() => dispatch(unfollowUserThunk(post.writer.id))}
@@ -101,12 +105,12 @@ export default function PostPage() {
                                         </button>
                                         :
                                         <button
-                                        className="color-two user-follow-button"
+                                            className="color-two user-follow-button"
                                             onClick={() => dispatch(followUserThunk(post.writer.id))}
                                         >
                                             Follow
                                         </button>
-                                        )
+                                    )
                                     }
                                 </div>
                                 {user && userClap &&

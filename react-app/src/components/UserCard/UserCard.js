@@ -29,7 +29,9 @@ export default function UserCard({ user, className, position }) {
                         className="profile-pic-small"
                     >
                         <img
-                            src={profilePic}
+                            src={user.imageURL || profilePic}
+                            alt={profilePic}
+                            onError={e => { e.currentTarget.src = profilePic }}
                         />
                     </div>
                     <div
