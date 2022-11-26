@@ -9,30 +9,43 @@ export default function UserProfileImage() {
 
     const user = useSelector(state => state.session.user)
     const [imageURL, setImageURL] = useState(user.imageURL)
+    const [about, setAbout] = useState(user.about)
 
     return (
-
-        <div
-            className='user-profile-image'
-        >
+        <>
             <div
-                className="profile-pic-large"
+                className='user-profile-image'
             >
-                <img
-                    src={user.imageURL || profilePic}
-                    alt={profilePic}
-                    onError={e => { e.currentTarget.src = profilePic }}
-                />
+                <div
+                    className="profile-pic-large"
+                >
+                    <img
+                        src={user.imageURL || profilePic}
+                        alt={profilePic}
+                        onError={e => { e.currentTarget.src = profilePic }}
+                    />
+                </div>
+                <div
+                    className="user-profile-image-input"
+                >
+                    <input
+                        type="text"
+                        onChange={(e) => setImageURL(e.target.value)}
+                        value={imageURL}
+                    >
+                    </input>
+                </div>
             </div>
             <div>
-                <input
-                    style={{width: '100%'}}
-                    type="text"
-                    value={imageURL}
+                <textarea
+                    onChange={(e) => setAbout(e.target.value)}
+                    value={about}
                 >
-
-                </input>
+                </textarea>
             </div>
-        </div>
+            <div>
+                Update
+            </div>
+        </>
     )
 }
