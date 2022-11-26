@@ -8,8 +8,8 @@ import profilePic from "../../../images/ProfilePic.png"
 export default function UserProfileImage() {
 
     const user = useSelector(state => state.session.user)
-    const [imageURL, setImageURL] = useState(user.imageURL)
-    const [about, setAbout] = useState(user.about)
+    const [imageURL, setImageURL] = useState(user.imageURL || '')
+    const [about, setAbout] = useState(user.about || '')
 
     return (
         <>
