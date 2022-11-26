@@ -8,6 +8,7 @@ import { readUserPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
 import { readPostClapsThunk } from "../../store/claps";
 import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
@@ -84,7 +85,9 @@ export default function PostPage() {
     }, [post])
 
     if (!loaded) {
-        return null
+        return (
+            <LoadingIcon />
+        )
     }
 
     return (!isEmptyObj(post) &&

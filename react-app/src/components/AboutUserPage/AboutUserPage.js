@@ -3,6 +3,7 @@ import { Redirect, NavLink, Switch, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { readCurrentUserPostsThunk } from '../../store/posts'
+import LoadingIcon from '../LoadingIcon/LoadingIcon'
 import AboutUserProfile from './AboutUserProfile/AboutUserProfile'
 import AltPostDisplay from '../AltPostDisplay/AltPostDisplay'
 import "./AboutUserPage.css"
@@ -28,7 +29,9 @@ export function AboutUserPage() {
     }
 
     if(!loaded){
-        return null
+        return (
+            <LoadingIcon />
+        )
     }
 
     return (

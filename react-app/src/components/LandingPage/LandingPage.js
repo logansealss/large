@@ -8,6 +8,7 @@ import { readAllPostsThunk } from "../../store/posts"
 
 import "./LandingPage.css"
 import { useEffect, useState } from "react"
+import LoadingIcon from "../LoadingIcon/LoadingIcon"
 
 export default function LandingPage() {
 
@@ -26,7 +27,9 @@ export default function LandingPage() {
     const postArr = Object.values(posts)
 
     if(!loaded){
-        return null
+        return (
+            <LoadingIcon />
+        )
     }
 
     return (

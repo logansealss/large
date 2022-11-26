@@ -1,0 +1,12 @@
+.loading-icon-flex {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+}
