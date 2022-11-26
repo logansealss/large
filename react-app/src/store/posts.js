@@ -1,6 +1,7 @@
 const READ_ALL_POSTS = 'posts/READ_ALL_POSTS';
 const READ_SINGLE_POST = 'posts/READ_SINGLE_POST'
 const READ_USER_POSTS = 'posts/READ_USER_POSTS'
+const READ_CURRENT_USER_POSTS = 'POSTS/READ_CURRENT_USER_POSTS'
 const CREATE_POST = 'posts/CREATE_POST'
 const UPDATE_POST = 'posts/UPDATE_POST'
 const DELETE_POST = 'posts/DELETE_POST'
@@ -18,6 +19,11 @@ const readSinglePost = (post) => ({
 
 const readUserPosts = (posts) => ({
     type: READ_USER_POSTS,
+    posts
+});
+
+const readCurrentUserPosts = (posts) => ({
+    type: READ_CURRENT_USER_POSTS,
     posts
 });
 
@@ -66,6 +72,18 @@ export const readUserPostsThunk = (writerId) => async (dispatch) => {
     if (response.ok) {
         const userPosts = await response.json();
         dispatch(readUserPosts(userPosts))
+        return null;
+    } else {
+        return response
+    }
+}
+
+export const readCurrentUserPostsThunk = () => async (dispatch) => {
+    const response = await fetch(`/api/posts/current`);
+
+    if (response.ok) {
+        const userPosts = await response.json();
+        dispatch(readCurrentUserPosts(userPosts))
         return null;
     } else {
         return response
@@ -134,24 +152,26 @@ export default function reducer(state = initialState, action) {
         case READ_SINGLE_POST:
             return { ...state, singlePost: action.post }
         case READ_USER_POSTS:
-            return { ...state, userPosts: action.posts }
+            return { ...state, allPosts: action.posts }
+        case READ_CURRENT_USER_POSTS:
+            return { ...state, allPosts: action.posts }
         case CREATE_POST:
-            return { 
-                ...state,  
+            return {
+                ...state,
                 allPosts: { ...state.allPosts, [action.post.id]: action.post }
             }
         case UPDATE_POST:
             return {
                 ...state,
-                allPosts: { ...state.allPosts, [action.post.id]: action.post}
+                allPosts: { ...state.allPosts, [action.post.id]: action.post }
             }
         case DELETE_POST:
-            newState = { 
+            newState = {
                 allPosts: { ...state.allPosts },
                 singlePost: { ...state.singlePost }
             }
             delete newState.allPosts[action.postId]
-            if(newState.singlePost.id === action.postId){
+            if (newState.singlePost.id === action.postId) {
                 newState.singlePost = {}
             }
             return newState

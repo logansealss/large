@@ -7,22 +7,27 @@ import { isEmptyObj } from "../../utils/Objects"
 import { readAllPostsThunk } from "../../store/posts"
 
 import "./LandingPage.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function LandingPage() {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const posts = useSelector(state => state.posts.allPosts)
-
-    const singlePost = useSelector(state => state.posts.singlePost)
-
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        dispatch(readAllPostsThunk())
+        (async () => {
+            await dispatch(readAllPostsThunk())
+            setLoaded(true)
+        })()
     }, [])
 
     const postArr = Object.values(posts)
+
+    if(!loaded){
+        return null
+    }
 
     return (
         <>
