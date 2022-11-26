@@ -6,7 +6,7 @@ import largePic from "../../images/Large.png"
 import profilePic from "../../images/ProfilePic.png"
 import "./AltPostDisplay.css"
 
-export default function AltPostDisplay({ post }) {
+export default function AltPostDisplay({ post, showWriter }) {
 
     return (
         <div
@@ -21,22 +21,30 @@ export default function AltPostDisplay({ post }) {
                     <div
                         className="alt-post-header-flex"
                     >
+                        {showWriter &&
+                            <>
+                                <div
+                                    className="profile-pic-small"
+                                >
+                                    <img
+                                        src={post.writer.imageURL || profilePic}
+                                        alt={profilePic}
+                                        onError={e => { e.currentTarget.src = profilePic }}
+                                    />
+                                </div>
+                                <div>
+                                    {`${post.writer.firstName} ${post.writer.lastName}`}
+                                </div>
+                                <div
+                                    className="post-content-spreader"
+                                >
+                                    ·
+                                </div>
+                            </>
+                        }
                         <div
-                            className="profile-pic-small"
+                            className="alt-post-date"
                         >
-                            <img
-                                src={profilePic}
-                            />
-                        </div>
-                        <div>
-                            {`${post.writer.firstName} ${post.writer.lastName}`}
-                        </div>
-                        <div
-                            className="post-content-spreader"
-                        >
-                            ·
-                        </div>
-                        <div>
                             {getMonthDay(post.createdAt)}
                         </div>
                     </div>
@@ -73,7 +81,7 @@ export default function AltPostDisplay({ post }) {
                         </div>
                     </Link>
                     <div
-                        className="alt-post-image-container"
+                        className="alt-post-data"
                     >
                         {`${post.readTime} min read`}
                     </div>

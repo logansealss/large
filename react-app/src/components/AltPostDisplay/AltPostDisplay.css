@@ -58,7 +58,13 @@
 
 .alt-post-display{
     padding: 24px 0;
-    border-top: 1px solid rgba(230, 230, 230, 1);
+    border-bottom: 1px solid rgba(230, 230, 230, 1);
+}
+
+.alt-post-date{
+    color: rgba(117, 117, 117, 1);
+    line-height: 20px;
+    font-size: 14px;
 }
 
 .profile-pic-small{
@@ -73,6 +79,12 @@
     object-fit: cover;
     border-radius: 50%;
     background-color: rgba(168, 168, 168, 1);
+}
+
+.alt-post-data{
+    line-height: 20px;
+    font-size: 14px;
+    color: rgba(117, 117, 117, 1);
 }
 
 

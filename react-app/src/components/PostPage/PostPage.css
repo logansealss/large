@@ -314,7 +314,7 @@ a {
 }
 
 .user-follow-button{
-    height: 100%;
+    /* height: 100%; */
     border-radius: 99em;
     margin-left: 15px;
 }
@@ -327,4 +327,28 @@ a {
     color: #1A8921;
     border: 1px solid #1A8921;
     background-color: #FFF;
+}
+
+.post-page-writer-footer{
+
+}
+
+.post-page-writer-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-page-writer-name{
+    line-height: 24px;
+    font-size: 20px;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.post-page-writer-about{
+    color: rgba(117, 117, 117, 1);
+    line-height: 20px;
+    font-size: 14px;
+    width: 75%;
+    margin-top: 8px;
 }

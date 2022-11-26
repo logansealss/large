@@ -4,10 +4,11 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
-import { readAllPostsThunk, readSinglePostThunk } from "../../store/posts";
+import { readUserPostsThunk, readSinglePostThunk } from "../../store/posts";
 import { readPostResponsesThunk } from "../../store/responses";
 import { readPostClapsThunk } from "../../store/claps";
 import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
 import PostFooterMenu from "./PostFooterMenu";
@@ -29,6 +30,7 @@ export default function PostPage() {
     const claps = useSelector(state => state.claps)
     const posts = useSelector(state => state.posts.allPosts)
     const [scrollVisible, setScrollVisible] = useState(true)
+    const [loaded, setLoaded] = useState(false)
 
     let userClap
     if (user) {
@@ -67,11 +69,26 @@ export default function PostPage() {
             if (result) {
                 history.push('/')
             }
-            dispatch(readPostResponsesThunk(postId))
-            dispatch(readPostClapsThunk(postId))
-            dispatch(readAllPostsThunk())
+            await dispatch(readPostResponsesThunk(postId))
+            await dispatch(readPostClapsThunk(postId))
         })()
     }, [postId])
+
+    useEffect(() => {
+
+        if (!isEmptyObj(post)) {
+            (async () => {
+                await dispatch(readUserPostsThunk(post.writer.id))
+                setLoaded(true)
+            })()
+        }
+    }, [post])
+
+    if (!loaded) {
+        return (
+            <LoadingIcon />
+        )
+    }
 
     return (!isEmptyObj(post) &&
         <div id="post-page-flex">
@@ -210,6 +227,45 @@ export default function PostPage() {
                             }
                         </div>
                     </div>
+                </div>
+                <div
+                    className="post-page-writer-footer"
+                >
+                    <div
+                        className="post-page-writer-flex"
+                    >
+                        <div
+                            className="post-page-writer-name"
+                        >
+                            {`More from ${post.writer.firstName} ${post.writer.lastName}`}
+                        </div>
+                        {user && user.id !== post.writer.id && (following[post.writer.id] ?
+                            <button
+                                className="following user-follow-button"
+                                onClick={() => dispatch(unfollowUserThunk(post.writer.id))}
+                            >
+                                Following
+                            </button>
+                            :
+                            <button
+                                className="color-two user-follow-button"
+                                onClick={() => dispatch(followUserThunk(post.writer.id))}
+                            >
+                                Follow
+                            </button>
+                        )
+                        }
+                        {/* <button>
+                            Follow
+                        </button> */}
+                    </div>
+                    {post.writer.about &&
+                        <div
+                            className="post-page-writer-about"
+                        >
+                            {post.writer.about}
+                        </div>
+                    }
                 </div>
                 {Object.values(posts).map(post => post.id !== +postId ? (
                     <AltPostDisplay
