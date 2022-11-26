@@ -25,7 +25,9 @@ export default function AltPostDisplay({ post }) {
                             className="profile-pic-small"
                         >
                             <img
-                                src={profilePic}
+                                src={post.writer.imageURL || profilePic}
+                                alt={profilePic}
+                                onError={e => { e.currentTarget.src = profilePic }}
                             />
                         </div>
                         <div>

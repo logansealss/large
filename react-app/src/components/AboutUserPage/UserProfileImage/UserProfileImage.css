@@ -1,0 +1,18 @@
+.user-profile-image{
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic-large{
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.profile-pic-large img{
+    height: 88px;
+    width: 88px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(168, 168, 168, 1);
+}
