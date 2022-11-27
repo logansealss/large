@@ -12,7 +12,9 @@ export default function PostFooterMenu({ isTop, userClap }) {
     const dispatch = useDispatch()
     const ref = useRef()
     const history = useHistory()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const post = useSelector(state => state.posts.singlePost)
     const claps = useSelector(state => state.claps)
     const [menuOpen, toggleMenuOpen] = useState(false);
@@ -39,7 +41,7 @@ export default function PostFooterMenu({ isTop, userClap }) {
     }
 
     async function deletePost() {
-        await dispatch(deletePostThunk(post.id))
+        dispatch(deletePostThunk(post.id))
         history.push('/')
     }
 
@@ -52,7 +54,7 @@ export default function PostFooterMenu({ isTop, userClap }) {
     }
 
     async function deleteUserClap() {
-        await dispatch(deletePostClapThunk(userClap.id))
+        dispatch(deletePostClapThunk(userClap.id))
     }
 
     const visibleMenu = menuOpen ? "post-menu visible" : "post-menu hidden"
@@ -79,7 +81,7 @@ export default function PostFooterMenu({ isTop, userClap }) {
                     className={popupMenuClass}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {user && user.id === post.writer.id && (
+                    {user && user.id === post.userId && (
                         <>
                             <div
                                 className="popup-menu-option"
@@ -105,7 +107,7 @@ export default function PostFooterMenu({ isTop, userClap }) {
                             )}
                         </>
                     )}
-                    {user && user.id !== post.writer.id && (
+                    {user && user.id !== post.userId && (
                         <>
                             <div
                                 className="popup-menu-option"

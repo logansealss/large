@@ -17,9 +17,8 @@ def get_posts_by_user(id):
     if user is None:
         return couldnt_be_found("User")
 
-    user_posts = Post.query.filter(Post.writer_id == id)                \
-        .options(joinedload(Post.writer)).all()
-    return { post.id: post.preview_to_dict() for post in user_posts }
+    user_posts = Post.query.filter(Post.writer_id == id).all()
+    return { post.id: post.writer_to_dict() for post in user_posts }
 
 # ----------------- GET CURRENT USER'S FOLLOWERS ----------------- #
 

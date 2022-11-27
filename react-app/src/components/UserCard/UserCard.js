@@ -9,7 +9,9 @@ export default function UserCard({ user, className, position }) {
 
     const dispatch = useDispatch()
 
-    const loggedInUser = useSelector(state => state.session.user)
+    // const loggedInUser = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const loggedInUser = useSelector(state => state.users[userId])
     const following = useSelector(state => state.follows.following)
 
     return (

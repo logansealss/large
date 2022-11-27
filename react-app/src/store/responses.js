@@ -3,7 +3,7 @@ const CREATE_POST_RESPONSE = 'responses/CREATE_POST_RESPONSE'
 const UPDATE_POST_RESPONSE = 'responses/UPDATE_POST_RESPONSE'
 const DELETE_POST_RESPONSE = 'responses/DELETE_POST_RESPONSE'
 
-const readPostResponses = (responses) => ({
+export const readPostResponses = (responses) => ({
     type: READ_POST_RESPONSES,
     responses
 });

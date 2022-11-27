@@ -8,11 +8,13 @@ import dots from "../../../images/dots.svg"
 import profilePic from "../../../images/ProfilePic.png"
 
 
-export default function Response({ response }) {
+export default function Response({ response, author }) {
 
     const dispatch = useDispatch()
     const ref = useRef()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const [menuOpen, toggleMenuOpen] = useState(false);
     const [displayForm, setDisplayForm] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
@@ -78,7 +80,7 @@ export default function Response({ response }) {
                                     className='profile-image-container'
                                 >
                                     <img
-                                        src={response.user.imageURL || profilePic}
+                                        src={author.imageURL || profilePic}
                                         alt={profilePic}
                                         onError={e => { e.currentTarget.src = profilePic }}
                                     />
@@ -87,7 +89,7 @@ export default function Response({ response }) {
                                     <div
                                         className="response-author"
                                     >
-                                        {`${response.user.firstName} ${response.user.lastName}`}
+                                        {`${author.firstName} ${author.lastName}`}
                                     </div>
                                     <div
                                         className="response-date"
@@ -97,7 +99,7 @@ export default function Response({ response }) {
                                 </div>
                             </div>
                         </div>
-                        {user && user.id === response.user.id && (
+                        {user && user.id === author.id && (
                             <div
                                 className="response-menu-relative"
                             >

@@ -13,7 +13,8 @@ import "./AboutUserPage.css"
 export function AboutUserPage() {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const userPosts = useSelector(state => state.posts.allPosts)
     const [loaded, setLoaded] = useState(false)
 

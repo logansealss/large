@@ -6,7 +6,10 @@ import ResponseForm from "./ResponseForm"
 export default function Responses() {
 
     const responses = useSelector(state => state.responses)
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
+    const users = useSelector(state => state.users)
 
     return (
         <div
@@ -33,6 +36,7 @@ export default function Responses() {
                 <Response
                     response={response}
                     key={response.id}
+                    author={users[response.userId]}
                 ></Response>
             ))}
 

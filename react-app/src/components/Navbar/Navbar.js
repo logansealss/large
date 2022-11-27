@@ -16,7 +16,9 @@ export default function Navbar() {
 
     const dispatch = useDispatch()
     const location = useLocation()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const [isTop, setIsTop] = useState(true)
 
     function updateIsTop() {

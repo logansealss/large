@@ -2,7 +2,7 @@
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
@@ -102,7 +102,7 @@ export const signUp = (username, email, firstName, lastName, password) => async 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload }
+      return { user: action.payload.id }
     case REMOVE_USER:
       return { user: null }
     default:

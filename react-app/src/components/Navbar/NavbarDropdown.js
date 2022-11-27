@@ -8,7 +8,9 @@ import "./NavbarDropdown.css"
 export default function NavbarDropdown() {
     const dispatch = useDispatch();
     const [menuOpen, toggleMenuOpen] = useState(false);
-    const user = useSelector(state => state.session.user);
+    // const user = useSelector(state => state.session.user);
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
 
     const signout = async (e) => {
         await dispatch(logout());

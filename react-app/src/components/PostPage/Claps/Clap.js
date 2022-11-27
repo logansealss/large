@@ -2,7 +2,7 @@
 import profilePic from "../../../images/ProfilePic.png"
 import "./Clap.css"
 
-export default function Clap({ clap }) {
+export default function Clap({ clap, user }) {
     return (
         <div
             className="clap-container"
@@ -14,7 +14,7 @@ export default function Clap({ clap }) {
                     className='profile-image-container'
                 >
                     <img
-                        src={clap.user.imageURL || profilePic}
+                        src={user.imageURL || profilePic}
                         alt={profilePic}
                         onError={e => { e.currentTarget.src = profilePic }}
                     />
@@ -22,7 +22,7 @@ export default function Clap({ clap }) {
                 <div
                     className="clap-name-container"
                 >
-                    {`${clap.user.firstName} ${clap.user.lastName}`}
+                    {`${user.firstName} ${user.lastName}`}
                 </div>
             </div>
         </div>

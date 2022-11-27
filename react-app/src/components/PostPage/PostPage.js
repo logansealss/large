@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readUserPostsThunk, readSinglePostThunk } from "../../store/posts";
-import { fetchSinglePost } from "../../store/userHelpers";
+import { fetchPostClaps, fetchSinglePost, fetchPostResponses } from "../../store/userHelpers";
 import { readPostResponsesThunk } from "../../store/responses";
 import { readPostClapsThunk } from "../../store/claps";
 import { followUserThunk, unfollowUserThunk } from "../../store/follows"
@@ -26,7 +26,9 @@ export default function PostPage() {
     const history = useHistory()
     const postFooterDetails = useRef()
     const post = useSelector(state => state.posts.singlePost)
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const author = useSelector(state => state.users[post.userId])
     const following = useSelector(state => state.follows.following)
     const claps = useSelector(state => state.claps)
@@ -36,7 +38,7 @@ export default function PostPage() {
 
     let userClap
     if (user) {
-        userClap = Object.values(claps).find(clap => clap.user.id === user.id)
+        userClap = Object.values(claps).find(clap => clap.userId === user.id)
     }
 
     function isInViewport(rect) {
@@ -72,8 +74,10 @@ export default function PostPage() {
             if (result) {
                 history.push('/')
             }
-            await dispatch(readPostResponsesThunk(postId))
-            await dispatch(readPostClapsThunk(postId))
+            // await dispatch(readPostResponsesThunk(postId))
+            await fetchPostResponses(postId, dispatch)
+            await fetchPostClaps(postId, dispatch)
+            // await dispatch(readPostClapsThunk(postId))
         })()
     }, [postId])
 
@@ -93,7 +97,7 @@ export default function PostPage() {
         )
     }
 
-    return (!isEmptyObj(post) &&
+    return (
         <div id="post-page-flex">
             <div id="post-page-container">
                 <div id="writer-card-container">

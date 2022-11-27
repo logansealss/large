@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
         secondaryjoin=id == follows.c.followee_id,
         backref="followers"
     )
-    
+
     follower_count = db.column_property(
         select(func.count(follows.c.followee_id))\
         .where(follows.c.followee_id == id)\
@@ -185,7 +185,7 @@ class Post(db.Model):
     def writer_to_dict(self):
         return {
             "id": self.id,
-            "writerId": self.writer_id,
+            "userId": self.writer_id,
             "title": self.title,
             "preview": self.subtitle or self.post[0:100],
             "readTime": self.read_time,

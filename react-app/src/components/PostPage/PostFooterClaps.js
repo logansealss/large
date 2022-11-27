@@ -11,14 +11,16 @@ import Claps from "./Claps/Claps"
 export default function PostFooterClaps({post, author}) {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const claps = useSelector(state => state.claps)
     // const post = useSelector(state => state.posts.singlePost)
     const numClaps = Object.values(claps).reduce((sum, cur) => sum += cur.amount, 0)
 
     let userClap
     if (user) {
-        userClap = Object.values(claps).find(clap => clap.user.id === user.id)
+        userClap = Object.values(claps).find(clap => clap.userId === user.id)
     }
 
     const [intObj, setIntObj] = useState()
@@ -30,7 +32,7 @@ export default function PostFooterClaps({post, author}) {
 
         let userClap
         if(user){
-            userClap = Object.values(claps).find(clap => clap.user.id === user.id)
+            userClap = Object.values(claps).find(clap => clap.userId === user.id)
         }
         setClapsAmount(userClap ? userClap.amount : 0)
     }, [user, claps])
