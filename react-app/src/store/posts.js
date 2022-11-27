@@ -7,12 +7,12 @@ const UPDATE_POST = 'posts/UPDATE_POST'
 const DELETE_POST = 'posts/DELETE_POST'
 
 
-const readAllPosts = (posts) => ({
+export const readAllPosts = (posts) => ({
     type: READ_ALL_POSTS,
     posts
 });
 
-const readSinglePost = (post) => ({
+export const readSinglePost = (post) => ({
     type: READ_SINGLE_POST,
     post
 });

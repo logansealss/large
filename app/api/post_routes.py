@@ -1,8 +1,9 @@
 from flask import Blueprint, request
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, aliased
+from sqlalchemy import func, select
 from flask_login import current_user, login_required
 
-from app.models import db, Post, Response, Clap
+from app.models import db, Post, Response, Clap, User, follows
 from app.forms.post_form import CreatePostForm, UpdatePostForm
 from app.forms.response_form import ResponseForm
 from app.forms.clap_form import ClapForm

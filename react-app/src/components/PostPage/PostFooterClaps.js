@@ -8,12 +8,12 @@ import sparkles from "../../images/sparkles.svg"
 import clap from "../../images/clap.svg"
 import Claps from "./Claps/Claps"
 
-export default function PostFooterClaps() {
+export default function PostFooterClaps({post, author}) {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const claps = useSelector(state => state.claps)
-    const post = useSelector(state => state.posts.singlePost)
+    // const post = useSelector(state => state.posts.singlePost)
     const numClaps = Object.values(claps).reduce((sum, cur) => sum += cur.amount, 0)
 
     let userClap
@@ -82,10 +82,10 @@ export default function PostFooterClaps() {
                     className="claps-container"
                 >
                     <div
-                        className={user && user.id !==post.writer.id ? "svg-container svg-claps hover" : "svg-container svg-claps"}
-                        onMouseDown={user && user.id !==post.writer.id ? clapsMouseDown : undefined}
-                        onMouseUp={user && user.id !==post.writer.id ? clapsStopClick : undefined}
-                        onDragEnd={user && user.id !==post.writer.id ? clapsStopClick : undefined}
+                        className={user && user.id !== author.id ? "svg-container svg-claps hover" : "svg-container svg-claps"}
+                        onMouseDown={user && user.id !== author.id ? clapsMouseDown : undefined}
+                        onMouseUp={user && user.id !== author.id ? clapsStopClick : undefined}
+                        onDragEnd={user && user.id !== author.id ? clapsStopClick : undefined}
                     >
                         <img src={clap} />
                     </div>

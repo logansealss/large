@@ -5,6 +5,7 @@ import Header from "../Header/Header"
 import LandingPostPreview from "./LandingPostPreview/LandingPostPreview"
 import { isEmptyObj } from "../../utils/Objects"
 import { readAllPostsThunk } from "../../store/posts"
+import { fetchAllPosts } from "../../store/userHelpers"
 
 import "./LandingPage.css"
 import { useEffect, useState } from "react"
@@ -19,7 +20,7 @@ export default function LandingPage() {
 
     useEffect(() => {
         (async () => {
-            await dispatch(readAllPostsThunk())
+            await fetchAllPosts(dispatch)
             setLoaded(true)
         })()
     }, [])

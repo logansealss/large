@@ -49,7 +49,8 @@ export default function UserCard({ user, className, position }) {
                 }
                 <div className='user-card-footer'>
                     <div>
-                        x Followers
+                        {user.followerCount > 0 && 
+                            `${user.followerCount} ${user.followerCount === 1 ? 'follower' : 'followers'}`}
                     </div>
                     {loggedInUser && loggedInUser.id !== user.id && 
                         (following[user.id] ?
