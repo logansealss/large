@@ -57,7 +57,7 @@ def following_for_user():
 
     user = User.query.options(joinedload(User.following)).get(current_user.id)
 
-    return { following.id: following.id for following in user.following}
+    return { following.id: following.to_dict() for following in user.following}
 
 
 

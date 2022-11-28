@@ -3,7 +3,12 @@ import { readAllPosts, readSinglePost } from "./posts";
 import { readPostResponses } from "./responses";
 import { incrementFollowers, decrementFollowers, readUsers } from "./users"
 import { setUser } from "./session"
-import { followUser, unfollowUser } from "./follows";
+import { 
+    followUser, 
+    unfollowUser, 
+    readCurrentUserFollowing, 
+    readCurrentUserFollowers 
+} from "./follows";
 
 export async function authenticate(dispatch) {
     const response = await fetch('/api/auth');
@@ -192,6 +197,49 @@ export async function fetchUnollowUser(userId, dispatch) {
     if (response.ok) {
         dispatch(unfollowUser(userId))
         dispatch(decrementFollowers(userId))
+        return null;
+    } else {
+        return response
+    }
+}
+
+export async function fetchUserFollowers(dispatch) {
+    const response = await fetch(`/api/users/current/followers`);
+
+    if (response.ok) {
+        const followers = await response.json();
+        const followersForReducer = {}
+        const usersForReducer = {}
+
+        for (const follower of Object.values(followers)) {
+            usersForReducer[follower.id] = follower
+            followersForReducer[follower.id] = follower.id
+        }
+
+        dispatch(readCurrentUserFollowers(followersForReducer))
+        dispatch(readUsers(usersForReducer))
+        return null;
+    } else {
+        return response
+    }
+}
+
+export async function fetchUserFollowing(dispatch) {
+    const response = await fetch(`/api/users/current/following`);
+
+    if (response.ok) {
+        const followers = await response.json();
+        console.log(followers)
+        const followersForReducer = {}
+        const usersForReducer = {}
+
+        for (const follower of Object.values(followers)) {
+            usersForReducer[follower.id] = follower
+            followersForReducer[follower.id] = follower.id
+        }
+
+        dispatch(readCurrentUserFollowing(followersForReducer))
+        dispatch(readUsers(usersForReducer))
         return null;
     } else {
         return response

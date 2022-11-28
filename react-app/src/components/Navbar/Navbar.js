@@ -6,7 +6,8 @@ import { logout } from '../../store/session';
 import NavbarDropdown from "./NavbarDropdown";
 import AuthModalForm from "../auth/AuthModalForm";
 import { isEmptyObj } from "../../utils/Objects";
-import { readCurrentUserFollowingThunk, clearFollows } from "../../store/follows";
+import { clearFollows } from "../../store/follows";
+import { fetchUserFollowing } from "../../store/userHelpers";
 import "./Navbar.css"
 import "./AuthModal.css"
 import mainLogo from "../../images/main-logo.png"
@@ -29,7 +30,7 @@ export default function Navbar() {
 
     useEffect(() => {
         if(user){
-            dispatch(readCurrentUserFollowingThunk())
+            fetchUserFollowing(dispatch)
         }else{
             dispatch(clearFollows())
         }

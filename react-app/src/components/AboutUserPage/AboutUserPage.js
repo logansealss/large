@@ -3,6 +3,7 @@ import { Redirect, NavLink, Switch, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { readCurrentUserPostsThunk } from '../../store/posts'
+import { fetchUserFollowing, fetchUserFollowers } from '../../store/userHelpers'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
 import AboutUserProfile from './AboutUserProfile/AboutUserProfile'
 import AltPostDisplay from '../AltPostDisplay/AltPostDisplay'
@@ -21,6 +22,7 @@ export function AboutUserPage() {
     useEffect(() => {
         (async () => {
             await dispatch(readCurrentUserPostsThunk())
+            await fetchUserFollowers(dispatch)
             setLoaded(true)
         })()
     }, [])

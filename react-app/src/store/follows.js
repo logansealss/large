@@ -4,12 +4,12 @@ const FOLLOW_USER = 'follows/FOLLOW_USER'
 const UNFOLLOW_USER = 'follows/UNFOLLOW_USER'
 const CLEAR_FOLLOWS = 'follows/CLEAR_FOLLOWS'
 
-const readCurrentUserFollowers = (followers) => ({
+export const readCurrentUserFollowers = (followers) => ({
     type: READ_CURRENT_USER_FOLLOWERS,
     followers
 })
 
-const readCurrentUserFollowing = (following) => ({
+export const readCurrentUserFollowing = (following) => ({
     type: READ_CURRENT_USER_FOLLOWING,
     following
 })
