@@ -27,7 +27,7 @@ def get_user_posts():
     user_id = current_user.id
     user_posts = Post.query.filter(Post.writer_id == user_id)       \
         .options(joinedload(Post.writer)).all()
-    return {post.id: post.preview_to_dict() for post in user_posts}
+    return {post.id: post.writer_to_dict() for post in user_posts}
 
 # -------------- GET POST BY ID -------------- #
 

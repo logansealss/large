@@ -1,12 +1,16 @@
 
 import { Link } from "react-router-dom"
 
+import PostFooterMenu from "../PostPage/PostFooterMenu"
 import { getMonthDay } from "../../utils/Dates"
 import largePic from "../../images/Large.png"
 import profilePic from "../../images/ProfilePic.png"
 import "./AltPostDisplay.css"
+import { useSelector } from "react-redux"
 
 export default function AltPostDisplay({ post, showWriter }) {
+
+    const userId = useSelector(state => state.session.user)
 
     return (
         <div
@@ -81,9 +85,19 @@ export default function AltPostDisplay({ post, showWriter }) {
                         </div>
                     </Link>
                     <div
-                        className="alt-post-data"
+                        className="alt-post-footer-flex"
                     >
-                        {`${post.readTime} min read`}
+                        <div
+                            className="alt-post-data"
+                        >
+                            {`${post.readTime} min read`}
+                        </div>
+                        {userId && userId === post.userId &&
+                            <PostFooterMenu
+                                post={post}
+                                isTop={true}
+                            />
+                        }
                     </div>
                 </div>
             </div>

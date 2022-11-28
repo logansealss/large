@@ -8,15 +8,12 @@ import { useHistory } from "react-router-dom";
 import dots from "../../images/dots.svg"
 
 
-export default function PostFooterMenu({ isTop, userClap }) {
+export default function PostFooterMenu({ post, isTop, userClap }) {
     const dispatch = useDispatch()
     const ref = useRef()
     const history = useHistory()
-    // const user = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user)
     const user = useSelector(state => state.users[userId])
-    const post = useSelector(state => state.posts.singlePost)
-    const claps = useSelector(state => state.claps)
     const [menuOpen, toggleMenuOpen] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -42,7 +39,9 @@ export default function PostFooterMenu({ isTop, userClap }) {
 
     async function deletePost() {
         dispatch(deletePostThunk(post.id))
-        history.push('/')
+        if(history.location.pathname !== '/about'){
+            history.push('/')
+        }
     }
 
     function deleteConfirmation() {
@@ -60,9 +59,6 @@ export default function PostFooterMenu({ isTop, userClap }) {
     const visibleMenu = menuOpen ? "post-menu visible" : "post-menu hidden"
     const topMenu = isTop ? " top" : ''
     const popupMenuClass = visibleMenu + topMenu
-
-
-
 
     return (
         <div

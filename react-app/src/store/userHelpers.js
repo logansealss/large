@@ -229,7 +229,6 @@ export async function fetchUserFollowing(dispatch) {
 
     if (response.ok) {
         const followers = await response.json();
-        console.log(followers)
         const followersForReducer = {}
         const usersForReducer = {}
 

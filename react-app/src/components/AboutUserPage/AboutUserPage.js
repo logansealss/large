@@ -93,6 +93,7 @@ export function AboutUserPage() {
                                 {Object.values(following).map(userId =>
                                     <UserDisplay
                                         user={users[userId]}
+                                        key={userId}
                                     />)
                                 }
                                 {Object.values(following).length === 0 &&
@@ -107,6 +108,7 @@ export function AboutUserPage() {
                                 {Object.values(followers).map(userId =>
                                     <UserDisplay
                                         user={users[userId]}
+                                        key={userId}
                                     />)
                                 }
                                 {Object.values(followers).length === 0 &&

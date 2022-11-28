@@ -24,7 +24,6 @@ export default function PostPage() {
     const history = useHistory()
     const postFooterDetails = useRef()
     const post = useSelector(state => state.posts.singlePost)
-    // const user = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user)
     const user = useSelector(state => state.users[userId])
     const author = useSelector(state => state.users[post.userId])
@@ -134,12 +133,15 @@ export default function PostPage() {
                                 </div>
                                 {user && userClap &&
                                     <PostFooterMenu
+                                        post={post}
                                         userClap={userClap}
                                     ></PostFooterMenu>
                                 }
                                 {
                                     user && user.id === author.id &&
-                                    <PostFooterMenu></PostFooterMenu>
+                                    <PostFooterMenu
+                                        post={post}
+                                    ></PostFooterMenu>
                                 }
                             </div>
                             <div>
@@ -196,6 +198,7 @@ export default function PostPage() {
                                         id="post-scroll-menu-flex"
                                     >
                                         <PostFooterMenu
+                                            post={post}
                                             userClap={userClap}
                                             isTop={true}
                                         ></PostFooterMenu>
@@ -220,12 +223,15 @@ export default function PostPage() {
                         >
                             {user && userClap &&
                                 <PostFooterMenu
+                                    post={post}
                                     userClap={userClap}
                                 >
                                 </PostFooterMenu>
                             }
                             {user && author.id === user.id &&
-                                <PostFooterMenu></PostFooterMenu>
+                                <PostFooterMenu
+                                    post={post}
+                                ></PostFooterMenu>
                             }
                         </div>
                     </div>
