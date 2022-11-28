@@ -95,7 +95,7 @@ export function AboutUserPage() {
                                         user={users[userId]}
                                     />)
                                 }
-                                {Object.values(followers).length === 0 &&
+                                {Object.values(following).length === 0 &&
                                     <div>
                                         You're not following anyone yet.
                                     </div>
