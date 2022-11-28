@@ -189,7 +189,7 @@ export async function fetchFollowUser(userId, dispatch) {
     }
 }
 
-export async function fetchUnollowUser(userId, dispatch) {
+export async function fetchUnfollowUser(userId, dispatch) {
     const response = await fetch(`/api/users/${userId}/follow`, {
         method: 'DELETE'
     });

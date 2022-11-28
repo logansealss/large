@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { fetchFollowUser, fetchUnollowUser } from "../../store/userHelpers";
+import { fetchFollowUser, fetchUnfollowUser } from "../../store/userHelpers";
 
 import profilePic from "../../images/ProfilePic.png"
 import './UserCard.css'
@@ -58,7 +58,7 @@ export default function UserCard({ user, className, position }) {
                         (following[user.id] ?
                             <button
                                 className="following user-follow-button"
-                                onClick={() => fetchUnollowUser(user.id, dispatch)}
+                                onClick={() => fetchUnfollowUser(user.id, dispatch)}
                             >
                                 Following
                             </button>

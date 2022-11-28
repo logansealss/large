@@ -6,7 +6,7 @@ import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
 import { readUserPostsThunk } from "../../store/posts";
 import { fetchPostClaps, fetchSinglePost, fetchPostResponses } from "../../store/userHelpers";
-import { fetchFollowUser, fetchUnollowUser } from "../../store/userHelpers";
+import { fetchFollowUser, fetchUnfollowUser } from "../../store/userHelpers";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
@@ -66,16 +66,13 @@ export default function PostPage() {
 
         (async () => {
 
-            // const result = await dispatch(readSinglePostThunk(postId))
             const result = await fetchSinglePost(postId, dispatch)
 
             if (result) {
                 history.push('/')
             }
-            // await dispatch(readPostResponsesThunk(postId))
             await fetchPostResponses(postId, dispatch)
             await fetchPostClaps(postId, dispatch)
-            // await dispatch(readPostClapsThunk(postId))
         })()
     }, [postId])
 
@@ -121,7 +118,7 @@ export default function PostPage() {
                                     {user && user.id !== author.id && (following[author.id] ?
                                         <button
                                             className="following user-follow-button"
-                                            onClick={() => fetchUnollowUser(author.id, dispatch)}
+                                            onClick={() => fetchUnfollowUser(author.id, dispatch)}
                                         >
                                             Following
                                         </button>
@@ -247,7 +244,7 @@ export default function PostPage() {
                         {user && user.id !== author.id && (following[author.id] ?
                             <button
                                 className="following user-follow-button"
-                                onClick={() => fetchUnollowUser(author.id, dispatch)}
+                                onClick={() => fetchUnfollowUser(author.id, dispatch)}
                             >
                                 Following
                             </button>
