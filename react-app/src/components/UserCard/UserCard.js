@@ -50,11 +50,15 @@ export default function UserCard({ user, className, position }) {
                     </div>
                 }
                 <div className='user-card-footer'>
-                    <div>
-                        {user.followerCount > 0 && 
-                            `${user.followerCount} ${user.followerCount === 1 ? 'follower' : 'followers'}`}
+                    <div
+                        className="user-card-follower-count"
+                    >
+                        <div>
+                            {user.followerCount > 0 &&
+                                `${user.followerCount} ${user.followerCount === 1 ? 'follower' : 'followers'}`}
+                        </div>
                     </div>
-                    {loggedInUser && loggedInUser.id !== user.id && 
+                    {loggedInUser && loggedInUser.id !== user.id &&
                         (following[user.id] ?
                             <button
                                 className="following user-follow-button"

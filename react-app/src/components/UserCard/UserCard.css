@@ -66,3 +66,8 @@
 .user-card-name:hover{
     cursor: default;
 }
+
+.user-card-follower-count{
+    display: flex;
+    align-items: center;
+}

@@ -171,7 +171,7 @@ def seed_users():
                   first_name="Gary",
                   last_name="Song",
                   about="Software Engineer",
-                  image_url="https://avatars.githubusercontent.com/u/106426283?v=4"
+                  image_url="https://avatars.githubusercontent.com/u/105745865?v=4"
                 ))
 
     for user in users:
