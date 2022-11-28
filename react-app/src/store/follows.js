@@ -4,22 +4,22 @@ const FOLLOW_USER = 'follows/FOLLOW_USER'
 const UNFOLLOW_USER = 'follows/UNFOLLOW_USER'
 const CLEAR_FOLLOWS = 'follows/CLEAR_FOLLOWS'
 
-const readCurrentUserFollowers = (followers) => ({
+export const readCurrentUserFollowers = (followers) => ({
     type: READ_CURRENT_USER_FOLLOWERS,
     followers
 })
 
-const readCurrentUserFollowing = (following) => ({
+export const readCurrentUserFollowing = (following) => ({
     type: READ_CURRENT_USER_FOLLOWING,
     following
 })
 
-const followUser = (userId) => ({
+export const followUser = (userId) => ({
     type: FOLLOW_USER,
     userId
 })
 
-const unfollowUser = (userId) => ({
+export const unfollowUser = (userId) => ({
     type: UNFOLLOW_USER,
     userId
 })
@@ -55,8 +55,7 @@ export const readCurrentUserFollowingThunk = () => async (dispatch) => {
 export const followUserThunk = (userId) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/follow`, {
         method: 'POST'
-    }
-    );
+    });
 
     if (response.ok) {
         dispatch(followUser(userId))

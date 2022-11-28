@@ -81,10 +81,17 @@
     background-color: rgba(168, 168, 168, 1);
 }
 
+.alt-post-footer-flex{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .alt-post-data{
     line-height: 20px;
     font-size: 14px;
     color: rgba(117, 117, 117, 1);
+    margin-right: 485px;
 }
 
 

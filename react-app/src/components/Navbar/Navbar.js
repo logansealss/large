@@ -6,7 +6,8 @@ import { logout } from '../../store/session';
 import NavbarDropdown from "./NavbarDropdown";
 import AuthModalForm from "../auth/AuthModalForm";
 import { isEmptyObj } from "../../utils/Objects";
-import { readCurrentUserFollowingThunk, clearFollows } from "../../store/follows";
+import { clearFollows } from "../../store/follows";
+import { fetchUserFollowing } from "../../store/userHelpers";
 import "./Navbar.css"
 import "./AuthModal.css"
 import mainLogo from "../../images/main-logo.png"
@@ -16,7 +17,9 @@ export default function Navbar() {
 
     const dispatch = useDispatch()
     const location = useLocation()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const [isTop, setIsTop] = useState(true)
 
     function updateIsTop() {
@@ -27,7 +30,7 @@ export default function Navbar() {
 
     useEffect(() => {
         if(user){
-            dispatch(readCurrentUserFollowingThunk())
+            fetchUserFollowing(dispatch)
         }else{
             dispatch(clearFollows())
         }

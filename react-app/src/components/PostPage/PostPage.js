@@ -4,10 +4,9 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
-import { readUserPostsThunk, readSinglePostThunk } from "../../store/posts";
-import { readPostResponsesThunk } from "../../store/responses";
-import { readPostClapsThunk } from "../../store/claps";
-import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import { readUserPostsThunk } from "../../store/posts";
+import { fetchPostClaps, fetchSinglePost, fetchPostResponses } from "../../store/userHelpers";
+import { fetchFollowUser, fetchUnfollowUser } from "../../store/userHelpers";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
@@ -25,7 +24,9 @@ export default function PostPage() {
     const history = useHistory()
     const postFooterDetails = useRef()
     const post = useSelector(state => state.posts.singlePost)
-    const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
+    const author = useSelector(state => state.users[post.userId])
     const following = useSelector(state => state.follows.following)
     const claps = useSelector(state => state.claps)
     const posts = useSelector(state => state.posts.allPosts)
@@ -34,7 +35,7 @@ export default function PostPage() {
 
     let userClap
     if (user) {
-        userClap = Object.values(claps).find(clap => clap.user.id === user.id)
+        userClap = Object.values(claps).find(clap => clap.userId === user.id)
     }
 
     function isInViewport(rect) {
@@ -64,13 +65,13 @@ export default function PostPage() {
 
         (async () => {
 
-            const result = await dispatch(readSinglePostThunk(postId))
+            const result = await fetchSinglePost(postId, dispatch)
 
             if (result) {
                 history.push('/')
             }
-            await dispatch(readPostResponsesThunk(postId))
-            await dispatch(readPostClapsThunk(postId))
+            await fetchPostResponses(postId, dispatch)
+            await fetchPostClaps(postId, dispatch)
         })()
     }, [postId])
 
@@ -78,7 +79,7 @@ export default function PostPage() {
 
         if (!isEmptyObj(post)) {
             (async () => {
-                await dispatch(readUserPostsThunk(post.writer.id))
+                await dispatch(readUserPostsThunk(post.userId))
                 setLoaded(true)
             })()
         }
@@ -90,14 +91,14 @@ export default function PostPage() {
         )
     }
 
-    return (!isEmptyObj(post) &&
+    return (
         <div id="post-page-flex">
             <div id="post-page-container">
                 <div id="writer-card-container">
                     <div id="writer-card-flex">
                         <div id="writer-card-image-div">
                             <img
-                                src={post.writer.imageURL || profilePic}
+                                src={author.imageURL || profilePic}
                                 alt={profilePic}
                                 onError={e => { e.currentTarget.src = profilePic }}
                             />
@@ -108,22 +109,22 @@ export default function PostPage() {
                                     className="writer-details-left"
                                 >
                                     <UserCard
-                                        user={post.writer}
+                                        user={author}
                                         className="writer-details-name"
                                         position="bottom"
                                     >
                                     </UserCard>
-                                    {user && user.id !== post.writer.id && (following[post.writer.id] ?
+                                    {user && user.id !== author.id && (following[author.id] ?
                                         <button
                                             className="following user-follow-button"
-                                            onClick={() => dispatch(unfollowUserThunk(post.writer.id))}
+                                            onClick={() => fetchUnfollowUser(author.id, dispatch)}
                                         >
                                             Following
                                         </button>
                                         :
                                         <button
                                             className="color-two user-follow-button"
-                                            onClick={() => dispatch(followUserThunk(post.writer.id))}
+                                            onClick={() => fetchFollowUser(author.id, dispatch)}
                                         >
                                             Follow
                                         </button>
@@ -132,12 +133,15 @@ export default function PostPage() {
                                 </div>
                                 {user && userClap &&
                                     <PostFooterMenu
+                                        post={post}
                                         userClap={userClap}
                                     ></PostFooterMenu>
                                 }
                                 {
-                                    user && user.id === post.writer.id &&
-                                    <PostFooterMenu></PostFooterMenu>
+                                    user && user.id === author.id &&
+                                    <PostFooterMenu
+                                        post={post}
+                                    ></PostFooterMenu>
                                 }
                             </div>
                             <div>
@@ -178,13 +182,13 @@ export default function PostPage() {
                 >
                     <div id="post-scroll-background">
                         <div id="post-footer-interactions-flex">
-                            <PostFooterClaps post={post}></PostFooterClaps>
+                            <PostFooterClaps post={post} author={author}></PostFooterClaps>
                             <div className="post-scroll-divider-container">
                                 <div className="post-scroll-divider">
                                 </div>
                             </div>
                             <PostFooterResponses></PostFooterResponses>
-                            {user && (userClap || post.writer.id === user.id) && (
+                            {user && (userClap || author.id === user.id) && (
                                 <>
                                     <div className="post-scroll-divider-container">
                                         <div className="post-scroll-divider">
@@ -194,6 +198,7 @@ export default function PostPage() {
                                         id="post-scroll-menu-flex"
                                     >
                                         <PostFooterMenu
+                                            post={post}
                                             userClap={userClap}
                                             isTop={true}
                                         ></PostFooterMenu>
@@ -209,7 +214,7 @@ export default function PostPage() {
                     <div id="post-footer-details-flex">
                         <div id="post-footer-interactions">
                             <div id="post-footer-interactions-flex">
-                                <PostFooterClaps post={post}></PostFooterClaps>
+                                <PostFooterClaps post={post} author={author}></PostFooterClaps>
                                 <PostFooterResponses></PostFooterResponses>
                             </div>
                         </div>
@@ -218,12 +223,15 @@ export default function PostPage() {
                         >
                             {user && userClap &&
                                 <PostFooterMenu
+                                    post={post}
                                     userClap={userClap}
                                 >
                                 </PostFooterMenu>
                             }
-                            {user && post.writer.id === user.id &&
-                                <PostFooterMenu></PostFooterMenu>
+                            {user && author.id === user.id &&
+                                <PostFooterMenu
+                                    post={post}
+                                ></PostFooterMenu>
                             }
                         </div>
                     </div>
@@ -237,19 +245,19 @@ export default function PostPage() {
                         <div
                             className="post-page-writer-name"
                         >
-                            {`More from ${post.writer.firstName} ${post.writer.lastName}`}
+                            {`More from ${author.firstName} ${author.lastName}`}
                         </div>
-                        {user && user.id !== post.writer.id && (following[post.writer.id] ?
+                        {user && user.id !== author.id && (following[author.id] ?
                             <button
                                 className="following user-follow-button"
-                                onClick={() => dispatch(unfollowUserThunk(post.writer.id))}
+                                onClick={() => fetchUnfollowUser(author.id, dispatch)}
                             >
                                 Following
                             </button>
                             :
                             <button
                                 className="color-two user-follow-button"
-                                onClick={() => dispatch(followUserThunk(post.writer.id))}
+                                onClick={() => fetchFollowUser(author.id, dispatch)}
                             >
                                 Follow
                             </button>
@@ -259,11 +267,11 @@ export default function PostPage() {
                             Follow
                         </button> */}
                     </div>
-                    {post.writer.about &&
+                    {author.about &&
                         <div
                             className="post-page-writer-about"
                         >
-                            {post.writer.about}
+                            {author.about}
                         </div>
                     }
                 </div>

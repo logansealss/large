@@ -1,6 +1,5 @@
-
-
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import UserCard from "../../UserCard/UserCard";
 import { getMonthDay } from "../../../utils/Dates";
@@ -10,6 +9,7 @@ import "./LandingPostPreview.css"
 
 export default function LandingPostPreview({ post }) {
 
+    const user = useSelector(state => state.users[post.userId])
     const monthDayStr = getMonthDay(post.createdAt)
 
     return (
@@ -25,14 +25,14 @@ export default function LandingPostPreview({ post }) {
                                     className="profile-pic-small"
                                 >
                                     <img
-                                        src={post.writer.imageURL || profilePic}
+                                        src={user.imageURL || profilePic}
                                         alt={profilePic}
                                         onError={e => { e.currentTarget.src = profilePic }}
                                     />
                                 </div>
 
                                 <UserCard
-                                    user={post.writer}
+                                    user={user}
                                     className="post-content-name"
                                     position='right'
                                 ></UserCard>

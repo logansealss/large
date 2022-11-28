@@ -8,13 +8,12 @@ import { useHistory } from "react-router-dom";
 import dots from "../../images/dots.svg"
 
 
-export default function PostFooterMenu({ isTop, userClap }) {
+export default function PostFooterMenu({ post, isTop, userClap }) {
     const dispatch = useDispatch()
     const ref = useRef()
     const history = useHistory()
-    const user = useSelector(state => state.session.user)
-    const post = useSelector(state => state.posts.singlePost)
-    const claps = useSelector(state => state.claps)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const [menuOpen, toggleMenuOpen] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -39,8 +38,10 @@ export default function PostFooterMenu({ isTop, userClap }) {
     }
 
     async function deletePost() {
-        await dispatch(deletePostThunk(post.id))
-        history.push('/')
+        dispatch(deletePostThunk(post.id))
+        if(history.location.pathname !== '/about'){
+            history.push('/')
+        }
     }
 
     function deleteConfirmation() {
@@ -52,15 +53,12 @@ export default function PostFooterMenu({ isTop, userClap }) {
     }
 
     async function deleteUserClap() {
-        await dispatch(deletePostClapThunk(userClap.id))
+        dispatch(deletePostClapThunk(userClap.id))
     }
 
     const visibleMenu = menuOpen ? "post-menu visible" : "post-menu hidden"
     const topMenu = isTop ? " top" : ''
     const popupMenuClass = visibleMenu + topMenu
-
-
-
 
     return (
         <div
@@ -79,7 +77,7 @@ export default function PostFooterMenu({ isTop, userClap }) {
                     className={popupMenuClass}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {user && user.id === post.writer.id && (
+                    {user && user.id === post.userId && (
                         <>
                             <div
                                 className="popup-menu-option"
@@ -105,7 +103,7 @@ export default function PostFooterMenu({ isTop, userClap }) {
                             )}
                         </>
                     )}
-                    {user && user.id !== post.writer.id && (
+                    {user && user.id !== post.userId && (
                         <>
                             <div
                                 className="popup-menu-option"

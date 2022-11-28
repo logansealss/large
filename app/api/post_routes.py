@@ -27,13 +27,13 @@ def get_user_posts():
     user_id = current_user.id
     user_posts = Post.query.filter(Post.writer_id == user_id)       \
         .options(joinedload(Post.writer)).all()
-    return {post.id: post.preview_to_dict() for post in user_posts}
+    return {post.id: post.writer_to_dict() for post in user_posts}
 
 # -------------- GET POST BY ID -------------- #
 
 @post_routes.route('/<int:post_id>')
 def get_post_by_id(post_id):
-    post_by_id = Post.query.get(post_id)
+    post_by_id = Post.query.options(joinedload(Post.writer)).get(post_id)
 
     if post_by_id is None:
         return couldnt_be_found("Post")
@@ -77,11 +77,7 @@ def create_post():
         db.session.add(new_post)
         db.session.commit()
 
-        new_post_dict = new_post.writer_to_dict()
-        new_post_dict['writer'] = current_user.to_dict()
-        del new_post_dict['writerId']
-
-        return new_post_dict
+        return new_post.writer_to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -110,8 +106,8 @@ def create_response(post_id):
         db.session.commit()
 
         new_response_dict = new_response.to_dict()
-        new_response_dict["user"] = current_user.to_dict()
-        del new_response_dict["userId"]
+        # new_response_dict["user"] = current_user.to_dict()
+        # del new_response_dict["userId"]
 
         return new_response_dict
 
@@ -153,11 +149,7 @@ def create_clap(post_id):
         db.session.add(new_clap)
         db.session.commit()
 
-        new_clap_dict = new_clap.to_dict()
-        new_clap_dict["user"] = current_user.to_dict()
-        del new_clap_dict["userId"]
-
-        return new_clap_dict
+        return new_clap.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -202,11 +194,7 @@ def update_post_by_id(post_id):
 
         db.session.commit()
 
-        post_by_id_dict = post_by_id.writer_to_dict()
-        post_by_id_dict["writer"] = current_user.to_dict()
-        del post_by_id_dict["writerId"]
-
-        return post_by_id_dict
+        return post_by_id.writer_to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

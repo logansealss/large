@@ -1,7 +1,8 @@
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import { fetchFollowUser, fetchUnfollowUser } from "../../store/userHelpers";
+
 import profilePic from "../../images/ProfilePic.png"
 import './UserCard.css'
 
@@ -9,7 +10,8 @@ export default function UserCard({ user, className, position }) {
 
     const dispatch = useDispatch()
 
-    const loggedInUser = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const loggedInUser = useSelector(state => state.users[userId])
     const following = useSelector(state => state.follows.following)
 
     return (
@@ -48,21 +50,26 @@ export default function UserCard({ user, className, position }) {
                     </div>
                 }
                 <div className='user-card-footer'>
-                    <div>
-                        x Followers
+                    <div
+                        className="user-card-follower-count"
+                    >
+                        <div>
+                            {user.followerCount > 0 &&
+                                `${user.followerCount} ${user.followerCount === 1 ? 'follower' : 'followers'}`}
+                        </div>
                     </div>
-                    {loggedInUser && loggedInUser.id !== user.id && 
+                    {loggedInUser && loggedInUser.id !== user.id &&
                         (following[user.id] ?
                             <button
                                 className="following user-follow-button"
-                                onClick={() => dispatch(unfollowUserThunk(user.id))}
+                                onClick={() => fetchUnfollowUser(user.id, dispatch)}
                             >
                                 Following
                             </button>
                             :
                             <button
                                 className="color-two user-follow-button"
-                                onClick={() => dispatch(followUserThunk(user.id))}
+                                onClick={() => fetchFollowUser(user.id, dispatch)}
                             >
                                 Follow
                             </button>

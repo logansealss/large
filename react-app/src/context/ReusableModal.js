@@ -5,7 +5,9 @@ import { Modal } from './Modal';
 function ReusableModal({ container, children, afterClick, bgClass }) {
     const [showModal, setShowModal] = useState(false);
 
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
 
     function onClose() {
         setShowModal(false);

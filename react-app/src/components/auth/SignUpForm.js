@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 
 import { testInputStr, minStrLengthFunc, maxStrLengthFunc } from '../../utils/InputValidation';
-import { signUp } from '../../store/session';
+// import { signUp } from '../../store/session';
+import { signUp } from '../../store/userHelpers';
 
 const SignUpForm = ({ onClose }) => {
   const mountedRef = useRef(true)
@@ -134,7 +135,7 @@ const SignUpForm = ({ onClose }) => {
       ['Repeat password is required', 'Repeat password must match password'])
 
     if (usernameTest && firstNameTest && lastNameTest && emailTest && passwordTest && repeatPasswordTest) {
-      const data = await dispatch(signUp(username, email, firstName, lastName, password));
+      const data = await signUp(username, email, firstName, lastName, password, dispatch);
       if (data) {
         for(let err of data){
           let [type, error] = err.split(' : ')

@@ -5,13 +5,15 @@ import posts from './posts'
 import responses from './responses'
 import claps from './claps'
 import follows from './follows'
+import users from './users'
 
 const rootReducer = combineReducers({
   session,
   posts,
   responses,
   claps,
-  follows
+  follows,
+  users
 });
 
 

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 
 import { testInputStr, minStrLengthFunc } from '../../utils/InputValidation';
-import { login } from '../../store/session';
+import { login } from '../../store/userHelpers';
+// import { login } from '../../store/session';
 
 const LoginForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const LoginForm = ({ onClose }) => {
 
   async function demoUserLogin(e) {
     e.preventDefault()
-    const data = await dispatch(login('davidrogers@user.io', 'password'));
+    const data = await login('davidrogers@user.io', 'password', dispatch);
   }
 
   const isNoLength = minStrLengthFunc(0)
@@ -33,7 +34,7 @@ const LoginForm = ({ onClose }) => {
       return
     }
 
-    const data = await dispatch(login(email, password));
+    const data = await login(email, password, dispatch);
     if (data) {
       const [head, tail] = data[0].split(' : ')
       if (head === 'email') {

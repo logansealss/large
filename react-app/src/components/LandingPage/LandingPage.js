@@ -5,6 +5,7 @@ import Header from "../Header/Header"
 import LandingPostPreview from "./LandingPostPreview/LandingPostPreview"
 import { isEmptyObj } from "../../utils/Objects"
 import { readAllPostsThunk } from "../../store/posts"
+import { fetchAllPosts } from "../../store/userHelpers"
 
 import "./LandingPage.css"
 import { useEffect, useState } from "react"
@@ -13,13 +14,15 @@ import LoadingIcon from "../LoadingIcon/LoadingIcon"
 export default function LandingPage() {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const posts = useSelector(state => state.posts.allPosts)
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         (async () => {
-            await dispatch(readAllPostsThunk())
+            await fetchAllPosts(dispatch)
             setLoaded(true)
         })()
     }, [])

@@ -317,6 +317,7 @@ a {
     /* height: 100%; */
     border-radius: 99em;
     margin-left: 15px;
+    padding: 3px 8px;
 }
 
 .user-follow-button:hover{

@@ -8,7 +8,8 @@ import SignUpForm from './components/auth/SignUpForm';
 import LandingPage from './components/LandingPage/LandingPage';
 import PostForm from './components/PostForm/PostForm';
 import PostPage from './components/PostPage/PostPage';
-import { authenticate } from './store/session';
+// import { authenticate } from './store/session';
+import { authenticate } from './store/userHelpers';
 import UpdatePostWrapper from './components/PostForm/UpdatePostWrapper';
 import { AboutUserPage } from './components/AboutUserPage/AboutUserPage';
 
@@ -18,7 +19,8 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(authenticate());
+      // await dispatch(authenticate());
+      await authenticate(dispatch)
       setLoaded(true);
     })();
   }, [dispatch]);

@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy import select, func
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -40,6 +41,13 @@ class User(db.Model, UserMixin):
         backref="followers"
     )
 
+    follower_count = db.column_property(
+        select(func.count(follows.c.followee_id))\
+        .where(follows.c.followee_id == id)\
+        .correlate_except(follows)\
+        .scalar_subquery()\
+    )
+
     @property
     def password(self):
         return self.hashed_password
@@ -59,7 +67,8 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'about': self.about,
-            'imageURL': self.image_url
+            'imageURL': self.image_url,
+            'followerCount': self.follower_count
         }
 
     def to_dict_with_followers(self):
@@ -71,6 +80,7 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'about': self.about,
             'imageURL': self.image_url,
+            'followerCount': self.follower_count,
             'followers': self.followers
         }
 
@@ -175,7 +185,7 @@ class Post(db.Model):
     def writer_to_dict(self):
         return {
             "id": self.id,
-            "writerId": self.writer_id,
+            "userId": self.writer_id,
             "title": self.title,
             "preview": self.subtitle or self.post[0:100],
             "readTime": self.read_time,

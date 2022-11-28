@@ -3,7 +3,9 @@ import { Redirect, NavLink, Switch, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { readCurrentUserPostsThunk } from '../../store/posts'
+import { fetchUserFollowers } from '../../store/userHelpers'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
+import UserDisplay from '../UserDisplay/UserDisplay'
 import AboutUserProfile from './AboutUserProfile/AboutUserProfile'
 import AltPostDisplay from '../AltPostDisplay/AltPostDisplay'
 import "./AboutUserPage.css"
@@ -13,13 +15,18 @@ import "./AboutUserPage.css"
 export function AboutUserPage() {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.user)
+    const user = useSelector(state => state.users[userId])
     const userPosts = useSelector(state => state.posts.allPosts)
+    const followers = useSelector(state => state.follows.followers)
+    const following = useSelector(state => state.follows.following)
+    const users = useSelector(state => state.users)
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         (async () => {
             await dispatch(readCurrentUserPostsThunk())
+            await fetchUserFollowers(dispatch)
             setLoaded(true)
         })()
     }, [])
@@ -28,7 +35,7 @@ export function AboutUserPage() {
         return <Redirect to="/"></Redirect>
     }
 
-    if(!loaded){
+    if (!loaded) {
         return (
             <LoadingIcon />
         )
@@ -83,25 +90,45 @@ export function AboutUserPage() {
                         </Route> */}
                         <Route exact path="/about/following">
                             <div>
-                                folowing these people
+                                {Object.values(following).map(userId =>
+                                    <UserDisplay
+                                        user={users[userId]}
+                                        key={userId}
+                                    />)
+                                }
+                                {Object.values(following).length === 0 &&
+                                    <div>
+                                        You're not following anyone yet.
+                                    </div>
+                                }
                             </div>
                         </Route>
                         <Route exact path="/about/followers">
                             <div>
-                                these people following you
+                                {Object.values(followers).map(userId =>
+                                    <UserDisplay
+                                        user={users[userId]}
+                                        key={userId}
+                                    />)
+                                }
+                                {Object.values(followers).length === 0 &&
+                                    <div>
+                                        You don't have any followers yet.
+                                    </div>
+                                }
                             </div>
                         </Route>
                         <Route exact path="/about">
                             <div>
-                                {Object.values(userPosts).map(post => 
+                                {Object.values(userPosts).map(post =>
                                     <AltPostDisplay
                                         post={post}
                                         key={post.id}
                                     >
                                     </AltPostDisplay>)}
-                                {Object.values(userPosts).length === 0 && 
+                                {Object.values(userPosts).length === 0 &&
                                     <div>
-                                        No posts to show.
+                                        You don't have any posts yet.
                                     </div>
                                 }
                             </div>

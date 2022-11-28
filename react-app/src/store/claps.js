@@ -3,7 +3,7 @@ const CREATE_POST_CLAP = 'claps/CREATE_POST_CLAP'
 const UPDATE_POST_CLAP = 'claps/UPDATE_POST_CLAP'
 const DELETE_POST_CLAP = 'claps/DELETE_POST_CLAP'
 
-const readPostClaps = (claps) => ({
+export const readPostClaps = (claps) => ({
     type: READ_POST_CLAPS,
     claps
 });
