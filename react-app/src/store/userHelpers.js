@@ -4,21 +4,79 @@ import { readPostResponses } from "./responses";
 import { readUsers } from "./users"
 import { setUser } from "./session"
 
-export async function authenticate(dispatch){
+export async function authenticate(dispatch) {
     const response = await fetch('/api/auth');
 
-      if (response.ok) {
+    if (response.ok) {
         const data = await response.json();
         if (data.errors) {
-          return;
+            return;
         }
-      
+
         dispatch(setUser(data));
-        dispatch(readUsers({ [data.id]: data}))
-      }
+        dispatch(readUsers({ [data.id]: data }))
+    }
 }
 
-export async function fetchAllPosts(dispatch){
+export async function login(email, password, dispatch) {
+    const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email,
+            password
+        })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        dispatch(readUsers({ [data.id]: data }))
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+
+}
+
+export async function signUp(username, email, firstName, lastName, password, dispatch){
+    const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            first_name: firstName,
+            last_name: lastName,
+            username,
+            email,
+            password,
+        }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        dispatch(readUsers({ [data.id]: data }))
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+}
+
+export async function fetchAllPosts(dispatch) {
     const response = await fetch('/api/posts');
 
     if (response.ok) {
@@ -26,7 +84,7 @@ export async function fetchAllPosts(dispatch){
         const postsForReducer = {}
         const usersForReducer = {}
 
-        for(const post of Object.values(posts)){
+        for (const post of Object.values(posts)) {
             const user = post.writer
             usersForReducer[user.id] = user
             delete post["writer"]
@@ -42,7 +100,7 @@ export async function fetchAllPosts(dispatch){
     }
 }
 
-export async function fetchSinglePost(postId, dispatch){
+export async function fetchSinglePost(postId, dispatch) {
     const response = await fetch(`/api/posts/${postId}`);
 
     if (response.ok) {
@@ -63,7 +121,7 @@ export async function fetchSinglePost(postId, dispatch){
     }
 }
 
-export async function fetchPostClaps(postId, dispatch){
+export async function fetchPostClaps(postId, dispatch) {
     const response = await fetch(`/api/posts/${postId}/claps`);
 
     if (response.ok) {
@@ -71,7 +129,7 @@ export async function fetchPostClaps(postId, dispatch){
         const clapsForReducer = {}
         const usersForReducer = {}
 
-        for(const clap of Object.values(claps)){
+        for (const clap of Object.values(claps)) {
             const user = clap.user
             usersForReducer[user.id] = user
             delete clap["user"]
@@ -87,7 +145,7 @@ export async function fetchPostClaps(postId, dispatch){
     }
 }
 
-export async function fetchPostResponses(postId, dispatch){
+export async function fetchPostResponses(postId, dispatch) {
     const response = await fetch(`/api/posts/${postId}/responses`);
 
     if (response.ok) {
@@ -95,7 +153,7 @@ export async function fetchPostResponses(postId, dispatch){
         const responsesForReducer = {}
         const usersForReducer = {}
 
-        for(const response of Object.values(responses)){
+        for (const response of Object.values(responses)) {
             const user = response.user
             usersForReducer[user.id] = user
             delete response["user"]
