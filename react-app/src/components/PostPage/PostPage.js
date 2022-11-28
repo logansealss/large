@@ -4,11 +4,9 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { isEmptyObj } from "../../utils/Objects";
 import { getMonthDay } from "../../utils/Dates";
-import { readUserPostsThunk, readSinglePostThunk } from "../../store/posts";
+import { readUserPostsThunk } from "../../store/posts";
 import { fetchPostClaps, fetchSinglePost, fetchPostResponses } from "../../store/userHelpers";
-import { readPostResponsesThunk } from "../../store/responses";
-import { readPostClapsThunk } from "../../store/claps";
-import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import { fetchFollowUser, fetchUnollowUser } from "../../store/userHelpers";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import UserCard from "../UserCard/UserCard";
 import AltPostDisplay from "../AltPostDisplay/AltPostDisplay";
@@ -123,14 +121,14 @@ export default function PostPage() {
                                     {user && user.id !== author.id && (following[author.id] ?
                                         <button
                                             className="following user-follow-button"
-                                            onClick={() => dispatch(unfollowUserThunk(author.id))}
+                                            onClick={() => fetchUnollowUser(author.id, dispatch)}
                                         >
                                             Following
                                         </button>
                                         :
                                         <button
                                             className="color-two user-follow-button"
-                                            onClick={() => dispatch(followUserThunk(author.id))}
+                                            onClick={() => fetchFollowUser(author.id, dispatch)}
                                         >
                                             Follow
                                         </button>
@@ -249,14 +247,14 @@ export default function PostPage() {
                         {user && user.id !== author.id && (following[author.id] ?
                             <button
                                 className="following user-follow-button"
-                                onClick={() => dispatch(unfollowUserThunk(author.id))}
+                                onClick={() => fetchUnollowUser(author.id, dispatch)}
                             >
                                 Following
                             </button>
                             :
                             <button
                                 className="color-two user-follow-button"
-                                onClick={() => dispatch(followUserThunk(author.id))}
+                                onClick={() => fetchFollowUser(author.id, dispatch)}
                             >
                                 Follow
                             </button>

@@ -14,12 +14,12 @@ const readCurrentUserFollowing = (following) => ({
     following
 })
 
-const followUser = (userId) => ({
+export const followUser = (userId) => ({
     type: FOLLOW_USER,
     userId
 })
 
-const unfollowUser = (userId) => ({
+export const unfollowUser = (userId) => ({
     type: UNFOLLOW_USER,
     userId
 })
@@ -55,8 +55,7 @@ export const readCurrentUserFollowingThunk = () => async (dispatch) => {
 export const followUserThunk = (userId) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/follow`, {
         method: 'POST'
-    }
-    );
+    });
 
     if (response.ok) {
         dispatch(followUser(userId))

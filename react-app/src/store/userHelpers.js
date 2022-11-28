@@ -1,8 +1,9 @@
 import { readPostClaps } from "./claps";
 import { readAllPosts, readSinglePost } from "./posts";
 import { readPostResponses } from "./responses";
-import { readUsers } from "./users"
+import { incrementFollowers, decrementFollowers, readUsers } from "./users"
 import { setUser } from "./session"
+import { followUser, unfollowUser } from "./follows";
 
 export async function authenticate(dispatch) {
     const response = await fetch('/api/auth');
@@ -46,7 +47,7 @@ export async function login(email, password, dispatch) {
 
 }
 
-export async function signUp(username, email, firstName, lastName, password, dispatch){
+export async function signUp(username, email, firstName, lastName, password, dispatch) {
     const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
@@ -163,6 +164,34 @@ export async function fetchPostResponses(postId, dispatch) {
 
         dispatch(readPostResponses(responsesForReducer))
         dispatch(readUsers(usersForReducer))
+        return null;
+    } else {
+        return response
+    }
+}
+
+export async function fetchFollowUser(userId, dispatch) {
+    const response = await fetch(`/api/users/${userId}/follow`, {
+        method: 'POST'
+    });
+
+    if (response.ok) {
+        dispatch(followUser(userId))
+        dispatch(incrementFollowers(userId))
+        return null;
+    } else {
+        return response
+    }
+}
+
+export async function fetchUnollowUser(userId, dispatch) {
+    const response = await fetch(`/api/users/${userId}/follow`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok) {
+        dispatch(unfollowUser(userId))
+        dispatch(decrementFollowers(userId))
         return null;
     } else {
         return response

@@ -1,7 +1,8 @@
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { followUserThunk, unfollowUserThunk } from "../../store/follows"
+import { fetchFollowUser, fetchUnollowUser } from "../../store/userHelpers";
+
 import profilePic from "../../images/ProfilePic.png"
 import './UserCard.css'
 
@@ -9,7 +10,6 @@ export default function UserCard({ user, className, position }) {
 
     const dispatch = useDispatch()
 
-    // const loggedInUser = useSelector(state => state.session.user)
     const userId = useSelector(state => state.session.user)
     const loggedInUser = useSelector(state => state.users[userId])
     const following = useSelector(state => state.follows.following)
@@ -58,14 +58,14 @@ export default function UserCard({ user, className, position }) {
                         (following[user.id] ?
                             <button
                                 className="following user-follow-button"
-                                onClick={() => dispatch(unfollowUserThunk(user.id))}
+                                onClick={() => fetchUnollowUser(user.id, dispatch)}
                             >
                                 Following
                             </button>
                             :
                             <button
                                 className="color-two user-follow-button"
-                                onClick={() => dispatch(followUserThunk(user.id))}
+                                onClick={() => fetchFollowUser(user.id, dispatch)}
                             >
                                 Follow
                             </button>
