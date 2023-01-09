@@ -28,15 +28,17 @@ Large is a website clone inspired by [Medium](https://medium.com/). It is an onl
 
 Users are able to view previews of posts and click on a post to see more information. The navigation bar's background color and button color will change based on the scroll and if a user is logged in.
 
-![Screenshot 2022-11-03 111158](https://user-images.githubusercontent.com/106628994/199776999-f6e8eb73-9e90-44a3-aa79-982e73a74f29.png)
-![Screenshot 2022-11-03 111228](https://user-images.githubusercontent.com/106628994/199777041-d912db90-a382-4eb0-9b90-eb6f13861d1b.png)
+![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/106628994/211245987-dda53c2b-a0cb-4424-888f-e552222594a4.gif)
+
+### Switch begin login and signup modals
+
+![ezgif com-gif-maker (9)](https://user-images.githubusercontent.com/106628994/211246191-a7cd885c-ba5f-49ea-8515-5862305ab179.gif)
 
 ### Posts
 
 The individual post details page shows all of the information related to the post including the responses related to the post. The claps/responses sticky menu will change display based on the scroll of the page.
 
-![Screenshot 2022-11-03 111312](https://user-images.githubusercontent.com/106628994/199777385-156874fc-6e34-4cad-9614-35008297def8.png)
-![Screenshot 2022-11-03 111351](https://user-images.githubusercontent.com/106628994/199777398-050ffba4-99d6-44e6-8d5a-352aee11d40b.png)
+![ezgif com-gif-maker (10)](https://user-images.githubusercontent.com/106628994/211246324-320a4113-47b5-4c77-857e-c0317cfa1105.gif)
 
 A new post can be created when a logged in user clicks write at the top of the navigation bar.
 
@@ -44,31 +46,38 @@ A new post can be created when a logged in user clicks write at the top of the n
 
 ![Screenshot 2022-11-03 111449](https://user-images.githubusercontent.com/106628994/199779635-6c34737b-8c13-4b69-8031-45cdbc4cfb99.png)
 
-The owner of the post can manage the post from the individual post details page.
+The owner of the post can edit or delete the post from the post page.
 
-
-![Screenshot 2022-11-03 113500](https://user-images.githubusercontent.com/106628994/199779888-f0666233-64e2-420b-9d5d-352f018b9bde.png)
-
+![ezgif com-gif-maker (11)](https://user-images.githubusercontent.com/106628994/211246605-04f55c53-822e-4ce6-b6ac-a28482b700ac.gif)
 
 ### Responses
 
-The post details page allows a user to view the responses to a post by clicking on the chat bubbles in the claps/responses sticky menu or menu beneath the post.
+The post details page allows a user to view the responses to a post by clicking on the chat bubbles in the claps/responses sticky menu or menu beneath the post. You can add, edit or delete responses in the modal that appears.
 
-![Screenshot 2022-11-03 111528](https://user-images.githubusercontent.com/106628994/199778440-ad1fa1e7-1b49-4d07-9b44-4dc7ea3b4f02.png)
+![ezgif com-gif-maker (12)](https://user-images.githubusercontent.com/106628994/211246827-db3572dd-d3b4-4004-8e2a-7d5c78592540.gif)
 
-![Screenshot 2022-11-03 111545](https://user-images.githubusercontent.com/106628994/199778463-a1ef9556-e2b0-4d5d-a866-d6883a5d792f.png)
+### Applause
 
-You can add, edit or delete responses in the modal that appears.
+Similarly, the post details page allows a user to add applause to a post(up to 50), remove their applause, view all users who have applauded the post, and the total applause for the post.
 
-![Screenshot 2022-11-03 112156](https://user-images.githubusercontent.com/106628994/199778879-44bf1f05-74c4-4026-8a16-f4914b589517.png)
+![ezgif com-gif-maker (13)](https://user-images.githubusercontent.com/106628994/211247091-52d6b5fd-9521-430e-bf1f-f38db57cf08d.gif)
 
+### Followers
+
+A logged in user is able to view the users that they are following and the users that are following them.
+
+![ezgif com-gif-maker (14)](https://user-images.githubusercontent.com/106628994/211247385-02bd9d2f-5d27-4153-8c48-d66261e68ee5.gif)
+
+### User Card
+
+Hovering the cursor over an author will bring up the author's user card displaying info about the author. The author can be followed/unfollowed from this card.
+
+![ezgif com-gif-maker (15)](https://user-images.githubusercontent.com/106628994/211247593-45f48966-0eb0-4778-9ddb-b3839ec3f3a2.gif)
 
 ## To-Do List
 
- - Allow users to add and remove applause to a post.
- - Allow users to follow/unfollow other users and view their followers and those that they are following.
  - Allow users to manage tags for posts as well as searching posts by tags.
- - Add a user page that allows logged in users to view their posts, responses, followers.
+ - Add a user page that allows logged in users to view their posts, and responses.
  - Add search functionality to find posts by keyword/phrase.
 
 ## Contact Information
